@@ -1,0 +1,177 @@
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <p class="eyebrow">GGEMS · GPU Monte Carlo</p>
+
+      <h1>
+        Monte Carlo
+        <span>for medical physics.</span>
+      </h1>
+
+      <p class="hero-lead">
+        High-performance simulation for medical imaging,
+        dosimetry and particle therapy.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button button-primary" href="#objective">
+          Discover GGEMS
+        </a>
+
+        <a
+          class="button button-secondary"
+          href="https://github.com/GGEMS/ggems"
+        >
+          GitHub
+          <span>↗</span>
+        </a>
+      </div>
+
+      <div class="hero-meta">
+        <span>Open source</span>
+        <span>GPL-3.0</span>
+        <span>GPU-first</span>
+        <span>C++23 · OpenCL</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="orbit-glow"></div>
+
+      <img src="/images/ggems-logo.png" alt="" />
+    </div>
+  </div>
+
+  <div class="hero-line"></div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 5.25rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 77% 42%, rgb(128 32 224 / 11%), transparent 28rem),
+      radial-gradient(circle at 21% 74%, rgb(80 192 112 / 6%), transparent 25rem);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    min-height: 680px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    align-items: center;
+    gap: 5rem;
+    padding-block: 5rem;
+  }
+
+  .hero-content { max-width: 760px; }
+
+  .hero h1 {
+    margin: 1.7rem 0 0;
+    font-size: clamp(4rem, 7vw, 7.4rem);
+    font-weight: 500;
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+  }
+
+  .hero h1 span {
+    display: block;
+    margin-top: 0.15em;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .hero-lead {
+    max-width: 650px;
+    margin: 2.2rem 0 0;
+    color: var(--color-text-muted);
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .button:hover { transform: translateY(-2px); }
+  .button-primary { color: #06120a; background: var(--color-green); }
+  .button-primary:hover { background: var(--color-green-light); }
+  .button-secondary { color: var(--color-text); border-color: var(--color-border-strong); background: rgb(255 255 255 / 3%); }
+  .button-secondary:hover { border-color: var(--color-purple); }
+  .button-secondary span { color: var(--color-purple); }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 3.5rem;
+    color: var(--color-text-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  .hero-meta span { display: inline-flex; align-items: center; }
+  .hero-meta span:not(:last-child)::after { content: '·'; margin-inline: 0.8rem; color: var(--color-green); }
+
+  .hero-visual { position: relative; min-height: 540px; display: grid; place-items: center; }
+  .hero-visual img { position: relative; z-index: 3; width: min(100%, 520px); height: auto; filter: drop-shadow(0 2.4rem 4.5rem rgb(0 0 0 / 38%)); animation: logo-float 8s ease-in-out infinite; }
+  .orbit-glow { position: absolute; z-index: 1; width: 78%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(128 32 224 / 14%), transparent 63%); filter: blur(1.8rem); }
+
+  .hero-line {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: min(var(--content-width), calc(100% - 3rem));
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--color-border-strong) 15%, var(--color-border-strong) 85%, transparent);
+  }
+
+  @keyframes logo-float {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-14px) rotate(1deg); }
+  }
+
+  @media (max-width: 940px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 1rem; padding-top: 4rem; }
+    .hero-visual { order: -1; min-height: 320px; }
+    .hero-visual img { width: min(70vw, 380px); }
+  }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: clamp(3.5rem, 16vw, 5.5rem); }
+    .hero-meta { flex-direction: column; gap: 0.5rem; }
+    .hero-meta span:not(:last-child)::after { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .hero-visual img { animation: none; } }
+</style>

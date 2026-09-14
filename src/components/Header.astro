@@ -1,0 +1,233 @@
+---
+const navigation = [
+  { label: 'About', href: '/about/' },
+  { label: 'Applications', href: '/applications/' },
+  { label: 'Technology', href: '/technology/' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="GGEMS home">
+      <img src="/images/ggems-logo.png" alt="" />
+      <span>GGEMS</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {
+        navigation.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))
+      }
+
+      <a
+        href="https://docs.ggems-project.com/"
+        class="external"
+      >
+        Documentation
+      </a>
+
+      <a
+        href="https://forum.ggems-project.com/"
+        class="external"
+      >
+        Community
+      </a>
+    </nav>
+
+    <a
+      class="github-link"
+      href="https://github.com/GGEMS/ggems"
+      aria-label="GGEMS on GitHub"
+    >
+      GitHub
+      <span>↗</span>
+    </a>
+
+    <details class="mobile-nav">
+      <summary aria-label="Open navigation">
+        <span></span>
+        <span></span>
+      </summary>
+
+      <nav>
+        {
+          navigation.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))
+        }
+
+        <a href="https://docs.ggems-project.com/">Documentation ↗</a>
+        <a href="https://forum.ggems-project.com/">Community ↗</a>
+        <a href="https://github.com/GGEMS/ggems">GitHub ↗</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 100;
+
+    border-bottom: 1px solid var(--color-border);
+
+    background: rgb(7 17 27 / 82%);
+    backdrop-filter: blur(18px);
+  }
+
+  .header-inner {
+    height: 5.25rem;
+
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    margin-right: auto;
+
+    color: var(--color-text);
+
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+
+    text-decoration: none;
+  }
+
+  .brand img {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    object-fit: contain;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.7rem;
+  }
+
+  .desktop-nav a,
+  .github-link {
+    color: var(--color-text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+
+    text-decoration: none;
+
+    transition: color var(--transition-fast);
+  }
+
+  .desktop-nav a:hover,
+  .github-link:hover {
+    color: var(--color-text);
+  }
+
+  .desktop-nav .external:hover {
+    color: var(--color-green-light);
+  }
+
+  .github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    padding-left: 1.8rem;
+
+    border-left: 1px solid var(--color-border);
+  }
+
+  .github-link span {
+    color: var(--color-purple);
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  @media (max-width: 940px) {
+    .desktop-nav,
+    .github-link {
+      display: none;
+    }
+
+    .mobile-nav {
+      position: relative;
+
+      display: block;
+    }
+
+    .mobile-nav summary {
+      width: 2.8rem;
+      height: 2.8rem;
+
+      display: grid;
+      align-content: center;
+      gap: 0.4rem;
+
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .mobile-nav summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .mobile-nav summary span {
+      display: block;
+
+      width: 1.5rem;
+      height: 1px;
+      margin-left: auto;
+
+      background: var(--color-text);
+    }
+
+    .mobile-nav nav {
+      position: absolute;
+      right: 0;
+      top: 3.4rem;
+
+      width: min(19rem, calc(100vw - 2rem));
+
+      display: flex;
+      flex-direction: column;
+
+      padding: 0.75rem;
+
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+
+      background: var(--color-surface-raised);
+
+      box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 35%);
+    }
+
+    .mobile-nav nav a {
+      padding: 0.9rem 1rem;
+
+      color: var(--color-text-muted);
+
+      border-radius: var(--radius-sm);
+
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+
+      text-decoration: none;
+    }
+
+    .mobile-nav nav a:hover {
+      color: var(--color-text);
+
+      background: rgb(255 255 255 / 4%);
+    }
+  }
+</style>

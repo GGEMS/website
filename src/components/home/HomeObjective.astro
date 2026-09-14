@@ -1,0 +1,238 @@
+<section id="objective" class="section objective">
+  <div class="container objective-grid">
+    <div>
+      <p class="eyebrow">GGEMS</p>
+
+      <h2 class="heading-1">
+        Built for science.<br />
+        <span>Designed for GPUs.</span>
+      </h2>
+    </div>
+
+    <div class="objective-copy">
+      <p class="lead">
+        GGEMS is an open-source Monte Carlo simulation platform focused on
+        high-performance medical physics applications.
+      </p>
+
+      <p class="body-text">
+        The project combines a modern scientific core with GPU-oriented
+        execution to support demanding simulation workflows in medical
+        imaging, dosimetry and particle transport.
+      </p>
+
+      <a
+        class="text-link"
+        href="https://github.com/GGEMS/ggems"
+      >
+        Explore the project
+        <span>↗</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="container pillars-wrap">
+    <div class="pillars">
+      <article class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-dot green"></span>
+        </div>
+
+        <h3>GPU-first</h3>
+
+        <p>
+          Scientific algorithms designed around modern heterogeneous
+          hardware rather than adapted as an afterthought.
+        </p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-dot purple"></span>
+        </div>
+
+        <h3>Medical physics</h3>
+
+        <p>
+          A focused simulation platform for imaging, dosimetry,
+          radiotherapy and medically relevant particle transport.
+        </p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-dot yellow"></span>
+        </div>
+
+        <h3>Open science</h3>
+
+        <p>
+          Open-source development, explicit scientific validation and
+          reproducible reference workflows.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .objective-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+    gap: 7rem;
+  }
+
+  .objective .heading-1 {
+    margin-top: 1.4rem;
+  }
+
+  .objective .heading-1 span {
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .objective-copy {
+    padding-top: 2.2rem;
+  }
+
+  .objective-copy .lead {
+    margin: 0;
+  }
+
+  .objective-copy .body-text {
+    margin: 1.8rem 0 0;
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    margin-top: 2rem;
+
+    color: var(--color-text);
+
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+
+    text-decoration: none;
+  }
+
+  .text-link span {
+    color: var(--color-purple);
+
+    transition: transform var(--transition-fast);
+  }
+
+  .text-link:hover span {
+    transform: translate(2px, -2px);
+  }
+
+  .pillars-wrap {
+    margin-top: 6rem;
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .pillar {
+    min-height: 360px;
+
+    padding: 2rem;
+
+    border-right: 1px solid var(--color-border);
+  }
+
+  .pillar:last-child {
+    border-right: 0;
+  }
+
+  .pillar-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .pillar-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+
+    border-radius: 50%;
+  }
+
+  .pillar-dot.green {
+    background: var(--color-green);
+
+    box-shadow: 0 0 1.5rem rgb(80 192 112 / 50%);
+  }
+
+  .pillar-dot.purple {
+    background: var(--color-purple);
+
+    box-shadow: 0 0 1.5rem rgb(128 32 224 / 50%);
+  }
+
+  .pillar-dot.yellow {
+    background: var(--color-yellow);
+
+    box-shadow: 0 0 1.5rem rgb(240 240 0 / 40%);
+  }
+
+  .pillar h3 {
+    margin: 7rem 0 0;
+
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .pillar p {
+    max-width: 20rem;
+
+    margin: 1.1rem 0 0;
+
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
+  }
+
+  @media (max-width: 940px) {
+    .objective-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .objective-copy {
+      max-width: 680px;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .pillars {
+      grid-template-columns: 1fr;
+    }
+
+    .pillar {
+      min-height: auto;
+
+      padding-block: 2.5rem;
+
+      border-right: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .pillar:last-child {
+      border-bottom: 0;
+    }
+
+    .pillar h3 {
+      margin-top: 4rem;
+    }
+  }
+</style>
