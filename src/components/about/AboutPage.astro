@@ -1,0 +1,329 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Lang } from '../../i18n/config';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const values = [
+  {
+    title: t('about.values.gpu.title'),
+    body: t('about.values.gpu.body'),
+    accent: 'green',
+  },
+  {
+    title: t('about.values.science.title'),
+    body: t('about.values.science.body'),
+    accent: 'purple',
+  },
+  {
+    title: t('about.values.open.title'),
+    body: t('about.values.open.body'),
+    accent: 'yellow',
+  },
+];
+
+const people = [
+  {
+    name: t('about.people.julien'),
+    role: t('about.people.julien.role'),
+  },
+  {
+    name: t('about.people.didier'),
+    role: t('about.people.didier.role'),
+  },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t('meta.about.title')}
+  description={t('meta.about.description')}
+>
+  <main>
+    <section class="page-hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">{t('about.eyebrow')}</p>
+
+          <h1 class="display">
+            {t('about.hero.primary')}
+            <span>{t('about.hero.secondary')}</span>
+          </h1>
+        </div>
+
+        <p class="lead">
+          {t('about.hero.lead')}
+        </p>
+      </div>
+    </section>
+
+    <section class="section identity">
+      <div class="container identity-grid">
+        <div>
+          <p class="eyebrow">{t('about.identity.eyebrow')}</p>
+
+          <h2 class="heading-1">
+            {t('about.identity.title.primary')}
+            <span>{t('about.identity.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <p class="lead">
+          {t('about.identity.body')}
+        </p>
+      </div>
+
+      <div class="container values">
+        {
+          values.map((item) => (
+            <article class="value">
+              <span class={`dot ${item.accent}`}></span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section people-section">
+      <div class="container people-grid">
+        <div>
+          <p class="eyebrow">{t('about.people.eyebrow')}</p>
+
+          <h2 class="heading-1">
+            {t('about.people.title.primary')}
+            <span>{t('about.people.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <div class="people-list">
+          {
+            people.map((person) => (
+              <article>
+                <h3>{person.name}</h3>
+                <p>{person.role}</p>
+              </article>
+            ))
+          }
+
+          <nav class="project-links" aria-label="Project links">
+            <a href="https://github.com/GGEMS/ggems">{t('about.links.github')} ↗</a>
+            <a href="https://docs.ggems-project.com/">{t('about.links.docs')} ↗</a>
+            <a href="https://forum.ggems-project.com/">{t('about.links.forum')} ↗</a>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+
+    padding-block: 6.5rem 6rem;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      radial-gradient(circle at 84% 36%, rgb(128 32 224 / 10%), transparent 28rem),
+      radial-gradient(circle at 14% 82%, rgb(80 192 112 / 8%), transparent 26rem);
+  }
+
+  .hero-grid,
+  .identity-grid,
+  .people-grid {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    align-items: end;
+    gap: 5rem;
+  }
+
+  .display,
+  .heading-1 {
+    margin-top: 1.25rem;
+  }
+
+  .page-hero .display {
+    font-size: clamp(3.8rem, 6vw, 6.2rem);
+  }
+
+  .identity .heading-1,
+  .people-section .heading-1 {
+    font-size: clamp(2.5rem, 4vw, 4.1rem);
+  }
+
+  .display span,
+  .heading-1 span {
+    display: block;
+
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .hero-grid .lead,
+  .identity-grid .lead {
+    margin: 0;
+  }
+
+  .values {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    margin-top: 4rem;
+
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .value {
+    min-height: 250px;
+
+    padding: 1.75rem;
+
+    border-right: 1px solid var(--color-border);
+  }
+
+  .value:last-child {
+    border-right: 0;
+  }
+
+  .dot {
+    display: block;
+
+    width: 0.55rem;
+    height: 0.55rem;
+
+    margin-left: auto;
+
+    border-radius: 50%;
+  }
+
+  .dot.green {
+    background: var(--color-green);
+  }
+
+  .dot.purple {
+    background: var(--color-purple);
+  }
+
+  .dot.yellow {
+    background: var(--color-yellow);
+  }
+
+  .value h3 {
+    margin: 4rem 0 0;
+
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+
+  .value p {
+    max-width: 22rem;
+
+    margin: 1rem 0 0;
+
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
+  }
+
+  .identity,
+  .people-section {
+    padding-block: 6rem;
+  }
+
+  .people-section {
+    border-top: 1px solid var(--color-border);
+
+    background: var(--color-bg-soft);
+  }
+
+  .people-grid {
+    align-items: start;
+  }
+
+  .people-list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .people-list article {
+    padding: 2rem 0;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .people-list h3 {
+    margin: 0;
+
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+
+  .people-list p {
+    margin: 0.45rem 0 0;
+
+    color: var(--color-text-muted);
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+
+    padding-top: 2rem;
+  }
+
+  .project-links a {
+    color: var(--color-text);
+
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid,
+    .identity-grid,
+    .people-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .values {
+      grid-template-columns: 1fr;
+    }
+
+    .value {
+      min-height: auto;
+
+      border-right: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .value:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

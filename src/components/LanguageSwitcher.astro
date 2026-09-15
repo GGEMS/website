@@ -1,0 +1,189 @@
+---
+import FlagIcon from './FlagIcon.astro';
+
+import {
+  languages,
+  supportedLanguages,
+  localizedPath,
+  type Lang,
+} from '../i18n/config';
+
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const pathname = Astro.url.pathname;
+---
+
+<details class="language-switcher">
+  <summary aria-label={t('language.label')} title={t('language.label')}>
+    <FlagIcon lang={lang} />
+
+    <span class="current-code">
+      {lang.toUpperCase()}
+    </span>
+
+    <span class="chevron" aria-hidden="true">⌄</span>
+  </summary>
+
+  <div class="language-menu">
+    {
+      supportedLanguages.map((code) => (
+        <a
+          href={localizedPath(pathname, code)}
+          lang={code}
+          hreflang={code}
+          aria-current={code === lang ? 'page' : undefined}
+        >
+          <span class="language-name">
+            <FlagIcon lang={code} />
+            <span>{languages[code]}</span>
+          </span>
+
+          <small>{code.toUpperCase()}</small>
+        </a>
+      ))
+    }
+  </div>
+</details>
+
+<style>
+  .language-switcher {
+    position: relative;
+
+    flex: 0 0 auto;
+  }
+
+  .language-switcher summary {
+    height: 2.65rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding-inline: 0.7rem;
+
+    color: var(--color-text-muted);
+
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+
+    background: var(--color-control-bg);
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
+    list-style: none;
+
+    transition:
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      background var(--transition-fast);
+  }
+
+  .language-switcher summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .language-switcher summary:hover {
+    color: var(--color-text);
+
+    border-color: var(--color-border-strong);
+
+    background: var(--color-control-hover);
+  }
+
+  .language-switcher summary:focus-visible {
+    outline: 2px solid var(--color-green-light);
+    outline-offset: 3px;
+  }
+
+  .current-code {
+    line-height: 1;
+  }
+
+  .chevron {
+    color: var(--color-green-light);
+
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .language-menu {
+    position: absolute;
+    z-index: 200;
+    right: 0;
+    top: calc(100% + 0.65rem);
+
+    width: 11.5rem;
+
+    padding: 0.4rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    background: var(--color-surface-raised);
+
+    box-shadow: 0 1.25rem 3rem var(--color-shadow);
+  }
+
+  .language-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding: 0.75rem 0.8rem;
+
+    color: var(--color-text-muted);
+
+    border-radius: var(--radius-sm);
+
+    font-size: 0.82rem;
+
+    text-decoration: none;
+  }
+
+  .language-menu a:hover,
+  .language-menu a[aria-current='page'] {
+    color: var(--color-text);
+
+    background: var(--color-control-hover);
+  }
+
+  .language-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .language-menu small {
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 520px) {
+    .language-switcher summary {
+      width: 2.65rem;
+
+      justify-content: center;
+
+      padding: 0;
+    }
+
+    .current-code,
+    .chevron {
+      display: none;
+    }
+  }
+</style>

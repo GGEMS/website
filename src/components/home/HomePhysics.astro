@@ -1,0 +1,291 @@
+---
+import { localizedPath, type Lang } from '../../i18n/config';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const particles = [
+  { symbol: 'γ', label: t('homePhysics.gamma'), accent: 'green' },
+  { symbol: 'β− / β+', label: t('homePhysics.electrons'), accent: 'purple', compact: true },
+  { symbol: 'p+', label: t('homePhysics.proton'), accent: 'green' },
+  { symbol: 'α', label: t('homePhysics.alpha'), accent: 'yellow' },
+  { symbol: 'n', label: t('homePhysics.neutron'), accent: 'purple' },
+];
+---
+
+<section class="section home-physics">
+  <div class="container">
+    <div class="physics-heading">
+      <div>
+        <p class="eyebrow">{t('homePhysics.eyebrow')}</p>
+
+        <h2 class="heading-1">
+          {t('homePhysics.title.primary')}
+          <span>{t('homePhysics.title.secondary')}</span>
+        </h2>
+      </div>
+
+      <p class="lead">
+        {t('homePhysics.lead')}
+      </p>
+    </div>
+
+    <div class="particle-grid">
+      {
+        particles.map((particle) => (
+          <article class={`particle-card ${particle.accent}`}>
+            <div class={`particle-symbol ${particle.compact ? 'compact' : ''}`}>{particle.symbol}</div>
+            <p>{particle.label}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="physics-footer">
+      <p>
+        {t('homePhysics.note')}
+      </p>
+
+      <a href={localizedPath('/physics/', lang)}>
+        {t('homePhysics.link')}
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-physics {
+    border-top: 1px solid var(--color-border);
+
+    background:
+      radial-gradient(
+        circle at 14% 42%,
+        rgb(80 192 112 / 6%),
+        transparent 24rem
+      ),
+      radial-gradient(
+        circle at 88% 58%,
+        rgb(128 32 224 / 7%),
+        transparent 26rem
+      ),
+      var(--color-bg-soft);
+  }
+
+  .physics-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+    align-items: end;
+    gap: 5rem;
+  }
+
+  .physics-heading .heading-1 {
+    margin-top: 1.4rem;
+  }
+
+  .physics-heading .heading-1 span {
+    display: block;
+
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .physics-heading .lead {
+    margin: 0;
+  }
+
+  .particle-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(160px, 1fr));
+
+    margin-top: 4.5rem;
+
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .particle-card {
+    position: relative;
+
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 1.5rem;
+
+    border-right: 1px solid var(--color-border);
+  }
+
+  .particle-card:last-child {
+    border-right: 0;
+  }
+
+  .particle-card::before {
+    content: '';
+
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+
+    width: 0.45rem;
+    height: 0.45rem;
+
+    border-radius: 50%;
+  }
+
+  .particle-card.green::before {
+    background: var(--color-green);
+  }
+
+  .particle-card.purple::before {
+    background: var(--color-purple);
+  }
+
+  .particle-card.yellow::before {
+    background: var(--color-yellow);
+  }
+
+  .particle-symbol {
+    margin-top: 1.25rem;
+
+    color: var(--color-text);
+
+    font-family: var(--font-sans);
+    font-size: clamp(2.8rem, 4.2vw, 4.8rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+  }
+
+  .particle-symbol.compact {
+    font-size: clamp(1.9rem, 2.8vw, 2.9rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .particle-card p {
+    margin: 0;
+
+    color: var(--color-text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .physics-footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 4rem;
+
+    margin-top: 2.5rem;
+  }
+
+  .physics-footer p {
+    max-width: 46rem;
+
+    margin: 0;
+
+    color: var(--color-text-subtle);
+
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .physics-footer a {
+    flex: 0 0 auto;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    color: var(--color-text);
+
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+
+    text-decoration: none;
+  }
+
+  .physics-footer a span {
+    color: var(--color-purple);
+
+    transition: transform var(--transition-fast);
+  }
+
+  .physics-footer a:hover span {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 980px) {
+    .physics-heading {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .physics-heading .lead {
+      max-width: 44rem;
+    }
+
+    .particle-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .particle-card {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .particle-card:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .particle-card:nth-last-child(-n + 3) {
+      border-bottom: 0;
+    }
+
+    .particle-card:last-child {
+      grid-column: auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .particle-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .particle-card {
+      min-height: 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .particle-card:last-child {
+      border-bottom: 0;
+    }
+
+    .particle-card,
+    .particle-card:nth-child(2n) {
+      min-height: 220px;
+
+      border-right: 0;
+    }
+
+    .particle-card:last-child {
+      grid-column: auto;
+    }
+
+    .physics-footer {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+</style>

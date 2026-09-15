@@ -1,14 +1,36 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { localizedPath, type Lang } from '../i18n/config';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  showLanguageSwitcher?: boolean;
+}
+
+const {
+  lang,
+  showLanguageSwitcher = true,
+} = Astro.props;
+
+const t = useTranslations(lang);
+
 const navigation = [
-  { label: 'About', href: '/about/' },
-  { label: 'Applications', href: '/applications/' },
-  { label: 'Technology', href: '/technology/' },
+  { label: t('nav.about'), href: localizedPath('/about/', lang) },
+  { label: t('nav.applications'), href: localizedPath('/applications/', lang) },
+  { label: t('nav.physics'), href: localizedPath('/physics/', lang) },
+  { label: t('nav.technology'), href: localizedPath('/technology/', lang) },
 ];
 ---
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="GGEMS home">
+    <a
+      class="brand"
+      href={localizedPath('/', lang)}
+      aria-label="GGEMS home"
+    >
       <img src="/images/ggems-logo.png" alt="" />
       <span>GGEMS</span>
     </a>
@@ -24,23 +46,27 @@ const navigation = [
         href="https://docs.ggems-project.com/"
         class="external"
       >
-        Documentation
+        {t('nav.documentation')}
       </a>
 
       <a
         href="https://forum.ggems-project.com/"
         class="external"
       >
-        Community
+        {t('nav.community')}
       </a>
     </nav>
+
+    {showLanguageSwitcher && <LanguageSwitcher lang={lang} />}
+
+    <ThemeToggle />
 
     <a
       class="github-link"
       href="https://github.com/GGEMS/ggems"
       aria-label="GGEMS on GitHub"
     >
-      GitHub
+      {t('nav.github')}
       <span>↗</span>
     </a>
 
@@ -57,9 +83,9 @@ const navigation = [
           ))
         }
 
-        <a href="https://docs.ggems-project.com/">Documentation ↗</a>
-        <a href="https://forum.ggems-project.com/">Community ↗</a>
-        <a href="https://github.com/GGEMS/ggems">GitHub ↗</a>
+        <a href="https://docs.ggems-project.com/">{t('nav.documentation')} ↗</a>
+        <a href="https://forum.ggems-project.com/">{t('nav.community')} ↗</a>
+        <a href="https://github.com/GGEMS/ggems">{t('nav.github')} ↗</a>
       </nav>
     </details>
   </div>
@@ -72,8 +98,12 @@ const navigation = [
 
     border-bottom: 1px solid var(--color-border);
 
-    background: rgb(7 17 27 / 82%);
+    background: var(--color-header-bg);
     backdrop-filter: blur(18px);
+
+    transition:
+      border-color var(--transition-fast),
+      background var(--transition-fast);
   }
 
   .header-inner {
@@ -81,7 +111,7 @@ const navigation = [
 
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .brand {
@@ -111,7 +141,7 @@ const navigation = [
   .desktop-nav {
     display: flex;
     align-items: center;
-    gap: 1.7rem;
+    gap: 1.2rem;
   }
 
   .desktop-nav a,
@@ -131,16 +161,13 @@ const navigation = [
     color: var(--color-text);
   }
 
-  .desktop-nav .external:hover {
-    color: var(--color-green-light);
-  }
 
   .github-link {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
 
-    padding-left: 1.8rem;
+    padding-left: 1rem;
 
     border-left: 1px solid var(--color-border);
   }
@@ -153,7 +180,7 @@ const navigation = [
     display: none;
   }
 
-  @media (max-width: 940px) {
+  @media (max-width: 1120px) {
     .desktop-nav,
     .github-link {
       display: none;
@@ -208,7 +235,7 @@ const navigation = [
 
       background: var(--color-surface-raised);
 
-      box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 35%);
+      box-shadow: 0 1.5rem 4rem var(--color-shadow);
     }
 
     .mobile-nav nav a {
@@ -227,7 +254,7 @@ const navigation = [
     .mobile-nav nav a:hover {
       color: var(--color-text);
 
-      background: rgb(255 255 255 / 4%);
+      background: var(--color-control-hover);
     }
   }
 </style>

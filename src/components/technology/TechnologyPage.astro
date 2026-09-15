@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Lang } from '../../i18n/config';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const technologies = [
+  {
+    name: t('technologyPage.cpp.title'),
+    body: t('technologyPage.cpp.body'),
+    accent: 'green',
+  },
+  {
+    name: t('technologyPage.opencl.title'),
+    body: t('technologyPage.opencl.body'),
+    accent: 'purple',
+  },
+  {
+    name: t('technologyPage.python.title'),
+    body: t('technologyPage.python.body'),
+    accent: 'yellow',
+  },
+  {
+    name: t('technologyPage.vulkan.title'),
+    body: t('technologyPage.vulkan.body'),
+    accent: 'green',
+  },
+  {
+    name: t('technologyPage.imgui.title'),
+    body: t('technologyPage.imgui.body'),
+    accent: 'purple',
+  },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t('meta.technology.title')}
+  description={t('meta.technology.description')}
+>
+  <main>
+    <section class="page-hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">{t('technologyPage.eyebrow')}</p>
+
+          <h1 class="display">
+            {t('technologyPage.hero.primary')}
+            <span>{t('technologyPage.hero.secondary')}</span>
+          </h1>
+        </div>
+
+        <p class="lead">
+          {t('technologyPage.hero.lead')}
+        </p>
+      </div>
+    </section>
+
+    <section class="section stack">
+      <div class="container stack-grid">
+        <div>
+          <p class="eyebrow">{t('technologyPage.stack.eyebrow')}</p>
+
+          <h2 class="heading-1">
+            {t('technologyPage.stack.title.primary')}
+            <span>{t('technologyPage.stack.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <div class="technology-list">
+          {
+            technologies.map((item) => (
+              <article>
+                <span class={`dot ${item.accent}`}></span>
+
+                <div>
+                  <h3>{item.name}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section principle">
+      <div class="container principle-grid">
+        <div>
+          <p class="eyebrow">{t('technologyPage.principle.eyebrow')}</p>
+
+          <h2 class="heading-1">
+            {t('technologyPage.principle.title.primary')}
+            <span>{t('technologyPage.principle.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <p class="lead">
+          {t('technologyPage.principle.body')}
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+
+    padding-block: 6.5rem 6rem;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      radial-gradient(circle at 82% 30%, rgb(128 32 224 / 11%), transparent 27rem),
+      radial-gradient(circle at 14% 82%, rgb(80 192 112 / 7%), transparent 27rem);
+  }
+
+  .hero-grid,
+  .stack-grid,
+  .principle-grid {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+    gap: 5rem;
+  }
+
+  .hero-grid,
+  .principle-grid {
+    align-items: end;
+  }
+
+  .stack-grid {
+    align-items: start;
+  }
+
+  .display,
+  .heading-1 {
+    margin-top: 1.25rem;
+  }
+
+  .page-hero .display {
+    font-size: clamp(3.8rem, 6vw, 6.2rem);
+  }
+
+  .stack .heading-1,
+  .principle .heading-1 {
+    font-size: clamp(2.5rem, 4vw, 4.1rem);
+  }
+
+  .display span,
+  .heading-1 span {
+    display: block;
+
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .hero-grid .lead,
+  .principle-grid .lead {
+    margin: 0;
+  }
+
+  .technology-list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .technology-list article {
+    display: grid;
+    grid-template-columns: 1rem 1fr;
+    gap: 1.5rem;
+
+    padding: 1.55rem 0;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .dot {
+    width: 0.48rem;
+    height: 0.48rem;
+
+    margin-top: 0.45rem;
+
+    border-radius: 50%;
+  }
+
+  .dot.green {
+    background: var(--color-green);
+  }
+
+  .dot.purple {
+    background: var(--color-purple);
+  }
+
+  .dot.yellow {
+    background: var(--color-yellow);
+  }
+
+  .technology-list h3 {
+    margin: 0;
+
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .technology-list p {
+    max-width: 38rem;
+
+    margin: 0.75rem 0 0;
+
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
+  }
+
+  .stack,
+  .principle {
+    padding-block: 6rem;
+  }
+
+  .principle {
+    border-top: 1px solid var(--color-border);
+
+    background: var(--color-bg-soft);
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid,
+    .stack-grid,
+    .principle-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

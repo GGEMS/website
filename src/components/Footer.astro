@@ -1,3 +1,15 @@
+---
+import type { Lang } from '../i18n/config';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
@@ -5,14 +17,14 @@
 
       <div>
         <strong>GGEMS</strong>
-        <p>GPU Monte Carlo for medical physics</p>
+        <p>{t('footer.tagline')}</p>
       </div>
     </div>
 
     <div class="footer-links">
-      <a href="https://github.com/GGEMS/ggems">GitHub ↗</a>
-      <a href="https://docs.ggems-project.com/">Documentation ↗</a>
-      <a href="https://forum.ggems-project.com/">Forum ↗</a>
+      <a href="https://github.com/GGEMS/ggems">{t('nav.github')} ↗</a>
+      <a href="https://docs.ggems-project.com/">{t('footer.documentation')} ↗</a>
+      <a href="https://forum.ggems-project.com/">{t('footer.forum')} ↗</a>
     </div>
 
     <p class="copyright">
@@ -28,7 +40,7 @@
     background:
       linear-gradient(
         to bottom,
-        rgb(255 255 255 / 1%),
+        var(--color-footer-sheen),
         transparent
       ),
       var(--color-bg);

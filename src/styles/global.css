@@ -1,8 +1,11 @@
 :root {
+  color-scheme: dark;
+
   --color-bg: #07111b;
   --color-bg-soft: #0a1520;
   --color-surface: #0b1723;
   --color-surface-raised: #101e2c;
+  --color-surface-glass: rgb(11 23 35 / 78%);
 
   --color-text: #f5f8fb;
   --color-text-muted: #aab7c5;
@@ -17,6 +20,19 @@
 
   --color-border: rgb(255 255 255 / 9%);
   --color-border-strong: rgb(255 255 255 / 16%);
+
+  --color-header-bg: rgb(7 17 27 / 82%);
+  --color-control-bg: rgb(255 255 255 / 3%);
+  --color-control-hover: rgb(255 255 255 / 6%);
+  --color-visual-line: rgb(255 255 255 / 8%);
+  --color-visual-line-soft: rgb(255 255 255 / 6%);
+  --color-footer-sheen: rgb(255 255 255 / 1%);
+
+  --color-shadow: rgb(0 0 0 / 35%);
+  --color-logo-shadow: rgb(0 0 0 / 38%);
+
+  --color-bg-purple-glow: rgb(128 32 224 / 10%);
+  --color-bg-green-glow: rgb(80 192 112 / 7%);
 
   --font-sans: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -41,10 +57,13 @@
 }
 
 [data-theme='light'] {
+  color-scheme: light;
+
   --color-bg: #f4f7f5;
   --color-bg-soft: #edf2ef;
   --color-surface: #ffffff;
   --color-surface-raised: #f8faf9;
+  --color-surface-glass: rgb(255 255 255 / 78%);
 
   --color-text: #16221c;
   --color-text-muted: #5e7067;
@@ -52,6 +71,19 @@
 
   --color-border: rgb(22 34 28 / 10%);
   --color-border-strong: rgb(22 34 28 / 18%);
+
+  --color-header-bg: rgb(244 247 245 / 86%);
+  --color-control-bg: rgb(22 34 28 / 3%);
+  --color-control-hover: rgb(22 34 28 / 6%);
+  --color-visual-line: rgb(22 34 28 / 10%);
+  --color-visual-line-soft: rgb(22 34 28 / 7%);
+  --color-footer-sheen: rgb(22 34 28 / 2%);
+
+  --color-shadow: rgb(22 34 28 / 16%);
+  --color-logo-shadow: rgb(22 34 28 / 16%);
+
+  --color-bg-purple-glow: rgb(128 32 224 / 6%);
+  --color-bg-green-glow: rgb(80 192 112 / 6%);
 }
 
 *,
@@ -76,18 +108,24 @@ body {
   margin: 0;
   min-height: 100vh;
 
+  color: var(--color-text);
+
   background:
     radial-gradient(
       circle at 80% 18%,
-      rgb(128 32 224 / 10%),
+      var(--color-bg-purple-glow),
       transparent 34rem
     ),
     radial-gradient(
       circle at 16% 82%,
-      rgb(80 192 112 / 7%),
+      var(--color-bg-green-glow),
       transparent 30rem
     ),
     var(--color-bg);
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 img,
@@ -178,7 +216,7 @@ select {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
 
-  background: rgb(11 23 35 / 78%);
+  background: var(--color-surface-glass);
   backdrop-filter: blur(14px);
 }
 
@@ -199,5 +237,9 @@ select {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  body {
+    transition: none;
   }
 }

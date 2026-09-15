@@ -1,36 +1,47 @@
+---
+import type { Lang } from '../../i18n/config';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-content">
-      <p class="eyebrow">GGEMS · GPU Monte Carlo</p>
+      <p class="eyebrow">{t('hero.eyebrow')}</p>
 
       <h1>
-        Monte Carlo
-        <span>for medical physics.</span>
+        {t('hero.title.primary')}
+        <span>{t('hero.title.secondary')}</span>
       </h1>
 
       <p class="hero-lead">
-        High-performance simulation for medical imaging,
-        dosimetry and particle therapy.
+        {t('hero.lead')}
       </p>
 
       <div class="hero-actions">
         <a class="button button-primary" href="#objective">
-          Discover GGEMS
+          {t('hero.discover')}
         </a>
 
         <a
           class="button button-secondary"
           href="https://github.com/GGEMS/ggems"
         >
-          GitHub
+          {t('nav.github')}
           <span>↗</span>
         </a>
       </div>
 
       <div class="hero-meta">
-        <span>Open source</span>
+        <span>{t('hero.openSource')}</span>
         <span>GPL-3.0</span>
-        <span>GPU-first</span>
+        <span>{t('hero.gpuFirst')}</span>
         <span>C++23 · OpenCL</span>
       </div>
     </div>
@@ -48,7 +59,7 @@
 <style>
   .hero {
     position: relative;
-    min-height: calc(100vh - 5.25rem);
+    min-height: min(860px, calc(100svh - 5.25rem));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,7 +87,9 @@
     padding-block: 5rem;
   }
 
-  .hero-content { max-width: 760px; }
+  .hero-content {
+    max-width: 760px;
+  }
 
   .hero h1 {
     margin: 1.7rem 0 0;
@@ -119,15 +132,39 @@
     font-size: 0.82rem;
     font-weight: 500;
     text-decoration: none;
-    transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    transition:
+      transform var(--transition-fast),
+      border-color var(--transition-fast),
+      background var(--transition-fast);
   }
 
-  .button:hover { transform: translateY(-2px); }
-  .button-primary { color: #06120a; background: var(--color-green); }
-  .button-primary:hover { background: var(--color-green-light); }
-  .button-secondary { color: var(--color-text); border-color: var(--color-border-strong); background: rgb(255 255 255 / 3%); }
-  .button-secondary:hover { border-color: var(--color-purple); }
-  .button-secondary span { color: var(--color-purple); }
+  .button:hover {
+    transform: translateY(-2px);
+  }
+
+  .button-primary {
+    color: #06120a;
+    background: var(--color-green);
+  }
+
+  .button-primary:hover {
+    background: var(--color-green-light);
+  }
+
+  .button-secondary {
+    color: var(--color-text);
+    border-color: var(--color-border-strong);
+    background: var(--color-control-bg);
+  }
+
+  .button-secondary:hover {
+    border-color: var(--color-purple);
+    background: var(--color-control-hover);
+  }
+
+  .button-secondary span {
+    color: var(--color-purple);
+  }
 
   .hero-meta {
     display: flex;
@@ -139,12 +176,42 @@
     font-size: 0.7rem;
   }
 
-  .hero-meta span { display: inline-flex; align-items: center; }
-  .hero-meta span:not(:last-child)::after { content: '·'; margin-inline: 0.8rem; color: var(--color-green); }
+  .hero-meta span {
+    display: inline-flex;
+    align-items: center;
+  }
 
-  .hero-visual { position: relative; min-height: 540px; display: grid; place-items: center; }
-  .hero-visual img { position: relative; z-index: 3; width: min(100%, 520px); height: auto; filter: drop-shadow(0 2.4rem 4.5rem rgb(0 0 0 / 38%)); animation: logo-float 8s ease-in-out infinite; }
-  .orbit-glow { position: absolute; z-index: 1; width: 78%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(128 32 224 / 14%), transparent 63%); filter: blur(1.8rem); }
+  .hero-meta span:not(:last-child)::after {
+    content: '·';
+    margin-inline: 0.8rem;
+    color: var(--color-green);
+  }
+
+  .hero-visual {
+    position: relative;
+    min-height: 540px;
+    display: grid;
+    place-items: center;
+  }
+
+  .hero-visual img {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 520px);
+    height: auto;
+    filter: drop-shadow(0 2.4rem 4.5rem var(--color-logo-shadow));
+    animation: logo-float 8s ease-in-out infinite;
+  }
+
+  .orbit-glow {
+    position: absolute;
+    z-index: 1;
+    width: 78%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(128 32 224 / 14%), transparent 63%);
+    filter: blur(1.8rem);
+  }
 
   .hero-line {
     position: absolute;
@@ -153,25 +220,116 @@
     width: min(var(--content-width), calc(100% - 3rem));
     height: 1px;
     transform: translateX(-50%);
-    background: linear-gradient(90deg, transparent, var(--color-border-strong) 15%, var(--color-border-strong) 85%, transparent);
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        var(--color-border-strong) 15%,
+        var(--color-border-strong) 85%,
+        transparent
+      );
   }
 
   @keyframes logo-float {
-    0%, 100% { transform: translateY(0) rotate(-1deg); }
-    50% { transform: translateY(-14px) rotate(1deg); }
+    0%,
+    100% {
+      transform: translateY(0) rotate(-1deg);
+    }
+
+    50% {
+      transform: translateY(-14px) rotate(1deg);
+    }
   }
 
-  @media (max-width: 940px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 1rem; padding-top: 4rem; }
-    .hero-visual { order: -1; min-height: 320px; }
-    .hero-visual img { width: min(70vw, 380px); }
+  @media (max-width: 1120px) {
+    .hero {
+      min-height: auto;
+    }
+
+    .hero-inner {
+      min-height: 620px;
+
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.82fr);
+      gap: 3rem;
+
+      padding-block: 4rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 7vw, 5.9rem);
+    }
+
+    .hero-visual {
+      min-height: 420px;
+    }
+
+    .hero-visual img {
+      width: min(100%, 430px);
+    }
   }
 
-  @media (max-width: 720px) {
-    .hero h1 { font-size: clamp(3.5rem, 16vw, 5.5rem); }
-    .hero-meta { flex-direction: column; gap: 0.5rem; }
-    .hero-meta span:not(:last-child)::after { display: none; }
+  @media (max-width: 860px) {
+    .hero-inner {
+      min-height: 0;
+
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+
+      padding-block: 4rem;
+    }
+
+    .hero-content {
+      max-width: 680px;
+    }
+
+    .hero-visual {
+      min-height: 300px;
+    }
+
+    .hero-visual img {
+      width: min(70vw, 360px);
+    }
+
+    .orbit-glow {
+      width: min(72vw, 360px);
+    }
   }
 
-  @media (prefers-reduced-motion: reduce) { .hero-visual img { animation: none; } }
+  @media (max-width: 620px) {
+    .hero-inner {
+      padding-block: 3rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 15vw, 4.8rem);
+    }
+
+    .hero-lead {
+      margin-top: 1.7rem;
+    }
+
+    .hero-actions {
+      margin-top: 2rem;
+    }
+
+    .hero-meta {
+      row-gap: 0.45rem;
+
+      margin-top: 2.5rem;
+    }
+
+    .hero-meta span:not(:last-child)::after {
+      margin-inline: 0.55rem;
+    }
+
+    .hero-visual {
+      min-height: 250px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-visual img {
+      animation: none;
+    }
+  }
 </style>

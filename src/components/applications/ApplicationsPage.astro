@@ -1,0 +1,281 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Lang } from '../../i18n/config';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const applications = [
+  {
+    label: 'CT · CBCT',
+    title: t('applications.ct.title'),
+    body: t('applicationsPage.ct.body'),
+    accent: 'green',
+  },
+  {
+    label: 'PET · SPECT',
+    title: t('applications.pet.title'),
+    body: t('applicationsPage.pet.body'),
+    accent: 'purple',
+  },
+  {
+    label: 'DOSE',
+    title: t('applications.dosimetry.title'),
+    body: t('applicationsPage.dose.body'),
+    accent: 'yellow',
+  },
+  {
+    label: 'PARTICLE',
+    title: t('applications.therapy.title'),
+    body: t('applicationsPage.therapy.body'),
+    accent: 'mixed',
+  },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t('meta.applications.title')}
+  description={t('meta.applications.description')}
+>
+  <main>
+    <section class="page-hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">{t('applicationsPage.eyebrow')}</p>
+
+          <h1 class="display">
+            {t('applicationsPage.hero.primary')}
+            <span>{t('applicationsPage.hero.secondary')}</span>
+          </h1>
+        </div>
+
+        <p class="lead">
+          {t('applicationsPage.hero.lead')}
+        </p>
+      </div>
+    </section>
+
+    <section class="section application-scope">
+      <div class="container section-heading">
+        <p class="eyebrow">{t('applicationsPage.scope.eyebrow')}</p>
+
+        <h2 class="heading-1">
+          {t('applicationsPage.scope.title.primary')}
+          <span>{t('applicationsPage.scope.title.secondary')}</span>
+        </h2>
+      </div>
+
+      <div class="container application-grid">
+        {
+          applications.map((item) => (
+            <article class={`application-card ${item.accent}`}>
+              <div class="application-label">{item.label}</div>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section development-note">
+      <div class="container note-grid">
+        <div>
+          <p class="eyebrow">{t('applicationsPage.note.eyebrow')}</p>
+
+          <h2 class="heading-1">
+            {t('applicationsPage.note.title.primary')}
+            <span>{t('applicationsPage.note.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <p class="lead">
+          {t('applicationsPage.note.body')}
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+
+    padding-block: 6.5rem 6rem;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      radial-gradient(circle at 80% 30%, rgb(80 192 112 / 8%), transparent 26rem),
+      radial-gradient(circle at 18% 80%, rgb(128 32 224 / 9%), transparent 28rem);
+  }
+
+  .hero-grid,
+  .note-grid {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    align-items: end;
+    gap: 5rem;
+  }
+
+  .display,
+  .heading-1 {
+    margin-top: 1.25rem;
+  }
+
+  .page-hero .display {
+    font-size: clamp(3.8rem, 6vw, 6.2rem);
+  }
+
+  .application-scope .heading-1,
+  .development-note .heading-1 {
+    font-size: clamp(2.5rem, 4vw, 4.1rem);
+  }
+
+  .display span,
+  .heading-1 span {
+    display: block;
+
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .hero-grid .lead,
+  .note-grid .lead {
+    margin: 0;
+  }
+
+  .section-heading {
+    max-width: 850px;
+  }
+
+  .application-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    margin-top: 4rem;
+
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .application-card {
+    position: relative;
+
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 1.75rem;
+
+    overflow: hidden;
+
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .application-card::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+  }
+
+  .application-card.green::before {
+    background: radial-gradient(circle at 85% 18%, rgb(80 192 112 / 13%), transparent 16rem);
+  }
+
+  .application-card.purple::before {
+    background: radial-gradient(circle at 85% 18%, rgb(128 32 224 / 13%), transparent 16rem);
+  }
+
+  .application-card.yellow::before {
+    background: radial-gradient(circle at 85% 18%, rgb(240 240 0 / 8%), transparent 16rem);
+  }
+
+  .application-card.mixed::before {
+    background:
+      radial-gradient(circle at 82% 20%, rgb(128 32 224 / 10%), transparent 15rem),
+      radial-gradient(circle at 68% 34%, rgb(80 192 112 / 8%), transparent 14rem);
+  }
+
+  .application-label {
+    position: relative;
+
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+  }
+
+  .application-card > div:last-child {
+    position: relative;
+  }
+
+  .application-card h3 {
+    margin: 0;
+
+    font-size: clamp(1.8rem, 3vw, 2.9rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+  }
+
+  .application-card p {
+    max-width: 31rem;
+
+    margin: 1.25rem 0 0;
+
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
+  }
+
+  .application-scope,
+  .development-note {
+    padding-block: 6rem;
+  }
+
+  .development-note {
+    border-top: 1px solid var(--color-border);
+
+    background: var(--color-bg-soft);
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid,
+    .note-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .application-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

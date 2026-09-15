@@ -1,0 +1,462 @@
+---
+import { type Lang } from '../../i18n/config';
+import { useTranslations } from '../../i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const particleFamilies = [
+  {
+    symbol: 'γ',
+    title: t('homePhysics.gamma'),
+    body: t('physics.gamma.body'),
+    processes: t('physics.gamma.processes'),
+    accent: 'green',
+  },
+  {
+    symbol: 'β− / β+',
+    title: t('homePhysics.electrons'),
+    compact: true,
+    body: t('physics.electrons.body'),
+    processes: t('physics.electrons.processes'),
+    accent: 'purple',
+  },
+  {
+    symbol: 'p+',
+    title: t('homePhysics.proton'),
+    body: t('physics.proton.body'),
+    processes: t('physics.proton.processes'),
+    accent: 'green',
+  },
+  {
+    symbol: 'α',
+    title: t('homePhysics.alpha'),
+    body: t('physics.alpha.body'),
+    processes: t('physics.alpha.processes'),
+    accent: 'yellow',
+  },
+  {
+    symbol: 'n',
+    title: t('homePhysics.neutron'),
+    body: t('physics.neutron.body'),
+    processes: t('physics.neutron.processes'),
+    accent: 'purple',
+  },
+];
+
+const scientificStates = [
+  {
+    title: t('physics.status.scope.title'),
+    body: t('physics.status.scope.body'),
+  },
+  {
+    title: t('physics.status.implementation.title'),
+    body: t('physics.status.implementation.body'),
+  },
+  {
+    title: t('physics.status.validation.title'),
+    body: t('physics.status.validation.body'),
+  },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t('meta.physics.title')}
+  description={t('meta.physics.description')}
+>
+  <main>
+    <section class="physics-hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">{t('physics.eyebrow')}</p>
+
+          <h1 class="display">
+            {t('physics.hero.primary')}
+            <span>{t('physics.hero.secondary')}</span>
+          </h1>
+        </div>
+
+        <p class="lead hero-lead">
+          {t('physics.hero.lead')}
+        </p>
+      </div>
+    </section>
+
+    <section class="section physics-scope">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">{t('physics.scope.eyebrow')}</p>
+
+          <h2 class="heading-1">
+            {t('physics.scope.title.primary')}
+            <span>{t('physics.scope.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <div class="family-list">
+          {
+            particleFamilies.map((family) => (
+              <article class="family">
+                <div class={`family-symbol ${family.accent} ${family.compact ? 'compact' : ''}`}>
+                  {family.symbol}
+                </div>
+
+                <div class="family-copy">
+                  <h3>{family.title}</h3>
+                  <p>{family.body}</p>
+                </div>
+
+                <p class="family-processes">
+                  {family.processes}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section scientific-status">
+      <div class="container status-grid">
+        <div class="status-heading">
+          <p class="eyebrow">{t('physics.status.eyebrow')}</p>
+
+          <h2 class="heading-1">
+            {t('physics.status.title.primary')}
+            <span>{t('physics.status.title.secondary')}</span>
+          </h2>
+
+          <p class="lead">
+            {t('physics.status.body')}
+          </p>
+        </div>
+
+        <div class="status-list">
+          {
+            scientificStates.map((item) => (
+              <article>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section docs-handoff">
+      <div class="container docs-grid">
+        <div>
+          <p class="eyebrow">{t('physics.docs.eyebrow')}</p>
+
+          <h2 class="heading-1">
+            {t('physics.docs.title.primary')}
+            <span>{t('physics.docs.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <div class="docs-copy">
+          <p class="lead">
+            {t('physics.docs.body')}
+          </p>
+
+          <a href="https://docs.ggems-project.com/">
+            {t('physics.docs.link')}
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .physics-hero {
+    position: relative;
+
+    padding-block: 6.5rem 6rem;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .physics-hero::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      radial-gradient(
+        circle at 84% 34%,
+        rgb(128 32 224 / 12%),
+        transparent 28rem
+      ),
+      radial-gradient(
+        circle at 18% 84%,
+        rgb(80 192 112 / 8%),
+        transparent 28rem
+      );
+  }
+
+  .hero-grid {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    align-items: end;
+    gap: 5rem;
+  }
+
+  .physics-hero .display {
+    margin-top: 1.25rem;
+    font-size: clamp(3.8rem, 6vw, 6.2rem);
+  }
+
+  .physics-hero .display span,
+  .section-heading .heading-1 span,
+  .status-heading .heading-1 span,
+  .docs-grid .heading-1 span {
+    display: block;
+
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .hero-lead {
+    margin: 0;
+  }
+
+  .section-heading {
+    max-width: 820px;
+  }
+
+  .section-heading .heading-1 {
+    margin-top: 1.25rem;
+    font-size: clamp(2.5rem, 4vw, 4.1rem);
+  }
+
+  .status-heading .heading-1,
+  .docs-grid .heading-1 {
+    font-size: clamp(2.5rem, 4vw, 4.1rem);
+  }
+
+  .family-list {
+    margin-top: 4rem;
+
+    border-top: 1px solid var(--color-border);
+  }
+
+  .family {
+    display: grid;
+    grid-template-columns: minmax(110px, 0.8fr) minmax(340px, 1.15fr) minmax(260px, 0.95fr);
+    align-items: start;
+    gap: 2.5rem;
+
+    padding-block: 2rem;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .family-symbol {
+    font-size: clamp(3.2rem, 5vw, 5.2rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+  }
+
+  .family-symbol.compact {
+    font-size: clamp(2.2rem, 3vw, 3.1rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .family-symbol.green {
+    color: var(--color-green-light);
+  }
+
+  .family-symbol.purple {
+    color: #a864ed;
+  }
+
+  .family-symbol.yellow {
+    color: #d5d500;
+  }
+
+  .family-copy h3 {
+    max-width: 18ch;
+
+    margin: 0;
+
+    font-size: clamp(1.55rem, 2.3vw, 2.35rem);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+  }
+
+  .family-copy p {
+    max-width: 28rem;
+
+    margin: 1rem 0 0;
+
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
+  }
+
+  .family-processes {
+    max-width: 30ch;
+
+    margin: 0;
+
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.75;
+    letter-spacing: 0.02em;
+  }
+
+  .physics-scope,
+  .scientific-status,
+  .docs-handoff {
+    padding-block: 6rem;
+  }
+
+  .scientific-status {
+    border-top: 1px solid var(--color-border);
+
+    background: var(--color-bg-soft);
+  }
+
+  .status-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+    gap: 5rem;
+  }
+
+  .status-heading .heading-1 {
+    margin-top: 1.4rem;
+  }
+
+  .status-heading .lead {
+    max-width: 38rem;
+
+    margin-top: 2rem;
+  }
+
+  .status-list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .status-list article {
+    padding: 2rem 0;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .status-list h3 {
+    margin: 0;
+
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .status-list p {
+    max-width: 38rem;
+
+    margin: 0.8rem 0 0;
+
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
+  }
+
+  .docs-handoff {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .docs-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+    gap: 5rem;
+  }
+
+  .docs-grid .heading-1 {
+    margin-top: 1.4rem;
+  }
+
+  .docs-copy .lead {
+    margin: 2.2rem 0 0;
+  }
+
+  .docs-copy a {
+    display: inline-flex;
+    align-items: start;
+    gap: 0.6rem;
+
+    margin-top: 2rem;
+
+    color: var(--color-text);
+
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+
+    text-decoration: none;
+  }
+
+  .docs-copy a span {
+    color: var(--color-purple);
+
+    transition: transform var(--transition-fast);
+  }
+
+  .docs-copy a:hover span {
+    transform: translate(2px, -2px);
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid,
+    .status-grid,
+    .docs-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .family {
+      grid-template-columns: 5.5rem minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    .family-processes {
+      grid-column: 2;
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .physics-hero {
+      padding-block: 6rem;
+    }
+
+    .family {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .family-processes {
+      grid-column: auto;
+    }
+  }
+</style>
