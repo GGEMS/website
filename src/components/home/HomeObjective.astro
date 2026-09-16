@@ -15,9 +15,9 @@ const t = useTranslations(lang);
     <div>
       <p class="eyebrow">{t('objective.eyebrow')}</p>
 
-      <h2 class="heading-1">
+      <h2 class="heading-1 objective-title">
         {t('objective.title.primary')}<br />
-        <span>{t('objective.title.secondary')}</span>
+        {t('objective.title.secondary')}
       </h2>
     </div>
 
@@ -49,9 +49,7 @@ const t = useTranslations(lang);
 
         <h3>{t('pillar.gpu.title')}</h3>
 
-        <p>
-          {t('pillar.gpu.body')}
-        </p>
+        <p>{t('pillar.gpu.body')}</p>
       </article>
 
       <article class="pillar">
@@ -61,9 +59,7 @@ const t = useTranslations(lang);
 
         <h3>{t('pillar.physics.title')}</h3>
 
-        <p>
-          {t('pillar.physics.body')}
-        </p>
+        <p>{t('pillar.physics.body')}</p>
       </article>
 
       <article class="pillar">
@@ -73,9 +69,7 @@ const t = useTranslations(lang);
 
         <h3>{t('pillar.open.title')}</h3>
 
-        <p>
-          {t('pillar.open.body')}
-        </p>
+        <p>{t('pillar.open.body')}</p>
       </article>
     </div>
   </div>
@@ -88,13 +82,9 @@ const t = useTranslations(lang);
     gap: 7rem;
   }
 
-  .objective .heading-1 {
+  .objective-title {
+    max-width: 12ch;
     margin-top: 1.4rem;
-  }
-
-  .objective .heading-1 span {
-    color: var(--color-text-muted);
-    font-weight: 400;
   }
 
   .objective-copy {
@@ -113,20 +103,15 @@ const t = useTranslations(lang);
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-
     margin-top: 2rem;
-
     color: var(--color-text);
-
     font-family: var(--font-mono);
     font-size: 0.78rem;
-
     text-decoration: none;
   }
 
   .text-link span {
     color: var(--color-purple);
-
     transition: transform var(--transition-fast);
   }
 
@@ -135,22 +120,19 @@ const t = useTranslations(lang);
   }
 
   .pillars-wrap {
-    margin-top: 6rem;
+    margin-top: 5rem;
   }
 
   .pillars {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
   }
 
   .pillar {
-    min-height: 360px;
-
+    min-height: 300px;
     padding: 2rem;
-
     border-right: 1px solid var(--color-border);
   }
 
@@ -167,43 +149,36 @@ const t = useTranslations(lang);
   .pillar-dot {
     width: 0.55rem;
     height: 0.55rem;
-
     border-radius: 50%;
   }
 
   .pillar-dot.green {
     background: var(--color-green);
-
     box-shadow: 0 0 1.5rem rgb(80 192 112 / 50%);
   }
 
   .pillar-dot.purple {
     background: var(--color-purple);
-
     box-shadow: 0 0 1.5rem rgb(128 32 224 / 50%);
   }
 
   .pillar-dot.yellow {
     background: var(--color-yellow);
-
     box-shadow: 0 0 1.5rem rgb(240 240 0 / 40%);
   }
 
   .pillar h3 {
-    margin: 7rem 0 0;
-
+    margin: 4.25rem 0 0;
     font-size: 1.75rem;
     font-weight: 500;
     letter-spacing: -0.03em;
   }
 
   .pillar p {
-    max-width: 20rem;
-
+    max-width: 21rem;
     margin: 1.1rem 0 0;
-
     color: var(--color-text-muted);
-
+    font-size: 1.02rem;
     line-height: 1.7;
   }
 
@@ -220,15 +195,17 @@ const t = useTranslations(lang);
   }
 
   @media (max-width: 720px) {
+    .pillars-wrap {
+      margin-top: 4rem;
+    }
+
     .pillars {
       grid-template-columns: 1fr;
     }
 
     .pillar {
       min-height: auto;
-
       padding-block: 2.5rem;
-
       border-right: 0;
       border-bottom: 1px solid var(--color-border);
     }
@@ -238,7 +215,7 @@ const t = useTranslations(lang);
     }
 
     .pillar h3 {
-      margin-top: 4rem;
+      margin-top: 2.75rem;
     }
   }
 </style>

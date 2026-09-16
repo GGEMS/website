@@ -4,6 +4,7 @@ import HomeHero from './HomeHero.astro';
 import HomeObjective from './HomeObjective.astro';
 import HomeApplications from './HomeApplications.astro';
 import HomePhysics from './HomePhysics.astro';
+import HomeRoadmap from './HomeRoadmap.astro';
 
 import type { Lang } from '../../i18n/config';
 import { useTranslations } from '../../i18n';
@@ -26,5 +27,6 @@ const t = useTranslations(lang);
     <HomeObjective lang={lang} />
     <HomeApplications lang={lang} />
     <HomePhysics lang={lang} />
+    <HomeRoadmap lang={lang} />
   </main>
 </BaseLayout>

@@ -1,0 +1,749 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Lang } from '../../i18n/config';
+import { useRoadmapTranslations } from '../../i18n/roadmap';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useRoadmapTranslations(lang);
+
+const critical = [
+  { phase: '01', title: t('critical.foundation'), accent: 'green' },
+  { phase: '02', title: t('critical.materials'), accent: 'green' },
+  { phase: '03', title: t('critical.cuts'), accent: 'green' },
+  { phase: '04', title: t('critical.navigation'), accent: 'purple' },
+  { phase: '05', title: t('critical.gamma'), accent: 'purple' },
+  { phase: '06', title: t('critical.transport'), accent: 'purple' },
+  { phase: '07', title: t('critical.scoring'), accent: 'yellow' },
+];
+
+const phases = Array.from({ length: 21 }, (_, index) => {
+  const number = String(index).padStart(2, '0');
+  return [number, t(`phase.${number}` as Parameters<typeof t>[0])] as const;
+});
+
+const lanes = [
+  {
+    range: t('parallel.charged.range'),
+    title: t('parallel.charged.title'),
+    body: t('parallel.charged.body'),
+    accent: 'green',
+  },
+  {
+    range: t('parallel.detector.range'),
+    title: t('parallel.detector.title'),
+    body: t('parallel.detector.body'),
+    accent: 'purple',
+  },
+  {
+    range: t('parallel.neutron.range'),
+    title: t('parallel.neutron.title'),
+    body: t('parallel.neutron.body'),
+    accent: 'yellow',
+  },
+  {
+    range: t('parallel.integration.range'),
+    title: t('parallel.integration.title'),
+    body: t('parallel.integration.body'),
+    accent: 'purple',
+  },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t('meta.title')}
+  description={t('meta.description')}
+>
+  <main>
+    <section class="page-hero roadmap-hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">{t('hero.eyebrow')}</p>
+
+          <h1 class="display">
+            {t('hero.title.primary')}
+            <span>{t('hero.title.secondary')}</span>
+          </h1>
+        </div>
+
+        <p class="lead">{t('hero.lead')}</p>
+      </div>
+
+      <div class="container status-grid">
+        <article>
+          <span>{t('status.architecture.label')}</span>
+          <strong>{t('status.architecture.value')}</strong>
+        </article>
+        <article>
+          <span>{t('status.debug.label')}</span>
+          <strong>{t('status.debug.value')}</strong>
+        </article>
+        <article>
+          <span>{t('status.release.label')}</span>
+          <strong>{t('status.release.value')}</strong>
+        </article>
+        <article>
+          <span>{t('status.stage.label')}</span>
+          <strong>{t('status.stage.value')}</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="section critical-section">
+      <div class="container section-heading">
+        <div>
+          <p class="eyebrow">{t('critical.eyebrow')}</p>
+          <h2 class="heading-1">
+            {t('critical.title.primary')}
+            <span>{t('critical.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <p class="lead">{t('critical.lead')}</p>
+      </div>
+
+      <div class="container timeline-wrap">
+        <ol class="critical-timeline">
+          {
+            critical.map((step) => (
+              <li class={step.accent}>
+                <span class="phase">{t('phase.label')} {step.phase}</span>
+                <span class="timeline-node"></span>
+                <h3>{step.title}</h3>
+              </li>
+            ))
+          }
+        </ol>
+
+        <article class="gamma-milestone">
+          <div class="milestone-orbit" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div>
+            <span class="phase">{t('milestone.label')}</span>
+            <h3>{t('critical.milestone')}</h3>
+            <p>{t('critical.milestone.note')}</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section sequence-section">
+      <div class="container section-heading">
+        <div>
+          <p class="eyebrow">{t('sequence.eyebrow')}</p>
+          <h2 class="heading-1">
+            {t('sequence.title.primary')}
+            <span>{t('sequence.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <p class="lead">{t('sequence.lead')}</p>
+      </div>
+
+      <div class="container phase-index">
+        {
+          phases.map(([number, title]) => (
+            <article>
+              <span>{number}</span>
+              <h3>{title}</h3>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section parallel-section">
+      <div class="container section-heading">
+        <div>
+          <p class="eyebrow">{t('parallel.eyebrow')}</p>
+          <h2 class="heading-1">
+            {t('parallel.title.primary')}
+            <span>{t('parallel.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <p class="lead">{t('parallel.lead')}</p>
+      </div>
+
+      <div class="container lane-grid">
+        {
+          lanes.map((lane) => (
+            <article class={lane.accent}>
+              <span class="lane-dot"></span>
+              <span class="lane-range">{lane.range}</span>
+              <h3>{lane.title}</h3>
+              <p>{lane.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section principle-section">
+      <div class="container principle-grid">
+        <div>
+          <p class="eyebrow">{t('principle.eyebrow')}</p>
+          <h2 class="heading-1">
+            {t('principle.title.primary')}
+            <span>{t('principle.title.secondary')}</span>
+          </h2>
+        </div>
+
+        <div class="principle-copy">
+          <p class="lead">{t('principle.body')}</p>
+          <p class="roadmap-note">{t('principle.note')}</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+
+    padding-block: 6.5rem 0;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .roadmap-hero::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      radial-gradient(circle at 84% 28%, rgb(128 32 224 / 12%), transparent 30rem),
+      radial-gradient(circle at 12% 76%, rgb(80 192 112 / 9%), transparent 27rem);
+  }
+
+  .roadmap-hero::after {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+      linear-gradient(rgb(128 128 128 / 4%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(128 128 128 / 4%) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, black, transparent 88%);
+  }
+
+  .hero-grid,
+  .section-heading,
+  .principle-grid {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+    align-items: end;
+    gap: 5rem;
+  }
+
+  .display,
+  .heading-1 {
+    margin-top: 1.25rem;
+  }
+
+  .roadmap-hero .display {
+    font-size: clamp(3.8rem, 6vw, 6.2rem);
+  }
+
+  .display span,
+  .heading-1 span {
+    display: block;
+
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .hero-grid .lead,
+  .section-heading .lead,
+  .principle-copy .lead {
+    margin: 0;
+  }
+
+  .status-grid {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    margin-top: 5.5rem;
+
+    border-top: 1px solid var(--color-border);
+  }
+
+  .status-grid article {
+    min-height: 145px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 1.35rem 1.5rem 1.5rem;
+
+    border-right: 1px solid var(--color-border);
+  }
+
+  .status-grid article:last-child {
+    border-right: 0;
+  }
+
+  .status-grid span,
+  .phase,
+  .lane-range {
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .status-grid strong {
+    color: var(--color-text);
+
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 1.5vw, 1.35rem);
+    font-weight: 500;
+  }
+
+  .status-grid article:first-child strong {
+    color: var(--color-green);
+  }
+
+  .critical-section,
+  .parallel-section {
+    background: var(--color-bg-soft);
+  }
+
+  .timeline-wrap {
+    margin-top: 4.5rem;
+  }
+
+  .critical-timeline {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .critical-timeline::before {
+    content: '';
+
+    position: absolute;
+    left: 3rem;
+    right: 3rem;
+    top: 4.4rem;
+
+    height: 1px;
+
+    background: linear-gradient(90deg, var(--color-green), var(--color-purple) 68%, var(--color-yellow));
+    opacity: 0.5;
+  }
+
+  .critical-timeline li {
+    position: relative;
+
+    min-height: 220px;
+
+    padding: 1.4rem;
+
+    border-right: 1px solid var(--color-border);
+  }
+
+  .critical-timeline li:last-child {
+    border-right: 0;
+  }
+
+  .timeline-node {
+    position: absolute;
+    z-index: 2;
+    top: 3.9rem;
+    left: 1.4rem;
+
+    width: 0.78rem;
+    height: 0.78rem;
+
+    border: 3px solid var(--color-bg-soft);
+    border-radius: 50%;
+
+    box-sizing: content-box;
+  }
+
+  .critical-timeline li.green .timeline-node {
+    background: var(--color-green);
+    box-shadow: 0 0 1rem rgb(80 192 112 / 50%);
+  }
+
+  .critical-timeline li.purple .timeline-node {
+    background: var(--color-purple);
+    box-shadow: 0 0 1rem rgb(128 32 224 / 50%);
+  }
+
+  .critical-timeline li.yellow .timeline-node {
+    background: var(--color-yellow);
+    box-shadow: 0 0 1rem rgb(240 240 0 / 32%);
+  }
+
+  .critical-timeline h3 {
+    margin: 7.5rem 0 0;
+
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .gamma-milestone {
+    position: relative;
+
+    min-height: 240px;
+
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: center;
+    gap: 3rem;
+
+    padding: 2.5rem 3rem;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--color-border);
+
+    background:
+      radial-gradient(circle at 12% 50%, rgb(240 240 0 / 8%), transparent 15rem),
+      linear-gradient(90deg, rgb(80 192 112 / 4%), rgb(128 32 224 / 4%));
+  }
+
+  .milestone-orbit {
+    position: relative;
+
+    width: 150px;
+    aspect-ratio: 1;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgb(128 32 224 / 45%);
+    border-radius: 50%;
+  }
+
+  .milestone-orbit::before,
+  .milestone-orbit::after {
+    content: '';
+
+    position: absolute;
+
+    border: 1px solid rgb(80 192 112 / 35%);
+    border-radius: 50%;
+  }
+
+  .milestone-orbit::before {
+    width: 74%;
+    height: 74%;
+    transform: rotate(58deg) scaleY(0.42);
+  }
+
+  .milestone-orbit::after {
+    width: 106%;
+    height: 40%;
+    transform: rotate(-26deg);
+  }
+
+  .milestone-orbit span {
+    position: absolute;
+
+    width: 0.55rem;
+    height: 0.55rem;
+
+    border-radius: 50%;
+  }
+
+  .milestone-orbit span:nth-child(1) {
+    background: var(--color-green);
+    transform: translate(-58px, 12px);
+  }
+
+  .milestone-orbit span:nth-child(2) {
+    background: var(--color-purple);
+    transform: translate(44px, -39px);
+  }
+
+  .milestone-orbit span:nth-child(3) {
+    background: var(--color-yellow);
+    box-shadow: 0 0 1.2rem rgb(240 240 0 / 50%);
+  }
+
+  .gamma-milestone h3 {
+    margin: 0.7rem 0 0;
+
+    font-size: clamp(2rem, 4vw, 3.7rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .gamma-milestone p {
+    margin: 1.25rem 0 0;
+
+    color: var(--color-text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.7;
+  }
+
+  .sequence-section {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .phase-index {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    margin-top: 4.5rem;
+
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .phase-index article {
+    min-height: 118px;
+
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1.2rem 1.4rem;
+
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-index span {
+    color: var(--color-purple);
+
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+  }
+
+  .phase-index h3 {
+    margin: 0;
+
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .lane-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    margin-top: 4.5rem;
+
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .lane-grid article {
+    min-height: 280px;
+
+    padding: 1.6rem;
+
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .lane-dot {
+    display: block;
+
+    width: 0.55rem;
+    height: 0.55rem;
+
+    margin-left: auto;
+
+    border-radius: 50%;
+  }
+
+  .lane-grid article.green .lane-dot {
+    background: var(--color-green);
+  }
+
+  .lane-grid article.purple .lane-dot {
+    background: var(--color-purple);
+  }
+
+  .lane-grid article.yellow .lane-dot {
+    background: var(--color-yellow);
+  }
+
+  .lane-range {
+    display: block;
+    margin-top: 3rem;
+  }
+
+  .lane-grid h3 {
+    margin: 0.85rem 0 0;
+
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+
+  .lane-grid p {
+    max-width: 34rem;
+
+    margin: 1rem 0 0;
+
+    color: var(--color-text-muted);
+
+    line-height: 1.7;
+  }
+
+  .principle-section {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .roadmap-note {
+    margin: 2rem 0 0;
+    padding-top: 1.5rem;
+
+    color: var(--color-text-subtle);
+
+    border-top: 1px solid var(--color-border);
+
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 1020px) {
+    .hero-grid,
+    .section-heading,
+    .principle-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-grid article:nth-child(2) {
+      border-right: 0;
+    }
+
+    .status-grid article:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .critical-timeline {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .critical-timeline::before {
+      display: none;
+    }
+
+    .critical-timeline li {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .critical-timeline li:nth-child(4) {
+      border-right: 0;
+    }
+
+    .critical-timeline li:nth-child(n + 5) {
+      border-bottom: 0;
+    }
+
+    .timeline-node {
+      top: 3.8rem;
+    }
+
+    .gamma-milestone {
+      grid-template-columns: 180px 1fr;
+    }
+
+    .phase-index {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 700px) {
+    .page-hero {
+      padding-top: 5rem;
+    }
+
+    .status-grid,
+    .critical-timeline,
+    .phase-index,
+    .lane-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .status-grid article,
+    .status-grid article:nth-child(2),
+    .critical-timeline li,
+    .critical-timeline li:nth-child(4),
+    .phase-index article,
+    .lane-grid article {
+      border-right: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .status-grid article:last-child,
+    .critical-timeline li:last-child,
+    .phase-index article:last-child,
+    .lane-grid article:last-child {
+      border-bottom: 0;
+    }
+
+    .critical-timeline li {
+      min-height: 155px;
+    }
+
+    .critical-timeline h3 {
+      margin-top: 4.8rem;
+    }
+
+    .gamma-milestone {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+
+      padding: 2rem;
+    }
+
+    .milestone-orbit {
+      width: 120px;
+    }
+  }
+</style>
