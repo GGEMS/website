@@ -32,7 +32,11 @@ const navigation = [
       aria-label="GGEMS home"
     >
       <img src="/images/ggems-logo.png" alt="" />
-      <span>GGEMS</span>
+
+      <span class="brand-copy">
+        <strong>GGEMS</strong>
+        <small>GPU Geant4-based Monte Carlo Simulations</small>
+      </span>
     </a>
 
     <nav class="desktop-nav" aria-label="Main navigation">
@@ -91,19 +95,65 @@ const navigation = [
   </div>
 </header>
 
+<script>
+  const header = document.querySelector('.site-header');
+
+  if (header instanceof HTMLElement) {
+    let ticking = false;
+
+    const updateHeader = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 12);
+      ticking = false;
+    };
+
+    const requestHeaderUpdate = () => {
+      if (ticking) return;
+
+      ticking = true;
+      window.requestAnimationFrame(updateHeader);
+    };
+
+    updateHeader();
+    window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
+  }
+</script>
+
 <style>
   .site-header {
-    position: relative;
+    --header-background: rgb(7 17 27 / 72%);
+    --header-background-scrolled: rgb(7 17 27 / 94%);
+
+    position: sticky;
+    top: 0;
     z-index: 100;
 
     border-bottom: 1px solid var(--color-border);
 
-    background: var(--color-header-bg);
+    background: var(--header-background);
     backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
     transition:
       border-color var(--transition-fast),
-      background var(--transition-fast);
+      background var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  :global([data-theme='light']) .site-header {
+    --header-background: rgb(244 247 245 / 76%);
+    --header-background-scrolled: rgb(244 247 245 / 95%);
+  }
+
+  .site-header.is-scrolled {
+    border-bottom-color: var(--color-border-strong);
+
+    background: var(--header-background-scrolled);
+
+    box-shadow: 0 0.65rem 2rem rgb(0 0 0 / 10%);
+  }
+
+  :global([data-theme='light']) .site-header.is-scrolled {
+    box-shadow: 0 0.65rem 2rem rgb(22 34 28 / 7%);
   }
 
   .header-inner {
@@ -138,6 +188,34 @@ const navigation = [
     object-fit: contain;
   }
 
+  .brand-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem;
+    min-width: 0;
+  }
+
+  .brand-copy strong {
+    color: var(--color-text);
+
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: 0.08em;
+  }
+
+  .brand-copy small {
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
   .desktop-nav {
     display: flex;
     align-items: center;
@@ -160,7 +238,6 @@ const navigation = [
   .github-link:hover {
     color: var(--color-text);
   }
-
 
   .github-link {
     display: inline-flex;
@@ -255,6 +332,18 @@ const navigation = [
       color: var(--color-text);
 
       background: var(--color-control-hover);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .brand-copy small {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none;
     }
   }
 </style>

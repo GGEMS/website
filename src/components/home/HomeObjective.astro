@@ -12,14 +12,12 @@ const t = useTranslations(lang);
 
 <section id="objective" class="section objective">
   <div class="container objective-grid">
-    <div>
-      <p class="eyebrow">{t('objective.eyebrow')}</p>
+    <p class="eyebrow">{t('objective.eyebrow')}</p>
 
-      <h2 class="heading-1 objective-title">
-        {t('objective.title.primary')}<br />
-        {t('objective.title.secondary')}
-      </h2>
-    </div>
+    <h2 class="heading-1 objective-title">
+      {t('objective.title.primary')}<br />
+      {t('objective.title.secondary')}
+    </h2>
 
     <div class="objective-copy">
       <p class="lead">
@@ -79,16 +77,27 @@ const t = useTranslations(lang);
   .objective-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
-    gap: 7rem;
+    grid-template-areas:
+      'eyebrow .'
+      'title copy';
+    column-gap: 7rem;
+    row-gap: 1.4rem;
+    align-items: start;
+  }
+
+  .objective-grid > .eyebrow {
+    grid-area: eyebrow;
   }
 
   .objective-title {
+    grid-area: title;
+
     max-width: 12ch;
-    margin-top: 1.4rem;
+    margin: 0;
   }
 
   .objective-copy {
-    padding-top: 2.2rem;
+    grid-area: copy;
   }
 
   .objective-copy .lead {
@@ -185,12 +194,16 @@ const t = useTranslations(lang);
   @media (max-width: 940px) {
     .objective-grid {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      grid-template-areas:
+        'eyebrow'
+        'title'
+        'copy';
+      gap: 1.4rem;
     }
 
     .objective-copy {
       max-width: 680px;
-      padding-top: 0;
+      margin-top: 1.1rem;
     }
   }
 

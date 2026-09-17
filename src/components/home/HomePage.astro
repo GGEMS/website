@@ -4,6 +4,8 @@ import HomeHero from './HomeHero.astro';
 import HomeObjective from './HomeObjective.astro';
 import HomeApplications from './HomeApplications.astro';
 import HomePhysics from './HomePhysics.astro';
+import PortableCompute from '../sections/PortableCompute.astro';
+import VisualizationDebugging from '../sections/VisualizationDebugging.astro';
 import HomeRoadmap from './HomeRoadmap.astro';
 
 import type { Lang } from '../../i18n/config';
@@ -22,11 +24,113 @@ const t = useTranslations(lang);
   title={t('meta.home.title')}
   description={t('meta.home.description')}
 >
-  <main>
+  <main class="home-page">
     <HomeHero lang={lang} />
     <HomeObjective lang={lang} />
     <HomeApplications lang={lang} />
     <HomePhysics lang={lang} />
+    <PortableCompute lang={lang} />
+    <VisualizationDebugging lang={lang} />
     <HomeRoadmap lang={lang} />
   </main>
 </BaseLayout>
+
+<style>
+  /*
+   * Home section rhythm
+   *
+   * The two band tones are deliberately more separated than the base site
+   * surfaces so the eye can read the section changes without divider lines.
+   */
+  .home-page {
+    --home-band-a: #07111b;
+    --home-band-b: #0d1b27;
+    --home-section-padding: 4.5rem;
+  }
+
+  :global([data-theme='light']) .home-page {
+    --home-band-a: #f8faf9;
+    --home-band-b: #dde8e0;
+  }
+
+  /*
+   * All standard Home bands use the same vertical rhythm.
+   * The Hero keeps its dedicated layout because it is intentionally oversized.
+   */
+  .home-page :global(.section) {
+    padding-block: var(--home-section-padding);
+  }
+
+  /* A — Hero */
+  .home-page :global(.hero) {
+    background-color: var(--home-band-a);
+  }
+
+  /* B — Objective */
+  .home-page :global(.objective) {
+    background: var(--home-band-b);
+  }
+
+  /* A — Applications */
+  .home-page :global(.applications) {
+    border-top: 0;
+    background: var(--home-band-a);
+  }
+
+  /* B — Particles */
+  .home-page :global(.home-physics) {
+    border-top: 0;
+
+    background:
+      radial-gradient(
+        circle at 14% 42%,
+        rgb(80 192 112 / 6%),
+        transparent 24rem
+      ),
+      radial-gradient(
+        circle at 88% 58%,
+        rgb(128 32 224 / 7%),
+        transparent 26rem
+      ),
+      var(--home-band-b);
+  }
+
+  /* A — Portable Compute */
+  .home-page :global(.portable-compute) {
+    background: var(--home-band-a);
+  }
+
+  /* B — Visualization & Debugging */
+  .home-page :global(.visualization-debugging) {
+    background: var(--home-band-b);
+  }
+
+  /* A — Roadmap */
+  .home-page :global(.home-roadmap) {
+    border-top: 0;
+
+    background:
+      radial-gradient(
+        circle at 12% 22%,
+        rgb(80 192 112 / 8%),
+        transparent 24rem
+      ),
+      radial-gradient(
+        circle at 82% 74%,
+        rgb(128 32 224 / 8%),
+        transparent 28rem
+      ),
+      var(--home-band-a);
+  }
+
+  /* The alternating section tones now provide the large-scale separation. */
+  .home-page :global(.hero-line) {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .home-page {
+      --home-section-padding: 4rem;
+    }
+  }
+</style>

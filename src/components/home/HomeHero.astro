@@ -39,10 +39,10 @@ const t = useTranslations(lang);
       </div>
 
       <div class="hero-meta">
-        <span>{t('hero.openSource')}</span>
         <span>GPL-3.0</span>
         <span>{t('hero.gpuFirst')}</span>
-        <span>C++23 · OpenCL</span>
+        <span>OpenCL</span>
+        <span>Vulkan</span>
       </div>
     </div>
 
@@ -206,11 +206,39 @@ const t = useTranslations(lang);
   .orbit-glow {
     position: absolute;
     z-index: 1;
-    width: 78%;
+    width: 88%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: radial-gradient(circle, rgb(128 32 224 / 14%), transparent 63%);
-    filter: blur(1.8rem);
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        rgb(128 32 224 / 28%) 0%,
+        rgb(128 32 224 / 16%) 34%,
+        transparent 68%
+      ),
+      radial-gradient(
+        circle at 42% 58%,
+        rgb(80 192 112 / 10%) 0%,
+        transparent 54%
+      );
+    filter: blur(2.3rem);
+  }
+
+  :global([data-theme='light']) .orbit-glow {
+    width: 82%;
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        rgb(128 32 224 / 13%) 0%,
+        rgb(128 32 224 / 7%) 36%,
+        transparent 68%
+      ),
+      radial-gradient(
+        circle at 42% 58%,
+        rgb(80 192 112 / 6%) 0%,
+        transparent 54%
+      );
+    filter: blur(2rem);
   }
 
   .hero-line {
@@ -291,7 +319,9 @@ const t = useTranslations(lang);
     }
 
     .orbit-glow {
-      width: min(72vw, 360px);
+      width: min(64vw, 320px);
+      opacity: 0.72;
+      filter: blur(1.8rem);
     }
   }
 
@@ -314,7 +344,6 @@ const t = useTranslations(lang);
 
     .hero-meta {
       row-gap: 0.45rem;
-
       margin-top: 2.5rem;
     }
 
@@ -324,6 +353,12 @@ const t = useTranslations(lang);
 
     .hero-visual {
       min-height: 250px;
+    }
+
+    .orbit-glow {
+      width: min(58vw, 260px);
+      opacity: 0.58;
+      filter: blur(1.5rem);
     }
   }
 

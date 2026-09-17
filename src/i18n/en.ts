@@ -9,7 +9,7 @@ const en = {
   'nav.community': 'Community',
   'nav.github': 'GitHub',
 
-  'meta.home.title': 'GGEMS — GPU Monte Carlo for Medical Physics',
+  'meta.home.title': 'GGEMS — GPU Geant4-based Monte Carlo Simulations',
   'meta.home.description':
     'GGEMS is an open-source GPU Monte Carlo simulation platform for medical imaging, dosimetry and particle therapy.',
 
@@ -134,7 +134,6 @@ const en = {
   'physics.docs.body':
     'The website presents the physics at a high level. Sphinx will carry model details, energy ranges, references, validation methodology and reproducible examples.',
   'physics.docs.link': 'Open the documentation',
-
 
   'meta.about.title': 'About — GGEMS',
   'meta.about.description':

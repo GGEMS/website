@@ -9,69 +9,35 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+const title = lang === 'fr' ? 'Particules' : 'Particles';
 const electronLabel = lang === 'fr' ? 'Électron' : 'Electron';
 const positronLabel = 'Positron';
+const alphaLabel = 'Alpha · Generic Ion';
 
 const particles = [
-  {
-    symbol: 'γ',
-    label: t('homePhysics.gamma'),
-    accent: 'green',
-    symbolClass: 'gamma',
-  },
-  {
-    symbol: 'β−',
-    label: electronLabel,
-    accent: 'purple',
-    symbolClass: 'beta',
-  },
-  {
-    symbol: 'β+',
-    label: positronLabel,
-    accent: 'purple',
-    symbolClass: 'beta',
-  },
-  {
-    symbol: 'p',
-    label: t('homePhysics.proton'),
-    accent: 'green',
-    symbolClass: 'nucleon',
-  },
-  {
-    symbol: 'n',
-    label: t('homePhysics.neutron'),
-    accent: 'purple',
-    symbolClass: 'nucleon',
-  },
-  {
-    symbol: 'α',
-    label: t('homePhysics.alpha'),
-    accent: 'yellow',
-    symbolClass: 'alpha',
-  },
+  { symbol: 'γ', label: t('homePhysics.gamma'), type: 'gamma' },
+  { symbol: 'β−', label: electronLabel, type: 'electron' },
+  { symbol: 'β+', label: positronLabel, type: 'positron' },
+  { symbol: 'p', label: t('homePhysics.proton'), type: 'proton' },
+  { symbol: 'n', label: t('homePhysics.neutron'), type: 'neutron' },
+  { symbol: 'α', label: alphaLabel, type: 'alpha' },
 ];
 ---
 
 <section class="section home-physics">
   <div class="container">
     <div class="physics-heading">
-      <div>
-        <p class="eyebrow">{t('homePhysics.eyebrow')}</p>
-
-        <h2 class="heading-1">{t('homePhysics.title.primary')}</h2>
-      </div>
-
-      <p class="lead">
-        {t('homePhysics.lead')}
-      </p>
+      <p class="eyebrow">{t('homePhysics.eyebrow')}</p>
+      <h2 class="heading-1">{title}</h2>
+      <p class="lead">{t('homePhysics.lead')}</p>
     </div>
 
     <div class="particle-grid">
       {
         particles.map((particle) => (
-          <article class={`particle-card ${particle.accent}`}>
+          <article class={`particle-card ${particle.type}`}>
             <div class="particle-orb">
-              <div class={`particle-symbol ${particle.symbolClass}`}>{particle.symbol}</div>
+              <div class="particle-symbol">{particle.symbol}</div>
             </div>
             <p>{particle.label}</p>
           </article>
@@ -80,9 +46,7 @@ const particles = [
     </div>
 
     <div class="physics-footer">
-      <p>
-        {t('homePhysics.note')}
-      </p>
+      <p>{t('homePhysics.note')}</p>
 
       <a href={localizedPath('/physics/', lang)}>
         {t('homePhysics.link')}
@@ -94,121 +58,158 @@ const particles = [
 
 <style>
   .home-physics {
+    padding-block: 4.5rem;
+
     border-top: 1px solid var(--color-border);
 
     background:
-      radial-gradient(
-        circle at 14% 42%,
-        rgb(80 192 112 / 6%),
-        transparent 24rem
-      ),
-      radial-gradient(
-        circle at 88% 58%,
-        rgb(128 32 224 / 7%),
-        transparent 26rem
-      ),
+      radial-gradient(circle at 14% 42%, rgb(80 192 112 / 6%), transparent 24rem),
+      radial-gradient(circle at 88% 58%, rgb(128 32 224 / 7%), transparent 26rem),
       var(--color-bg-soft);
   }
 
   .physics-heading {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
-    align-items: end;
-    gap: 4.5rem;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    grid-template-areas:
+      'eyebrow .'
+      'title lead';
+    column-gap: 5rem;
+    row-gap: 1.35rem;
+    align-items: start;
+  }
+
+  .physics-heading > .eyebrow {
+    grid-area: eyebrow;
   }
 
   .physics-heading .heading-1 {
-    margin-top: 1.4rem;
+    grid-area: title;
+
     max-width: 12ch;
+    margin: 0;
   }
 
   .physics-heading .lead {
+    grid-area: lead;
+
     margin: 0;
+
+    color: rgb(221 229 237 / 90%);
   }
 
   .particle-grid {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 2rem);
 
-    margin-top: 4.5rem;
-
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+    margin-top: 4.75rem;
   }
 
   .particle-card {
-    position: relative;
+    --particle-rgb: 192 192 192;
 
-    min-height: 260px;
+    min-width: 0;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 1.35rem;
 
-    padding: 2rem 1.25rem 1.6rem;
-
-    border-right: 1px solid var(--color-border);
+    padding-block: 0.5rem 1rem;
 
     text-align: center;
   }
 
-  .particle-card:last-child {
-    border-right: 0;
-  }
+  /* Exact GGEMS particle colors:
+     Gamma      -> GREEN_Neon      -> RGB(46, 139, 87)
+     Electron   -> CYAN_Cryo       -> RGB(58, 178, 190)
+     Positron   -> MAGENTA_Fuchsia -> RGB(255, 160, 255)
+     Proton     -> RED_Tomato      -> RGB(220, 20, 60)
+     Neutron    -> GRAY_Silver     -> RGB(192, 192, 192)
+     Alpha      -> YELLOW_Gold     -> RGB(255, 255, 80)
+  */
+
+  .particle-card.gamma { --particle-rgb: 46 139 87; }
+  .particle-card.electron { --particle-rgb: 58 178 190; }
+  .particle-card.positron { --particle-rgb: 255 160 255; }
+  .particle-card.proton { --particle-rgb: 220 20 60; }
+  .particle-card.neutron { --particle-rgb: 192 192 192; }
+  .particle-card.alpha { --particle-rgb: 255 255 80; }
 
   .particle-orb {
     position: relative;
 
-    width: clamp(6.8rem, 8vw, 8.4rem);
+    width: clamp(6.8rem, 8.3vw, 8.7rem);
     aspect-ratio: 1;
 
     display: grid;
     place-items: center;
 
+    overflow: hidden;
+
     border-radius: 50%;
 
-    border: 1px solid rgb(127 127 127 / 22%);
-
     background:
-      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 34%), transparent 30%),
-      radial-gradient(circle at 68% 72%, rgb(255 255 255 / 8%), transparent 42%),
-      linear-gradient(145deg, rgb(255 255 255 / 6%), rgb(255 255 255 / 1%));
+      radial-gradient(
+        circle at 30% 24%,
+        rgb(255 255 255 / 82%) 0%,
+        rgb(255 255 255 / 30%) 9%,
+        transparent 25%
+      ),
+      radial-gradient(
+        circle at 70% 76%,
+        rgb(0 0 0 / 24%) 0%,
+        transparent 48%
+      ),
+      radial-gradient(
+        circle at 42% 38%,
+        rgb(var(--particle-rgb) / 78%) 0%,
+        rgb(var(--particle-rgb) / 48%) 52%,
+        rgb(var(--particle-rgb) / 22%) 78%,
+        rgb(var(--particle-rgb) / 10%) 100%
+      );
 
     box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 18%),
-      inset 0 -10px 24px rgb(0 0 0 / 4%),
-      0 12px 28px rgb(0 0 0 / 5%);
-
-    overflow: hidden;
-    isolation: isolate;
+      inset 0.65rem 0.65rem 1.5rem rgb(255 255 255 / 18%),
+      inset -0.75rem -0.9rem 1.8rem rgb(0 0 0 / 20%),
+      0 0.75rem 1.6rem rgb(0 0 0 / 10%),
+      0 0 2rem rgb(var(--particle-rgb) / 8%);
   }
 
+  .particle-orb::after {
+    content: '';
 
-  .particle-card.green .particle-orb {
+    position: absolute;
+    top: 16%;
+    left: 18%;
+
+    width: 34%;
+    height: 17%;
+
+    border-radius: 50%;
+
     background:
-      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 34%), transparent 30%),
-      radial-gradient(circle at 68% 72%, rgb(255 255 255 / 8%), transparent 42%),
-      linear-gradient(145deg, rgb(80 192 112 / 10%), rgb(80 192 112 / 2%));
+      radial-gradient(
+        ellipse at center,
+        rgb(255 255 255 / 62%) 0%,
+        rgb(255 255 255 / 18%) 44%,
+        transparent 72%
+      );
+
+    filter: blur(1px);
+    transform: rotate(-24deg);
+
+    pointer-events: none;
   }
 
-
-  .particle-card.purple .particle-orb {
-    background:
-      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 34%), transparent 30%),
-      radial-gradient(circle at 68% 72%, rgb(255 255 255 / 8%), transparent 42%),
-      linear-gradient(145deg, rgb(128 32 224 / 10%), rgb(128 32 224 / 2%));
+  :global([data-theme='light']) .particle-orb {
+    box-shadow:
+      inset 0.7rem 0.7rem 1.4rem rgb(255 255 255 / 46%),
+      inset -0.85rem -1rem 1.9rem rgb(0 0 0 / 24%),
+      0 0.7rem 1.45rem rgb(22 34 28 / 15%),
+      0 0 2.1rem rgb(var(--particle-rgb) / 13%);
   }
-
-
-  .particle-card.yellow .particle-orb {
-    background:
-      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 34%), transparent 30%),
-      radial-gradient(circle at 68% 72%, rgb(255 255 255 / 8%), transparent 42%),
-      linear-gradient(145deg, rgb(232 224 32 / 11%), rgb(232 224 32 / 2%));
-  }
-
 
   .particle-symbol {
     position: relative;
@@ -217,36 +218,38 @@ const particles = [
     color: var(--color-text);
 
     font-family: var(--font-sans);
+    font-size: clamp(2.85rem, 3.7vw, 4.15rem);
     font-weight: 400;
     line-height: 1;
+    letter-spacing: -0.045em;
     white-space: nowrap;
   }
 
-  .particle-symbol.gamma,
-  .particle-symbol.alpha {
-    font-size: clamp(2.9rem, 3.7vw, 4.2rem);
-    letter-spacing: -0.05em;
-  }
-
-  .particle-symbol.beta {
-    font-size: clamp(2.5rem, 3.2vw, 3.8rem);
-    letter-spacing: -0.04em;
-  }
-
-  .particle-symbol.nucleon {
-    font-size: clamp(3rem, 3.7vw, 4rem);
-    letter-spacing: -0.05em;
+  .particle-card.electron .particle-symbol,
+  .particle-card.positron .particle-symbol {
+    font-size: clamp(2.6rem, 3.3vw, 3.8rem);
   }
 
   .particle-card p {
     margin: 0;
 
-    color: var(--color-text-muted);
+    color: rgb(204 216 227 / 90%);
 
     font-family: var(--font-mono);
-    font-size: 0.76rem;
-    letter-spacing: 0.055em;
+    font-size: 0.74rem;
+    letter-spacing: 0.07em;
+    line-height: 1.4;
     text-transform: uppercase;
+  }
+
+
+  :global([data-theme='light']) .physics-heading .lead,
+  :global([data-theme='light']) .particle-card p {
+    color: var(--color-text-muted);
+  }
+
+  :global([data-theme='light']) .physics-footer p {
+    color: var(--color-text-subtle);
   }
 
   .physics-footer {
@@ -255,7 +258,10 @@ const particles = [
     justify-content: space-between;
     gap: 4rem;
 
-    margin-top: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+
+    border-top: 1px solid var(--color-border);
   }
 
   .physics-footer p {
@@ -263,7 +269,7 @@ const particles = [
 
     margin: 0;
 
-    color: var(--color-text-subtle);
+    color: rgb(174 191 207 / 88%);
 
     font-size: 0.9rem;
     line-height: 1.7;
@@ -286,7 +292,6 @@ const particles = [
 
   .physics-footer a span {
     color: var(--color-purple);
-
     transition: transform var(--transition-fast);
   }
 
@@ -297,47 +302,39 @@ const particles = [
   @media (max-width: 1100px) {
     .particle-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .particle-card {
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .particle-card:nth-child(3n) {
-      border-right: 0;
-    }
-
-    .particle-card:nth-last-child(-n + 3) {
-      border-bottom: 0;
+      row-gap: 3rem;
     }
   }
 
   @media (max-width: 980px) {
     .physics-heading {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      grid-template-areas:
+        'eyebrow'
+        'title'
+        'lead';
+      gap: 1.35rem;
     }
 
     .physics-heading .lead {
       max-width: 44rem;
+      margin-top: 1.1rem;
     }
   }
 
   @media (max-width: 640px) {
     .particle-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem 1.5rem;
     }
 
-    .particle-card,
-    .particle-card:nth-child(3n) {
-      min-height: 220px;
-
-      border-right: 0;
-      border-bottom: 1px solid var(--color-border);
+    .particle-orb {
+      width: min(8rem, 36vw);
     }
 
-    .particle-card:last-child {
-      border-bottom: 0;
+    .physics-footer {
+      flex-direction: column;
+      gap: 1.5rem;
     }
   }
 </style>
