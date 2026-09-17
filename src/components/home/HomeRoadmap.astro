@@ -18,62 +18,24 @@ const t = useHomeRoadmapTranslations(lang);
       <p class="lead">{t('lead')}</p>
     </div>
 
-    <div class="roadmap-track">
-      <article class="roadmap-stage status-done">
-        <div class="stage-status">
-          <span class="status-marker" aria-hidden="true"></span>
-          <span>{t('status.done')}</span>
-        </div>
-
-        <div class="stage-track" aria-hidden="true">
-          <span class="stage-node"></span>
-        </div>
-
+    <div class="roadmap-grid">
+      <article class="roadmap-card roadmap-done">
+        <span class="stage-status">{t('status.done')}</span>
         <h3>{t('stage.done')}</h3>
       </article>
 
-      <article class="roadmap-stage status-active">
-        <div class="stage-status">
-          <span class="status-marker" aria-hidden="true"></span>
-          <span>{t('status.active')}</span>
-        </div>
-
-        <div class="stage-track active-track" aria-hidden="true">
-          <svg
-            class="progress-wave"
-            viewBox="0 0 100 28"
-            preserveAspectRatio="none"
-            role="presentation"
-          >
-            <path
-              d="M3 14 C10 0 20 28 30 14 S52 0 62 14 S84 28 97 14"
-            />
-          </svg>
-          <span class="stage-node"></span>
-        </div>
-
+      <article class="roadmap-card roadmap-active">
+        <span class="stage-status">{t('status.active')}</span>
         <h3>{t('stage.active')}</h3>
 
         <div class="next-milestone">
-          <div class="next-label">
-            <span class="next-marker" aria-hidden="true"></span>
-            <span>{t('status.next')}</span>
-          </div>
-
+          <span class="next-label">{t('status.next')}</span>
           <strong>{t('stage.next')}</strong>
         </div>
       </article>
 
-      <article class="roadmap-stage status-later">
-        <div class="stage-status">
-          <span class="status-marker" aria-hidden="true"></span>
-          <span>{t('status.later')}</span>
-        </div>
-
-        <div class="stage-track" aria-hidden="true">
-          <span class="stage-node"></span>
-        </div>
-
+      <article class="roadmap-card roadmap-later">
+        <span class="stage-status">{t('status.later')}</span>
         <h3>{t('stage.later')}</h3>
       </article>
     </div>
@@ -115,60 +77,69 @@ const t = useHomeRoadmapTranslations(lang);
 
   .roadmap-heading .heading-1 {
     grid-area: title;
-
     margin: 0;
   }
 
   .roadmap-heading .lead {
     grid-area: lead;
-
     margin: 0;
   }
 
-  .roadmap-track {
-    position: relative;
-
+  .roadmap-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1.55fr 1fr;
+    gap: 1rem;
 
     margin-top: 4.5rem;
-
   }
 
-  .roadmap-stage {
-    --status-color: var(--color-text-subtle);
-    --status-glow: rgb(114 128 142 / 20%);
+  .roadmap-card {
+    min-height: 220px;
 
-    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 
-    min-height: 230px;
+    padding: 1.7rem;
 
-    display: flex;
-    flex-direction: column;
-
-    padding: 1.45rem 1.55rem 1.7rem;
-
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
   }
 
-  .status-done {
-    --status-color: var(--color-green);
-    --status-glow: rgb(80 192 112 / 32%);
+  .roadmap-done {
+    background:
+      linear-gradient(
+        145deg,
+        rgb(80 192 112 / 13%),
+        rgb(80 192 112 / 5%)
+      );
   }
 
-  .status-active {
-    --status-color: var(--color-yellow);
-    --status-glow: rgb(240 240 0 / 28%);
+  .roadmap-active {
+    background:
+      radial-gradient(
+        circle at 76% 62%,
+        rgb(128 32 224 / 7%),
+        transparent 15rem
+      ),
+      linear-gradient(
+        145deg,
+        rgb(240 240 0 / 13%),
+        rgb(240 240 0 / 4%)
+      );
+  }
+
+  .roadmap-later {
+    background:
+      linear-gradient(
+        145deg,
+        rgb(128 32 224 / 11%),
+        rgb(128 32 224 / 4%)
+      );
   }
 
   .stage-status,
   .next-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-
     width: fit-content;
-
-    color: var(--color-text-muted);
 
     font-family: var(--font-mono);
     font-size: 0.67rem;
@@ -177,126 +148,26 @@ const t = useHomeRoadmapTranslations(lang);
     text-transform: uppercase;
   }
 
-  .status-marker,
-  .next-marker {
-    width: 0.5rem;
-    height: 0.5rem;
-
-    flex: 0 0 auto;
-
-    border-radius: 50%;
+  .roadmap-done .stage-status {
+    color: var(--color-green);
   }
 
-  .status-marker {
-    background: var(--status-color);
-    box-shadow: 0 0 0.85rem var(--status-glow);
+  .roadmap-active .stage-status {
+    color: #b8b800;
   }
 
-  .next-marker {
-    background: var(--color-purple);
-    box-shadow: 0 0 0.85rem rgb(128 32 224 / 34%);
+  .roadmap-later .stage-status {
+    color: var(--color-purple);
   }
 
-  .stage-track {
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    top: 4.95rem;
-
-    height: 0;
+  :global([data-theme='dark']) .roadmap-active .stage-status {
+    color: var(--color-yellow);
   }
 
-  .status-done .stage-track {
-    left: 1.55rem;
-  }
+  .roadmap-card h3 {
+    align-self: start;
 
-  .status-done .stage-track::before,
-  .status-later .stage-track::before {
-    content: '';
-
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -1px;
-
-    height: 2px;
-
-    background: var(--status-color);
-    opacity: 0.72;
-  }
-
-  .status-later .stage-track {
-    right: 1.55rem;
-  }
-
-  .progress-wave {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -0.9rem;
-
-    width: 100%;
-    height: 1.8rem;
-
-    overflow: visible;
-  }
-
-  .progress-wave path {
-    fill: none;
-    stroke: var(--color-yellow);
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-
-    vector-effect: non-scaling-stroke;
-
-    filter: drop-shadow(0 0 0.35rem rgb(240 240 0 / 24%));
-  }
-
-  .stage-node {
-    position: absolute;
-    z-index: 4;
-    top: 0;
-
-    width: 1rem;
-    height: 1rem;
-
-    border: 0;
-    border-radius: 50%;
-
-    background: var(--status-color);
-    box-shadow: 0 0 1rem var(--status-glow);
-
-    transform: translateY(-50%);
-  }
-
-  .status-done .stage-node {
-    right: -0.5rem;
-  }
-
-  .status-active .stage-node {
-    left: 62%;
-
-    box-shadow:
-      0 0 0 0.28rem rgb(240 240 0 / 12%),
-      0 0 1.4rem rgb(240 240 0 / 34%);
-
-    transform: translate(-50%, -50%);
-  }
-
-  .status-later .stage-node {
-    left: -0.5rem;
-  }
-
-  :global([data-theme='light']) .stage-status,
-  :global([data-theme='light']) .next-label {
-    color: var(--color-text-subtle);
-  }
-
-
-  .roadmap-stage h3 {
-    margin: 4.4rem 0 0;
+    margin: 3.4rem 0 0;
 
     color: var(--color-text);
 
@@ -306,41 +177,20 @@ const t = useHomeRoadmapTranslations(lang);
     letter-spacing: -0.02em;
   }
 
-
-  .status-active::after {
-    content: '';
-
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
-
-    background:
-      radial-gradient(
-        circle at 28% 42%,
-        rgb(240 240 0 / 5%),
-        transparent 13rem
-      ),
-      radial-gradient(
-        circle at 76% 62%,
-        rgb(128 32 224 / 7%),
-        transparent 15rem
-      );
-  }
-
   .next-milestone {
-    position: relative;
-    z-index: 1;
-
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
-    gap: 1.1rem;
+    gap: 1rem;
 
     margin-top: auto;
-    padding-top: 1.2rem;
+    padding-top: 1.15rem;
 
     border-top: 1px solid var(--color-border);
+  }
+
+  .next-label {
+    color: var(--color-purple);
   }
 
   .next-milestone strong {
@@ -381,57 +231,35 @@ const t = useHomeRoadmapTranslations(lang);
     transform: translateX(3px);
   }
 
-  @media (max-width: 980px) {
-    .roadmap-track {
+  @media (max-width: 900px) {
+    .roadmap-grid {
       grid-template-columns: 1fr;
+      gap: 0.9rem;
+
+      margin-top: 3rem;
     }
 
-    .roadmap-track::before {
-      display: none;
+    .roadmap-card {
+      min-height: 0;
+
+      display: flex;
+      flex-direction: column;
+
+      padding: 1.5rem;
     }
 
-    .roadmap-stage {
-      min-height: 170px;
-    }
-
-    .stage-track {
-      position: relative;
-      top: auto;
-      left: auto;
-      right: auto;
-
-      width: 100%;
-      height: auto;
-
-      margin-top: 1.65rem;
-    }
-
-    .status-done .stage-track::before,
-    .status-later .stage-track::before,
-    .progress-wave {
-      display: none;
-    }
-
-    .stage-node,
-    .status-done .stage-node,
-    .status-active .stage-node,
-    .status-later .stage-node {
-      position: relative;
-      top: auto;
-      left: auto;
-      right: auto;
-
-      display: block;
-
-      transform: none;
-    }
-
-    .roadmap-stage h3 {
-      margin-top: 1.6rem;
+    .roadmap-card h3 {
+      margin-top: 1.8rem;
     }
 
     .next-milestone {
-      margin-top: 1.5rem;
+      margin-top: 1.6rem;
+    }
+
+    .roadmap-footer {
+      justify-content: flex-start;
+
+      margin-top: 1.8rem;
     }
   }
 
@@ -454,11 +282,7 @@ const t = useHomeRoadmapTranslations(lang);
   @media (max-width: 560px) {
     .next-milestone {
       grid-template-columns: 1fr;
-      gap: 0.75rem;
-    }
-
-    .roadmap-footer {
-      justify-content: flex-start;
+      gap: 0.7rem;
     }
   }
 </style>

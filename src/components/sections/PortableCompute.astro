@@ -9,8 +9,17 @@ interface Props {
 const { lang } = Astro.props;
 const t = useCapabilityTranslations(lang);
 
-const systems = ['Windows', 'Linux', 'macOS'];
-const vendors = ['Intel', 'AMD', 'NVIDIA'];
+const systems = [
+  { name: 'Windows', className: 'windows' },
+  { name: 'Linux', className: 'linux' },
+  { name: 'macOS', className: 'macos' },
+];
+
+const vendors = [
+  { name: 'Intel', className: 'intel' },
+  { name: 'AMD', className: 'amd' },
+  { name: 'NVIDIA', className: 'nvidia' },
+];
 ---
 
 <section class="section portable-compute">
@@ -23,10 +32,10 @@ const vendors = ['Intel', 'AMD', 'NVIDIA'];
 
     <div class="portable-map" aria-label={t('portable.title')}>
       <div class="portable-row portable-systems">
-        <span class="row-label">{t('portable.os')}</span>
-
         <div class="node-grid">
-          {systems.map((system) => <div class="platform-node">{system}</div>)}
+          {systems.map((system) => (
+            <div class={`platform-node ${system.className}`}>{system.name}</div>
+          ))}
         </div>
       </div>
 
@@ -42,10 +51,12 @@ const vendors = ['Intel', 'AMD', 'NVIDIA'];
       </div>
 
       <div class="portable-row portable-vendors">
-        <span class="row-label">{t('portable.hardware')}</span>
-
         <div class="node-grid">
-          {vendors.map((vendor) => <div class="platform-node vendor-node">{vendor}</div>)}
+          {vendors.map((vendor) => (
+            <div class={`platform-node vendor-node ${vendor.className}`}>
+              {vendor.name}
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -93,9 +104,6 @@ const vendors = ['Intel', 'AMD', 'NVIDIA'];
 
     overflow: hidden;
 
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-
     background:
       radial-gradient(circle at 50% 50%, rgb(80 192 112 / 6%), transparent 22rem);
   }
@@ -105,18 +113,8 @@ const vendors = ['Intel', 'AMD', 'NVIDIA'];
     z-index: 2;
 
     display: grid;
-    grid-template-columns: 10rem minmax(0, 1fr);
+    grid-template-columns: 1fr;
     align-items: center;
-    gap: 2rem;
-  }
-
-  .row-label {
-    color: var(--color-text-subtle);
-
-    font-family: var(--font-mono);
-    font-size: 0.67rem;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
   }
 
   .node-grid {
@@ -126,17 +124,25 @@ const vendors = ['Intel', 'AMD', 'NVIDIA'];
   }
 
   .platform-node {
+    --node-bg: rgb(127 127 127 / 2%);
+    --node-border: var(--color-border);
+    --node-glow: transparent;
+
     min-height: 5.3rem;
 
     display: grid;
     place-items: center;
 
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--node-border);
     border-radius: var(--radius-md);
 
     color: var(--color-text);
 
-    background: rgb(127 127 127 / 2%);
+    background: var(--node-bg);
+
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 10%),
+      0 0 1.8rem var(--node-glow);
 
     font-family: var(--font-mono);
     font-size: clamp(0.9rem, 1.3vw, 1.05rem);
@@ -144,8 +150,66 @@ const vendors = ['Intel', 'AMD', 'NVIDIA'];
     letter-spacing: 0.02em;
   }
 
-  .vendor-node {
-    background: rgb(128 32 224 / 2.5%);
+  /* Operating systems stay deliberately neutral: the visual message is that
+     OpenCL spans all three rather than pairing an OS with a hardware vendor. */
+  .portable-systems .platform-node {
+    --node-bg:
+      linear-gradient(
+        145deg,
+        rgb(126 138 148 / 9%),
+        rgb(126 138 148 / 3%)
+      );
+    --node-border: rgb(126 138 148 / 20%);
+    --node-glow: rgb(126 138 148 / 3%);
+  }
+
+  /* Hardware vendors keep restrained brand-associated tints without using
+     third-party logos. */
+  .intel {
+    --node-bg: linear-gradient(145deg, rgb(0 113 197 / 14%), rgb(0 113 197 / 5%));
+    --node-border: rgb(0 113 197 / 25%);
+    --node-glow: rgb(0 113 197 / 5%);
+  }
+
+  .amd {
+    --node-bg: linear-gradient(145deg, rgb(220 20 60 / 13%), rgb(220 20 60 / 4%));
+    --node-border: rgb(220 20 60 / 23%);
+    --node-glow: rgb(220 20 60 / 5%);
+  }
+
+  .nvidia {
+    --node-bg: linear-gradient(145deg, rgb(118 185 0 / 15%), rgb(118 185 0 / 5%));
+    --node-border: rgb(118 185 0 / 26%);
+    --node-glow: rgb(118 185 0 / 6%);
+  }
+
+  :global([data-theme='dark']) .portable-systems .platform-node {
+    --node-bg:
+      linear-gradient(
+        145deg,
+        rgb(126 138 148 / 16%),
+        rgb(126 138 148 / 6%)
+      );
+    --node-border: rgb(126 138 148 / 28%);
+    --node-glow: rgb(126 138 148 / 5%);
+  }
+
+  :global([data-theme='dark']) .intel {
+    --node-bg: linear-gradient(145deg, rgb(0 113 197 / 23%), rgb(0 113 197 / 8%));
+    --node-border: rgb(0 113 197 / 35%);
+    --node-glow: rgb(0 113 197 / 8%);
+  }
+
+  :global([data-theme='dark']) .amd {
+    --node-bg: linear-gradient(145deg, rgb(220 20 60 / 22%), rgb(220 20 60 / 8%));
+    --node-border: rgb(220 20 60 / 33%);
+    --node-glow: rgb(220 20 60 / 8%);
+  }
+
+  :global([data-theme='dark']) .nvidia {
+    --node-bg: linear-gradient(145deg, rgb(118 185 0 / 23%), rgb(118 185 0 / 8%));
+    --node-border: rgb(118 185 0 / 35%);
+    --node-glow: rgb(118 185 0 / 9%);
   }
 
   .compute-bridge {
@@ -157,7 +221,7 @@ const vendors = ['Intel', 'AMD', 'NVIDIA'];
     align-items: center;
     gap: 1.25rem;
 
-    margin: 1.6rem 0 1.6rem 12rem;
+    margin: 1.6rem 0;
   }
 
   .bridge-line {
@@ -228,11 +292,6 @@ const vendors = ['Intel', 'AMD', 'NVIDIA'];
 
     .portable-row {
       grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .compute-bridge {
-      margin-left: 0;
     }
   }
 

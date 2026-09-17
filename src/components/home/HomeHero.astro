@@ -47,8 +47,6 @@ const t = useTranslations(lang);
     </div>
 
     <div class="hero-visual" aria-hidden="true">
-      <div class="orbit-glow"></div>
-
       <img src="/images/ggems-logo.png" alt="" />
     </div>
   </div>
@@ -66,15 +64,6 @@ const t = useTranslations(lang);
     overflow: hidden;
   }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 77% 42%, rgb(128 32 224 / 11%), transparent 28rem),
-      radial-gradient(circle at 21% 74%, rgb(80 192 112 / 6%), transparent 25rem);
-  }
 
   .hero-inner {
     position: relative;
@@ -203,43 +192,6 @@ const t = useTranslations(lang);
     animation: logo-float 8s ease-in-out infinite;
   }
 
-  .orbit-glow {
-    position: absolute;
-    z-index: 1;
-    width: 88%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background:
-      radial-gradient(
-        circle at 50% 50%,
-        rgb(128 32 224 / 28%) 0%,
-        rgb(128 32 224 / 16%) 34%,
-        transparent 68%
-      ),
-      radial-gradient(
-        circle at 42% 58%,
-        rgb(80 192 112 / 10%) 0%,
-        transparent 54%
-      );
-    filter: blur(2.3rem);
-  }
-
-  :global([data-theme='light']) .orbit-glow {
-    width: 82%;
-    background:
-      radial-gradient(
-        circle at 50% 50%,
-        rgb(128 32 224 / 13%) 0%,
-        rgb(128 32 224 / 7%) 36%,
-        transparent 68%
-      ),
-      radial-gradient(
-        circle at 42% 58%,
-        rgb(80 192 112 / 6%) 0%,
-        transparent 54%
-      );
-    filter: blur(2rem);
-  }
 
   .hero-line {
     position: absolute;
@@ -318,11 +270,6 @@ const t = useTranslations(lang);
       width: min(70vw, 360px);
     }
 
-    .orbit-glow {
-      width: min(64vw, 320px);
-      opacity: 0.72;
-      filter: blur(1.8rem);
-    }
   }
 
   @media (max-width: 620px) {
@@ -355,11 +302,6 @@ const t = useTranslations(lang);
       min-height: 250px;
     }
 
-    .orbit-glow {
-      width: min(58vw, 260px);
-      opacity: 0.58;
-      filter: blur(1.5rem);
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
