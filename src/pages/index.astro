@@ -2,84 +2,931 @@
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/600.css';
-import '@fontsource/space-grotesk/700.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="GGEMS 2 — GPU Geant4-based Monte Carlo Simulations for medical imaging, dosimetry and particle therapy."
+      content="GGEMS — GPU Geant4-based Monte Carlo Simulations for medical imaging, dosimetry and particle therapy."
     />
     <meta name="robots" content="noindex, nofollow, noarchive" />
 
-    <title>GGEMS 2 — Website under construction</title>
+    <link rel="icon" type="image/png" href="/images/ggems-logo.png" />
+    <link rel="apple-touch-icon" href="/images/ggems-logo.png" />
+
+    <title>GGEMS — Website in progress</title>
+
+    <script is:inline>
+      (() => {
+        const storedTheme = localStorage.getItem('ggems-theme');
+        const theme =
+          storedTheme ??
+          (window.matchMedia('(prefers-color-scheme: light)').matches
+            ? 'light'
+            : 'dark');
+
+        document.documentElement.dataset.theme = theme;
+
+        const storedLang = localStorage.getItem('ggems-language');
+        const supportedLanguages = ['en', 'fr', 'de', 'es', 'it', 'pt-BR', 'ru', 'zh-CN', 'ja'];
+
+        if (storedLang && supportedLanguages.includes(storedLang)) {
+          document.documentElement.lang = storedLang;
+          document.documentElement.dataset.lang = storedLang;
+        } else {
+          document.documentElement.lang = 'en';
+          document.documentElement.dataset.lang = 'en';
+        }
+      })();
+    </script>
   </head>
 
   <body>
-    <main>
-      <section class="hero">
-        <div class="visual" aria-hidden="true">
-          <div class="glow"></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="GGEMS home">
           <img src="/images/ggems-logo.png" alt="" />
+          <span class="brand-copy">
+            <strong>GGEMS</strong>
+            <small>GPU Geant4-based Monte Carlo Simulations</small>
+          </span>
+        </a>
+
+        <div class="header-actions">
+          <details class="language-switcher">
+            <summary aria-label="Language" title="Language">
+              <span class="flag current-flag current-flag-en" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="20" fill="#fff" />
+                  <g fill="#b22234">
+                    <rect y="0" width="28" height="1.54" />
+                    <rect y="3.08" width="28" height="1.54" />
+                    <rect y="6.16" width="28" height="1.54" />
+                    <rect y="9.24" width="28" height="1.54" />
+                    <rect y="12.32" width="28" height="1.54" />
+                    <rect y="15.40" width="28" height="1.54" />
+                    <rect y="18.46" width="28" height="1.54" />
+                  </g>
+                  <rect width="11.8" height="10.77" fill="#3c3b6e" />
+                  <g fill="#fff">
+                    <circle cx="1.5" cy="1.45" r=".38" />
+                    <circle cx="3.6" cy="1.45" r=".38" />
+                    <circle cx="5.7" cy="1.45" r=".38" />
+                    <circle cx="7.8" cy="1.45" r=".38" />
+                    <circle cx="9.9" cy="1.45" r=".38" />
+                    <circle cx="2.55" cy="3.1" r=".38" />
+                    <circle cx="4.65" cy="3.1" r=".38" />
+                    <circle cx="6.75" cy="3.1" r=".38" />
+                    <circle cx="8.85" cy="3.1" r=".38" />
+                    <circle cx="1.5" cy="4.75" r=".38" />
+                    <circle cx="3.6" cy="4.75" r=".38" />
+                    <circle cx="5.7" cy="4.75" r=".38" />
+                    <circle cx="7.8" cy="4.75" r=".38" />
+                    <circle cx="9.9" cy="4.75" r=".38" />
+                    <circle cx="2.55" cy="6.4" r=".38" />
+                    <circle cx="4.65" cy="6.4" r=".38" />
+                    <circle cx="6.75" cy="6.4" r=".38" />
+                    <circle cx="8.85" cy="6.4" r=".38" />
+                    <circle cx="1.5" cy="8.05" r=".38" />
+                    <circle cx="3.6" cy="8.05" r=".38" />
+                    <circle cx="5.7" cy="8.05" r=".38" />
+                    <circle cx="7.8" cy="8.05" r=".38" />
+                    <circle cx="9.9" cy="8.05" r=".38" />
+                    <circle cx="2.55" cy="9.7" r=".38" />
+                    <circle cx="4.65" cy="9.7" r=".38" />
+                    <circle cx="6.75" cy="9.7" r=".38" />
+                    <circle cx="8.85" cy="9.7" r=".38" />
+                  </g>
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-fr" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="9.34" height="20" x="0" fill="#0055a4" />
+                  <rect width="9.34" height="20" x="9.33" fill="#fff" />
+                  <rect width="9.34" height="20" x="18.66" fill="#ef4135" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-de" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="6.67" y="0" fill="#000" />
+                  <rect width="28" height="6.67" y="6.66" fill="#dd0000" />
+                  <rect width="28" height="6.67" y="13.33" fill="#ffce00" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-it" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="9.34" height="20" x="0" fill="#009246" />
+                  <rect width="9.34" height="20" x="9.33" fill="#fff" />
+                  <rect width="9.34" height="20" x="18.66" fill="#ce2b37" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-es" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="5" y="0" fill="#aa151b" />
+                  <rect width="28" height="10" y="5" fill="#f1bf00" />
+                  <rect width="28" height="5" y="15" fill="#aa151b" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-pt-br" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="20" fill="#009c3b" />
+                  <polygon points="14,2 26,10 14,18 2,10" fill="#ffdf00" />
+                  <circle cx="14" cy="10" r="4.2" fill="#002776" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-ru" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="6.67" y="0" fill="#fff" />
+                  <rect width="28" height="6.67" y="6.66" fill="#0039a6" />
+                  <rect width="28" height="6.67" y="13.33" fill="#d52b1e" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-zh-cn" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="20" fill="#de2910" />
+                  <polygon points="5,2.4 5.8,4.8 8.3,4.8 6.25,6.25 7.05,8.6 5,7.15 2.95,8.6 3.75,6.25 1.7,4.8 4.2,4.8" fill="#ffde00" />
+                  <circle cx="10.4" cy="3.4" r=".62" fill="#ffde00" />
+                  <circle cx="12.3" cy="5.1" r=".62" fill="#ffde00" />
+                  <circle cx="12.1" cy="7.7" r=".62" fill="#ffde00" />
+                  <circle cx="10.1" cy="9.1" r=".62" fill="#ffde00" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-ja" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="20" fill="#fff" />
+                  <circle cx="14" cy="10" r="5.2" fill="#bc002d" />
+                </svg>
+              </span>
+
+              <span class="current-code current-code-en">EN</span>
+              <span class="current-code current-code-fr">FR</span>
+              <span class="current-code current-code-de">DE</span>
+              <span class="current-code current-code-es">ES</span>
+              <span class="current-code current-code-it">IT</span>
+              <span class="current-code current-code-pt-br">PT-BR</span>
+              <span class="current-code current-code-ru">RU</span>
+              <span class="current-code current-code-zh-cn">ZH-CN</span>
+              <span class="current-code current-code-ja">JA</span>
+              <span class="chevron" aria-hidden="true">⌄</span>
+            </summary>
+
+            <div class="language-menu">
+              <button type="button" data-language="en">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="20" fill="#fff" />
+                      <g fill="#b22234">
+                        <rect y="0" width="28" height="1.54" />
+                        <rect y="3.08" width="28" height="1.54" />
+                        <rect y="6.16" width="28" height="1.54" />
+                        <rect y="9.24" width="28" height="1.54" />
+                        <rect y="12.32" width="28" height="1.54" />
+                        <rect y="15.40" width="28" height="1.54" />
+                        <rect y="18.46" width="28" height="1.54" />
+                      </g>
+                      <rect width="11.8" height="10.77" fill="#3c3b6e" />
+                    </svg>
+                  </span>
+                  <span>English</span>
+                </span>
+                <small>EN</small>
+              </button>
+
+              <button type="button" data-language="fr">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="9.34" height="20" x="0" fill="#0055a4" />
+                      <rect width="9.34" height="20" x="9.33" fill="#fff" />
+                      <rect width="9.34" height="20" x="18.66" fill="#ef4135" />
+                    </svg>
+                  </span>
+                  <span>Français</span>
+                </span>
+                <small>FR</small>
+              </button>
+
+              <button type="button" data-language="de">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="6.67" y="0" fill="#000" />
+                      <rect width="28" height="6.67" y="6.66" fill="#dd0000" />
+                      <rect width="28" height="6.67" y="13.33" fill="#ffce00" />
+                    </svg>
+                  </span>
+                  <span>Deutsch</span>
+                </span>
+                <small>DE</small>
+              </button>
+
+              <button type="button" data-language="it">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="9.34" height="20" x="0" fill="#009246" />
+                      <rect width="9.34" height="20" x="9.33" fill="#fff" />
+                      <rect width="9.34" height="20" x="18.66" fill="#ce2b37" />
+                    </svg>
+                  </span>
+                  <span>Italiano</span>
+                </span>
+                <small>IT</small>
+              </button>
+
+              <button type="button" data-language="es">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="5" y="0" fill="#aa151b" />
+                      <rect width="28" height="10" y="5" fill="#f1bf00" />
+                      <rect width="28" height="5" y="15" fill="#aa151b" />
+                    </svg>
+                  </span>
+                  <span>Español</span>
+                </span>
+                <small>ES</small>
+              </button>
+
+              <button type="button" data-language="pt-BR">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="20" fill="#009c3b" />
+                      <polygon points="14,2 26,10 14,18 2,10" fill="#ffdf00" />
+                      <circle cx="14" cy="10" r="4.2" fill="#002776" />
+                    </svg>
+                  </span>
+                  <span>Português (Brasil)</span>
+                </span>
+                <small>PT-BR</small>
+              </button>
+
+              <button type="button" data-language="ru">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="6.67" y="0" fill="#fff" />
+                      <rect width="28" height="6.67" y="6.66" fill="#0039a6" />
+                      <rect width="28" height="6.67" y="13.33" fill="#d52b1e" />
+                    </svg>
+                  </span>
+                  <span>Русский</span>
+                </span>
+                <small>RU</small>
+              </button>
+
+              <button type="button" data-language="zh-CN">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="20" fill="#de2910" />
+                      <polygon points="5,2.4 5.8,4.8 8.3,4.8 6.25,6.25 7.05,8.6 5,7.15 2.95,8.6 3.75,6.25 1.7,4.8 4.2,4.8" fill="#ffde00" />
+                      <circle cx="10.4" cy="3.4" r=".62" fill="#ffde00" />
+                      <circle cx="12.3" cy="5.1" r=".62" fill="#ffde00" />
+                      <circle cx="12.1" cy="7.7" r=".62" fill="#ffde00" />
+                      <circle cx="10.1" cy="9.1" r=".62" fill="#ffde00" />
+                    </svg>
+                  </span>
+                  <span>简体中文</span>
+                </span>
+                <small>ZH-CN</small>
+              </button>
+
+              <button type="button" data-language="ja">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="20" fill="#fff" />
+                      <circle cx="14" cy="10" r="5.2" fill="#bc002d" />
+                    </svg>
+                  </span>
+                  <span>日本語</span>
+                </span>
+                <small>JA</small>
+              </button>
+            </div>
+          </details>
+
+          <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+            <span class="theme-icon theme-dark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="presentation">
+                <circle cx="12" cy="12" r="3.5"></circle>
+                <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M18.72 5.28 17.3 6.7M6.7 17.3l-1.42 1.42"></path>
+              </svg>
+            </span>
+
+            <span class="theme-icon theme-light" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M20 15.3A8.4 8.4 0 0 1 8.7 4a8.4 8.4 0 1 0 11.3 11.3Z"></path>
+              </svg>
+            </span>
+          </button>
         </div>
+      </div>
+    </header>
 
-        <div class="content">
-          <p class="eyebrow">GGEMS 2</p>
+    <main>
+      <section class="hero section-a">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">GGEMS</p>
 
-          <h1>
-            A new GGEMS<br />
-            website
-            <span>is under construction.</span>
-          </h1>
+            <h1 data-i18n="en">
+              GGEMS website
+              <span>is being built.</span>
+            </h1>
 
-          <p class="lead">
-            GPU Geant4-based Monte Carlo Simulations for medical imaging,
-            dosimetry and particle therapy.
-          </p>
+            <h1 data-i18n="fr">
+              Site GGEMS
+              <span>en préparation.</span>
+            </h1>
 
-          <div class="actions">
-            <a class="primary" href="https://github.com/GGEMS/ggems">
-              GitHub
-            </a>
+            <h1 data-i18n="de">
+              GGEMS-Webseite
+              <span>im Aufbau.</span>
+            </h1>
 
-            <!--   <a class="secondary" href="https://forum.ggems-project.com/">
-                  Forum
-            </a> -->
+            <h1 data-i18n="it">
+              Sito GGEMS
+              <span>in preparazione.</span>
+            </h1>
+
+            <h1 data-i18n="es">
+              Sitio web de GGEMS
+              <span>en preparación.</span>
+            </h1>
+
+            <h1 data-i18n="pt-BR">
+              Site GGEMS
+              <span>em preparação.</span>
+            </h1>
+
+            <h1 data-i18n="ru">
+              Сайт GGEMS
+              <span>в разработке.</span>
+            </h1>
+
+            <h1 data-i18n="zh-CN">
+              <span class="cjk-nowrap">GGEMS 网站</span>
+              <span>正在建设中。</span>
+            </h1>
+
+            <h1 data-i18n="ja">
+              <span class="cjk-nowrap">GGEMS サイト</span>
+              <span>構築中。</span>
+            </h1>
+
+            <p class="hero-lead" data-i18n="en">
+              GGEMS development continues while the new public website is prepared.
+            </p>
+
+            <p class="hero-lead" data-i18n="fr">
+              Le développement de GGEMS continue pendant la préparation du nouveau site public.
+            </p>
+
+            <p class="hero-lead" data-i18n="de">
+              Die Entwicklung von GGEMS läuft weiter, während die neue öffentliche Website vorbereitet wird.
+            </p>
+
+            <p class="hero-lead" data-i18n="it">
+              Lo sviluppo di GGEMS prosegue mentre viene preparato il nuovo sito pubblico.
+            </p>
+
+            <p class="hero-lead" data-i18n="es">
+              El desarrollo de GGEMS continúa mientras se prepara el nuevo sitio web público.
+            </p>
+
+            <p class="hero-lead" data-i18n="pt-BR">
+              O desenvolvimento do GGEMS continua enquanto o novo site público é preparado.
+            </p>
+
+            <p class="hero-lead" data-i18n="ru">
+              Разработка GGEMS продолжается, пока готовится новый публичный сайт.
+            </p>
+
+            <p class="hero-lead" data-i18n="zh-CN">
+              GGEMS 的开发仍在持续，同时新的公开网站正在筹备中。
+            </p>
+
+            <p class="hero-lead" data-i18n="ja">
+              GGEMS の開発は継続中で、新しい公開サイトを準備しています。
+            </p>
+
+            <p class="definition">GPU Geant4-based Monte Carlo Simulations</p>
+
+            <p class="status" data-i18n="en">
+              <span></span>
+              Website redesign in progress · GGEMS development active
+            </p>
+
+            <p class="status" data-i18n="fr">
+              <span></span>
+              Refonte du site en cours · Développement de GGEMS actif
+            </p>
+
+            <p class="status" data-i18n="de">
+              <span></span>
+              Neugestaltung der Website läuft · GGEMS-Entwicklung aktiv
+            </p>
+
+            <p class="status" data-i18n="it">
+              <span></span>
+              Restyling del sito in corso · Sviluppo di GGEMS attivo
+            </p>
+
+            <p class="status" data-i18n="es">
+              <span></span>
+              Rediseño del sitio en curso · Desarrollo de GGEMS activo
+            </p>
+
+            <p class="status" data-i18n="pt-BR">
+              <span></span>
+              Reformulação do site em andamento · Desenvolvimento do GGEMS ativo
+            </p>
+
+            <p class="status" data-i18n="ru">
+              <span></span>
+              Обновление сайта · Разработка GGEMS продолжается
+            </p>
+
+            <p class="status" data-i18n="zh-CN">
+              <span></span>
+              网站改版进行中 · GGEMS 开发持续进行
+            </p>
+
+            <p class="status" data-i18n="ja">
+              <span></span>
+              サイト刷新中 · GGEMS の開発は継続中
+            </p>
           </div>
 
-          <p class="status">
-            <span></span>
-            Website foundation online · Design in progress
+          <div class="hero-visual" aria-hidden="true">
+            <img src="/images/ggems-logo.png" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-b">
+        <div class="container split-heading">
+          <p class="eyebrow" data-i18n="en">ABOUT</p>
+          <p class="eyebrow" data-i18n="fr">À PROPOS</p>
+          <p class="eyebrow" data-i18n="de">ÜBER GGEMS</p>
+          <p class="eyebrow" data-i18n="it">SU GGEMS</p>
+          <p class="eyebrow" data-i18n="es">SOBRE GGEMS</p>
+          <p class="eyebrow" data-i18n="pt-BR">SOBRE O GGEMS</p>
+          <p class="eyebrow" data-i18n="ru">О GGEMS</p>
+          <p class="eyebrow" data-i18n="zh-CN">关于 GGEMS</p>
+          <p class="eyebrow" data-i18n="ja">GGEMS について</p>
+
+          <h2 data-i18n="en">Monte Carlo for medical physics.</h2>
+          <h2 data-i18n="fr">Monte Carlo pour la physique médicale.</h2>
+          <h2 data-i18n="de">Monte Carlo für die medizinische Physik.</h2>
+          <h2 data-i18n="it">Monte Carlo per la fisica medica.</h2>
+          <h2 data-i18n="es">Monte Carlo para física médica.</h2>
+          <h2 data-i18n="pt-BR">Monte Carlo para física médica.</h2>
+          <h2 data-i18n="ru">Монте-Карло для медицинской физики.</h2>
+          <h2 data-i18n="zh-CN">用于医学物理的蒙特卡罗模拟。</h2>
+          <h2 data-i18n="ja">
+            <span class="ja-title-line">医療物理向け</span>
+            <span class="ja-title-line">モンテカルロ。</span>
+          </h2>
+
+          <p class="lead" data-i18n="en">
+            GGEMS is an open-source, GPU-first Monte Carlo simulation project for medical
+            imaging, dosimetry and particle therapy.
+          </p>
+
+          <p class="lead" data-i18n="fr">
+            GGEMS est un projet open source de simulation Monte Carlo GPU-first pour
+            l’imagerie médicale, la dosimétrie et la thérapie par particules.
+          </p>
+
+          <p class="lead" data-i18n="de">
+            GGEMS ist ein Open-Source-Projekt für GPU-first-Monte-Carlo-Simulationen
+            in der medizinischen Bildgebung, Dosimetrie und Partikeltherapie.
+          </p>
+
+          <p class="lead" data-i18n="it">
+            GGEMS è un progetto open source di simulazione Monte Carlo GPU-first per
+            l’imaging medico, la dosimetria e la terapia con particelle.
+          </p>
+
+          <p class="lead" data-i18n="es">
+            GGEMS es un proyecto de código abierto de simulación Monte Carlo GPU-first
+            para imagen médica, dosimetría y terapia con partículas.
+          </p>
+
+          <p class="lead" data-i18n="pt-BR">
+            GGEMS é um projeto de código aberto de simulação Monte Carlo GPU-first para
+            imagem médica, dosimetria e terapia com partículas.
+          </p>
+
+          <p class="lead" data-i18n="ru">
+            GGEMS — проект с открытым исходным кодом для GPU-first моделирования методом
+            Монте-Карло в медицинской визуализации, дозиметрии и терапии пучками частиц.
+          </p>
+
+          <p class="lead" data-i18n="zh-CN">
+            GGEMS 是一个开源、GPU-first 的蒙特卡罗模拟项目，面向医学成像、
+            剂量学和粒子治疗。
+          </p>
+
+          <p class="lead" data-i18n="ja">
+            GGEMS は、医用画像、線量評価、粒子線治療を対象とする、
+            オープンソースの GPU-first モンテカルロシミュレーションプロジェクトです。
           </p>
         </div>
+      </section>
+
+      <section class="section section-a">
+        <div class="container split-heading">
+          <p class="eyebrow" data-i18n="en">COMPUTE</p>
+          <p class="eyebrow" data-i18n="fr">CALCUL</p>
+          <p class="eyebrow" data-i18n="de">COMPUTING</p>
+          <p class="eyebrow" data-i18n="it">CALCOLO</p>
+          <p class="eyebrow" data-i18n="es">COMPUTACIÓN</p>
+          <p class="eyebrow" data-i18n="pt-BR">COMPUTAÇÃO</p>
+          <p class="eyebrow" data-i18n="ru">ВЫЧИСЛЕНИЯ</p>
+          <p class="eyebrow" data-i18n="zh-CN">计算</p>
+          <p class="eyebrow" data-i18n="ja">計算</p>
+
+          <h2 data-i18n="en">Portable Compute</h2>
+          <h2 data-i18n="fr">Calcul portable</h2>
+          <h2 data-i18n="de">Portable Computing</h2>
+          <h2 data-i18n="it">Calcolo portabile</h2>
+          <h2 data-i18n="es">Computación multiplataforma</h2>
+          <h2 data-i18n="pt-BR">Computação multiplataforma</h2>
+          <h2 data-i18n="ru">
+            <span class="ru-title-line">Кроссплатформенные</span>
+            <span class="ru-title-line">вычисления</span>
+          </h2>
+          <h2 data-i18n="zh-CN">跨平台计算</h2>
+          <h2 data-i18n="ja">
+            <span class="ja-title-line">クロスプラットフォーム</span>
+            <span class="ja-title-line">計算</span>
+          </h2>
+
+          <p class="lead" data-i18n="en">
+            GGEMS uses OpenCL for heterogeneous compute across Windows, Linux and macOS,
+            with Intel, AMD and NVIDIA hardware.
+          </p>
+
+          <p class="lead" data-i18n="fr">
+            GGEMS s’appuie sur OpenCL pour le calcul hétérogène sous Windows, Linux et macOS,
+            sur des matériels Intel, AMD et NVIDIA.
+          </p>
+
+          <p class="lead" data-i18n="de">
+            GGEMS nutzt OpenCL für heterogenes Computing unter Windows, Linux und macOS
+            auf Hardware von Intel, AMD und NVIDIA.
+          </p>
+
+          <p class="lead" data-i18n="it">
+            GGEMS utilizza OpenCL per il calcolo eterogeneo su Windows, Linux e macOS,
+            con hardware Intel, AMD e NVIDIA.
+          </p>
+
+          <p class="lead" data-i18n="es">
+            GGEMS utiliza OpenCL para computación heterogénea en Windows, Linux y macOS,
+            con hardware Intel, AMD y NVIDIA.
+          </p>
+
+          <p class="lead" data-i18n="pt-BR">
+            GGEMS usa OpenCL para computação heterogênea no Windows, Linux e macOS,
+            com hardware Intel, AMD e NVIDIA.
+          </p>
+
+          <p class="lead" data-i18n="ru">
+            GGEMS использует OpenCL для гетерогенных вычислений в Windows, Linux и macOS
+            на оборудовании Intel, AMD и NVIDIA.
+          </p>
+
+          <p class="lead" data-i18n="zh-CN">
+            GGEMS 使用 OpenCL，在 Windows、Linux 和 macOS 上进行异构计算，
+            并支持 Intel、AMD 和 NVIDIA 硬件。
+          </p>
+
+          <p class="lead" data-i18n="ja">
+            GGEMS は OpenCL を使用し、Windows、Linux、macOS 上で
+            Intel、AMD、NVIDIA ハードウェアによる異種計算を実現します。
+          </p>
+        </div>
+
+        <div class="container compute-map">
+          <div class="compute-row os-row">
+            <div class="compute-node">Windows</div>
+            <div class="compute-node">Linux</div>
+            <div class="compute-node">macOS</div>
+          </div>
+
+          <div class="opencl-core">
+            <small data-i18n="en">COMPUTE LAYER</small>
+            <small data-i18n="fr">COUCHE DE CALCUL</small>
+            <small data-i18n="de">RECHENSCHICHT</small>
+            <small data-i18n="it">LIVELLO DI CALCOLO</small>
+            <small data-i18n="es">CAPA DE CÓMPUTO</small>
+            <small data-i18n="pt-BR">CAMADA DE COMPUTAÇÃO</small>
+            <small data-i18n="ru">СЛОЙ ВЫЧИСЛЕНИЙ</small>
+            <small data-i18n="zh-CN">计算层</small>
+            <small data-i18n="ja">計算層</small>
+            <strong>OpenCL</strong>
+          </div>
+
+          <div class="compute-row vendor-row">
+            <div class="compute-node intel">Intel</div>
+            <div class="compute-node amd">AMD</div>
+            <div class="compute-node nvidia">NVIDIA</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-b project-status">
+        <div class="container split-heading">
+          <p class="eyebrow" data-i18n="en">PROJECT STATUS</p>
+          <p class="eyebrow" data-i18n="fr">ÉTAT DU PROJET</p>
+          <p class="eyebrow" data-i18n="de">PROJEKTSTATUS</p>
+          <p class="eyebrow" data-i18n="it">STATO DEL PROGETTO</p>
+          <p class="eyebrow" data-i18n="es">ESTADO DEL PROYECTO</p>
+          <p class="eyebrow" data-i18n="pt-BR">STATUS DO PROJETO</p>
+          <p class="eyebrow" data-i18n="ru">СТАТУС ПРОЕКТА</p>
+          <p class="eyebrow" data-i18n="zh-CN">项目状态</p>
+          <p class="eyebrow" data-i18n="ja">プロジェクト状況</p>
+
+          <h2 data-i18n="en">Implementation roadmap</h2>
+          <h2 data-i18n="fr">Roadmap d’implémentation</h2>
+          <h2 data-i18n="de">Umsetzungsplan</h2>
+          <h2 data-i18n="it">Piano di implementazione</h2>
+          <h2 data-i18n="es">Plan de implementación</h2>
+          <h2 data-i18n="pt-BR">Plano de implementação</h2>
+          <h2 data-i18n="ru">План реализации</h2>
+          <h2 data-i18n="zh-CN">实现路线图</h2>
+          <h2 data-i18n="ja">
+            <span class="ja-title-line">実装</span>
+            <span class="ja-title-line">ロードマップ</span>
+          </h2>
+
+          <p class="lead" data-i18n="en">
+            The architecture and validation strategy are established. Implementation is now
+            building the foundations of the first validated Gamma transport chain.
+          </p>
+
+          <p class="lead" data-i18n="fr">
+            L’architecture et la stratégie de validation sont établies. L’implémentation
+            construit maintenant les fondations de la première chaîne de transport Gamma validée.
+          </p>
+
+          <p class="lead" data-i18n="de">
+            Die Architektur und die Validierungsstrategie stehen fest. Die Implementierung
+            schafft derzeit die Grundlagen für die erste validierte Gamma-Transportkette.
+          </p>
+
+          <p class="lead" data-i18n="it">
+            L’architettura e la strategia di validazione sono definite. L’implementazione
+            sta costruendo le basi della prima catena di trasporto Gamma validata.
+          </p>
+
+          <p class="lead" data-i18n="es">
+            La arquitectura y la estrategia de validación están establecidas. La implementación
+            está construyendo las bases de la primera cadena de transporte Gamma validada.
+          </p>
+
+          <p class="lead" data-i18n="pt-BR">
+            A arquitetura e a estratégia de validação estão estabelecidas. A implementação
+            agora constrói as bases da primeira cadeia de transporte Gamma validada.
+          </p>
+
+          <p class="lead" data-i18n="ru">
+            Архитектура и стратегия валидации определены. Сейчас реализация закладывает
+            основу для первой валидированной цепочки переноса гамма-излучения.
+          </p>
+
+          <p class="lead" data-i18n="zh-CN">
+            架构和验证策略已经确定。目前正在构建首条经过验证的 Gamma 输运链所需的基础。
+          </p>
+
+          <p class="lead" data-i18n="ja">
+            アーキテクチャと検証戦略は確立済みです。現在は、
+            最初の検証済み Gamma 輸送チェーンに向けた基盤を実装しています。
+          </p>
+        </div>
+
+        <div class="container roadmap-grid">
+          <article class="roadmap-card roadmap-done">
+            <span class="roadmap-label" data-i18n="en">DONE</span>
+            <span class="roadmap-label" data-i18n="fr">TERMINÉ</span>
+            <span class="roadmap-label" data-i18n="de">ABGESCHLOSSEN</span>
+            <span class="roadmap-label" data-i18n="it">COMPLETATO</span>
+            <span class="roadmap-label" data-i18n="es">COMPLETADO</span>
+            <span class="roadmap-label" data-i18n="pt-BR">CONCLUÍDO</span>
+            <span class="roadmap-label" data-i18n="ru">ГОТОВО</span>
+            <span class="roadmap-label" data-i18n="zh-CN">完成</span>
+            <span class="roadmap-label" data-i18n="ja">完了</span>
+
+            <h3 data-i18n="en">Architecture & validation framework</h3>
+            <h3 data-i18n="fr">Architecture & cadre de validation</h3>
+            <h3 data-i18n="de">Architektur & Validierungsrahmen</h3>
+            <h3 data-i18n="it">Architettura e quadro di validazione</h3>
+            <h3 data-i18n="es">Arquitectura y marco de validación</h3>
+            <h3 data-i18n="pt-BR">Arquitetura e estrutura de validação</h3>
+            <h3 data-i18n="ru">Архитектура и система валидации</h3>
+            <h3 data-i18n="zh-CN">架构与验证框架</h3>
+            <h3 data-i18n="ja">アーキテクチャと検証基盤</h3>
+          </article>
+
+          <article class="roadmap-card roadmap-active">
+            <span class="roadmap-label" data-i18n="en">IN PROGRESS</span>
+            <span class="roadmap-label" data-i18n="fr">EN COURS</span>
+            <span class="roadmap-label" data-i18n="de">IN ARBEIT</span>
+            <span class="roadmap-label" data-i18n="it">IN CORSO</span>
+            <span class="roadmap-label" data-i18n="es">EN CURSO</span>
+            <span class="roadmap-label" data-i18n="pt-BR">EM ANDAMENTO</span>
+            <span class="roadmap-label" data-i18n="ru">В РАБОТЕ</span>
+            <span class="roadmap-label" data-i18n="zh-CN">进行中</span>
+            <span class="roadmap-label" data-i18n="ja">進行中</span>
+
+            <h3 data-i18n="en">Core physics foundations</h3>
+            <h3 data-i18n="fr">Fondations du cœur physique</h3>
+            <h3 data-i18n="de">Grundlagen des Physik-Kerns</h3>
+            <h3 data-i18n="it">Fondamenti del nucleo fisico</h3>
+            <h3 data-i18n="es">Fundamentos del núcleo de física</h3>
+            <h3 data-i18n="pt-BR">Fundamentos do núcleo de física</h3>
+            <h3 data-i18n="ru">Основы физического ядра</h3>
+            <h3 data-i18n="zh-CN">核心物理基础</h3>
+            <h3 data-i18n="ja">コア物理の基盤</h3>
+
+            <div class="next">
+              <span data-i18n="en">NEXT</span>
+              <span data-i18n="fr">ENSUITE</span>
+              <span data-i18n="de">ALS NÄCHSTES</span>
+              <span data-i18n="it">PROSSIMO</span>
+              <span data-i18n="es">SIGUIENTE</span>
+              <span data-i18n="pt-BR">A SEGUIR</span>
+              <span data-i18n="ru">ДАЛЕЕ</span>
+              <span data-i18n="zh-CN">下一步</span>
+              <span data-i18n="ja">次</span>
+              <strong data-i18n="en">First validated Gamma transport chain</strong>
+              <strong data-i18n="fr">Première chaîne de transport Gamma validée</strong>
+              <strong data-i18n="de">Erste validierte Gamma-Transportkette</strong>
+              <strong data-i18n="it">Prima catena di trasporto Gamma validata</strong>
+              <strong data-i18n="es">Primera cadena de transporte Gamma validada</strong>
+              <strong data-i18n="pt-BR">Primeira cadeia de transporte Gamma validada</strong>
+              <strong data-i18n="ru">Первая валидированная цепочка гамма-транспорта</strong>
+              <strong data-i18n="zh-CN">首条经过验证的 Gamma 输运链</strong>
+              <strong data-i18n="ja">最初の検証済み Gamma 輸送チェーン</strong>
+            </div>
+          </article>
+
+          <article class="roadmap-card roadmap-later">
+            <span class="roadmap-label" data-i18n="en">LATER</span>
+            <span class="roadmap-label" data-i18n="fr">PLUS TARD</span>
+            <span class="roadmap-label" data-i18n="de">SPÄTER</span>
+            <span class="roadmap-label" data-i18n="it">PIÙ AVANTI</span>
+            <span class="roadmap-label" data-i18n="es">MÁS ADELANTE</span>
+            <span class="roadmap-label" data-i18n="pt-BR">MAIS ADIANTE</span>
+            <span class="roadmap-label" data-i18n="ru">ПОЗЖЕ</span>
+            <span class="roadmap-label" data-i18n="zh-CN">后续</span>
+            <span class="roadmap-label" data-i18n="ja">今後</span>
+
+            <h3 data-i18n="en">Extended physics & detector capabilities</h3>
+            <h3 data-i18n="fr">Physique étendue & capacités détecteur</h3>
+            <h3 data-i18n="de">Erweiterte Physik- und Detektorfunktionen</h3>
+            <h3 data-i18n="it">Fisica estesa e capacità dei rivelatori</h3>
+            <h3 data-i18n="es">Física ampliada y capacidades de detección</h3>
+            <h3 data-i18n="pt-BR">Física ampliada e capacidades de detecção</h3>
+            <h3 data-i18n="ru">Расширенная физика и возможности детекторов</h3>
+            <h3 data-i18n="zh-CN">扩展物理与探测器功能</h3>
+            <h3 data-i18n="ja">拡張物理と検出器機能</h3>
+          </article>
+        </div>
+
       </section>
     </main>
 
     <footer>
-      <span>GGEMS</span>
-      <span>GPU Monte Carlo for medical physics</span>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <img src="/images/ggems-logo.png" alt="" />
+          <strong>GGEMS</strong>
+          <span>© {new Date().getFullYear()}</span>
+        </div>
+
+        <address>
+          <strong>LaTIM — INSERM UMR 1101</strong>
+          <span>22 Avenue Camille Desmoulins · 29238 Brest Cedex 3 · France</span>
+        </address>
+      </div>
     </footer>
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const themeButton = document.querySelector('.theme-toggle');
+        const languageButtons = document.querySelectorAll('[data-language]');
+
+        const updateTitle = () => {
+          if (root.dataset.lang === 'fr') {
+            document.title = 'GGEMS — Nouveau site en préparation';
+          } else if (root.dataset.lang === 'de') {
+            document.title = 'GGEMS — Webseite im Aufbau';
+          } else if (root.dataset.lang === 'it') {
+            document.title = 'GGEMS — Sito in preparazione';
+          } else if (root.dataset.lang === 'es') {
+            document.title = 'GGEMS — Sitio web en preparación';
+          } else if (root.dataset.lang === 'pt-BR') {
+            document.title = 'GGEMS — Site em preparação';
+          } else if (root.dataset.lang === 'ru') {
+            document.title = 'GGEMS — сайт в разработке';
+          } else if (root.dataset.lang === 'zh-CN') {
+            document.title = 'GGEMS — 新网站建设中';
+          } else if (root.dataset.lang === 'ja') {
+            document.title = 'GGEMS — 新サイト構築中';
+          } else {
+            document.title = 'GGEMS — Website in progress';
+          }
+        };
+
+        const setLanguage = (lang) => {
+          root.dataset.lang = lang;
+          root.lang = lang;
+          localStorage.setItem('ggems-language', lang);
+
+          languageButtons.forEach((button) => {
+            button.classList.toggle('active', button.dataset.language === lang);
+          });
+
+          document.querySelector('.language-switcher')?.removeAttribute('open');
+
+          updateTitle();
+        };
+
+        languageButtons.forEach((button) => {
+          button.addEventListener('click', () => setLanguage(button.dataset.language));
+        });
+
+        themeButton?.addEventListener('click', () => {
+          const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = nextTheme;
+          localStorage.setItem('ggems-theme', nextTheme);
+        });
+
+        const supportedLanguages = ['en', 'fr', 'de', 'es', 'it', 'pt-BR', 'ru', 'zh-CN', 'ja'];
+        setLanguage(
+          supportedLanguages.includes(root.dataset.lang)
+            ? root.dataset.lang
+            : 'en'
+        );
+      })();
+    </script>
   </body>
 </html>
 
 <style is:global>
   :root {
-    --background: #07111b;
+    --bg: #07111b;
+    --band-a: #07111b;
+    --band-b: #0d1b27;
     --surface: #0b1723;
     --text: #f5f8fb;
     --muted: #aab7c5;
-
+    --subtle: #72808e;
+    --border: rgb(170 183 197 / 14%);
+    --border-strong: rgb(170 183 197 / 24%);
     --green: #50c070;
     --green-light: #80d0a0;
-    --green-dark: #309050;
     --purple: #8020e0;
     --yellow: #f0f000;
+    --progress-label: #f0f000;
+    --shadow: rgb(0 0 0 / 18%);
+  }
+
+  :root[data-theme='light'] {
+    --bg: #f8faf9;
+    --band-a: #f8faf9;
+    --band-b: #dce7df;
+    --surface: #ffffff;
+    --text: #16221c;
+    --muted: #5e7067;
+    --subtle: #829087;
+    --border: rgb(22 34 28 / 10%);
+    --border-strong: rgb(22 34 28 / 18%);
+    --shadow: rgb(22 34 28 / 8%);
+    --progress-label: #7b7000;
   }
 
   * {
@@ -87,211 +934,850 @@ import '@fontsource/jetbrains-mono/500.css';
   }
 
   html {
-    background: var(--background);
+    background: var(--bg);
+    scroll-behavior: smooth;
   }
 
   body {
     margin: 0;
     min-width: 320px;
-    min-height: 100vh;
 
     color: var(--text);
-    background:
-      radial-gradient(circle at 78% 25%, rgb(128 32 224 / 12%), transparent 32rem),
-      radial-gradient(circle at 20% 80%, rgb(80 192 112 / 8%), transparent 28rem),
-      var(--background);
+    background: var(--bg);
 
     font-family: 'Space Grotesk', sans-serif;
   }
 
-  main {
-    min-height: calc(100vh - 5rem);
+
+  :root[data-lang='ru'] body {
+    font-family:
+      'Segoe UI',
+      'Arial',
+      sans-serif;
+  }
+
+  :root[data-lang='zh-CN'] body {
+    font-family:
+      'Space Grotesk',
+      'Microsoft YaHei',
+      'PingFang SC',
+      'Noto Sans CJK SC',
+      sans-serif;
+  }
+
+  :root[data-lang='ja'] body {
+    font-family:
+      'Space Grotesk',
+      'Yu Gothic',
+      'Hiragino Sans',
+      'Noto Sans CJK JP',
+      sans-serif;
+  }
+
+
+  :root[data-lang='ja'] [data-i18n='ja'] {
+    line-break: strict;
+  }
+
+  .ja-title-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+
+  .ru-title-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  :root[data-lang='ru'] .split-heading > h2 {
+    font-size: clamp(2.55rem, 4vw, 4.2rem);
+  }
+
+  :root[data-lang='en'] [data-i18n]:not([data-i18n='en']),
+  :root[data-lang='fr'] [data-i18n]:not([data-i18n='fr']),
+  :root[data-lang='de'] [data-i18n]:not([data-i18n='de']),
+  :root[data-lang='it'] [data-i18n]:not([data-i18n='it']),
+  :root[data-lang='es'] [data-i18n]:not([data-i18n='es']),
+  :root[data-lang='pt-BR'] [data-i18n]:not([data-i18n='pt-BR']),
+  :root[data-lang='ru'] [data-i18n]:not([data-i18n='ru']),
+  :root[data-lang='zh-CN'] [data-i18n]:not([data-i18n='zh-CN']),
+  :root[data-lang='ja'] [data-i18n]:not([data-i18n='ja']) {
+    display: none !important;
+  }
+
+  .container {
+    width: min(1180px, calc(100% - 3rem));
+    margin-inline: auto;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(18px);
+  }
+
+  .header-inner {
+    min-height: 5.1rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    margin-right: auto;
+
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .brand img {
+    width: 2.45rem;
+    height: 2.45rem;
+    object-fit: contain;
+  }
+
+  .brand-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.08rem;
+  }
+
+  .brand-copy strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .brand-copy small {
+    color: var(--subtle);
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .language-switcher {
+    position: relative;
+
+    flex: 0 0 auto;
+  }
+
+  .language-switcher summary {
+    height: 2.65rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding-inline: 0.7rem;
+
+    color: var(--muted);
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    background: rgb(127 127 127 / 4%);
+
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .language-switcher summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .flag {
+    width: 1.35rem;
+    aspect-ratio: 7 / 5;
+
+    display: inline-grid;
+
+    flex: 0 0 auto;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border-strong);
+    border-radius: 0.18rem;
+
+    box-shadow: 0 1px 2px var(--shadow);
+  }
+
+  .flag svg {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+  }
+
+  .current-flag-fr,
+  .current-code-fr,
+  .current-flag-de,
+  .current-code-de,
+  .current-flag-it,
+  .current-code-it,
+  .current-flag-es,
+  .current-code-es,
+  .current-flag-pt-br,
+  .current-code-pt-br,
+  .current-flag-ru,
+  .current-code-ru,
+  .current-flag-zh-cn,
+  .current-code-zh-cn,
+  .current-flag-ja,
+  .current-code-ja {
+    display: none;
+  }
+
+  :root[data-lang='fr'] .current-flag-en,
+  :root[data-lang='fr'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='fr'] .current-flag-fr,
+  :root[data-lang='fr'] .current-code-fr {
+    display: inline-grid;
+  }
+
+  :root[data-lang='de'] .current-flag-en,
+  :root[data-lang='de'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='de'] .current-flag-de,
+  :root[data-lang='de'] .current-code-de {
+    display: inline-grid;
+  }
+
+  :root[data-lang='it'] .current-flag-en,
+  :root[data-lang='it'] .current-code-en,
+  :root[data-lang='es'] .current-flag-en,
+  :root[data-lang='es'] .current-code-en,
+  :root[data-lang='pt-BR'] .current-flag-en,
+  :root[data-lang='pt-BR'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='it'] .current-flag-it,
+  :root[data-lang='it'] .current-code-it,
+  :root[data-lang='es'] .current-flag-es,
+  :root[data-lang='es'] .current-code-es,
+  :root[data-lang='pt-BR'] .current-flag-pt-br,
+  :root[data-lang='pt-BR'] .current-code-pt-br {
+    display: inline-grid;
+  }
+
+  :root[data-lang='ru'] .current-flag-en,
+  :root[data-lang='ru'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='ru'] .current-flag-ru,
+  :root[data-lang='ru'] .current-code-ru {
+    display: inline-grid;
+  }
+
+  :root[data-lang='zh-CN'] .current-flag-en,
+  :root[data-lang='zh-CN'] .current-code-en,
+  :root[data-lang='ja'] .current-flag-en,
+  :root[data-lang='ja'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='zh-CN'] .current-flag-zh-cn,
+  :root[data-lang='zh-CN'] .current-code-zh-cn,
+  :root[data-lang='ja'] .current-flag-ja,
+  :root[data-lang='ja'] .current-code-ja {
+    display: inline-grid;
+  }
+
+  .current-code {
+    line-height: 1;
+  }
+
+  .chevron {
+    color: var(--green-light);
+
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .language-menu {
+    position: absolute;
+    z-index: 200;
+    right: 0;
+    top: calc(100% + 0.65rem);
+
+    width: 13.5rem;
+
+    padding: 0.4rem;
+
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+
+    background: var(--surface);
+
+    box-shadow: 0 1.25rem 3rem var(--shadow);
+  }
+
+  .language-menu button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding: 0.75rem 0.8rem;
+
+    color: var(--muted);
+
+    border: 0;
+    border-radius: 0.5rem;
+
+    background: transparent;
+
+    font: inherit;
+    font-size: 0.82rem;
+
+    cursor: pointer;
+  }
+
+  .language-menu button:hover,
+  .language-menu button.active {
+    color: var(--text);
+    background: rgb(127 127 127 / 6%);
+  }
+
+  .language-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .language-menu small {
+    color: var(--subtle);
+
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .theme-toggle {
+    width: 2.65rem;
+    height: 2.65rem;
+
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 auto;
+
+    padding: 0;
+
+    color: var(--muted);
+
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
+    background: rgb(127 127 127 / 4%);
+
+    cursor: pointer;
+  }
+
+  .theme-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+
+    display: grid;
+    place-items: center;
+  }
+
+  .theme-icon svg {
+    width: 100%;
+    height: 100%;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+  }
+
+  .theme-light {
+    display: none;
+  }
+
+  :root[data-theme='light'] .theme-dark {
+    display: none;
+  }
+
+  :root[data-theme='light'] .theme-light {
+    display: grid;
+  }
+
+
+  .section {
+    padding-block: 4.5rem;
+  }
+
+  .section-a {
+    background: var(--band-a);
+  }
+
+  .section-b {
+    background: var(--band-b);
   }
 
   .hero {
-    width: min(1180px, calc(100% - 3rem));
-    min-height: calc(100vh - 5rem);
-    margin: 0 auto;
+    min-height: calc(100svh - 5.1rem);
 
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     align-items: center;
-    gap: 5rem;
-
-    padding: 5rem 0;
   }
 
-  .content {
-    position: relative;
-    z-index: 2;
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    align-items: center;
+    gap: 5rem;
+  }
+
+  .hero-copy {
+    max-width: 720px;
   }
 
   .eyebrow {
-    margin: 0 0 1.3rem;
+    margin: 0;
 
     color: var(--green-light);
 
     font-family: 'JetBrains Mono', monospace;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
-  h1 {
-    max-width: 760px;
-    margin: 0;
+  h1,
+  h2,
+  h3,
+  p {
+    text-wrap: pretty;
+  }
 
-    font-size: clamp(3.6rem, 5.7vw, 5.8rem);
+  h1 {
+    margin: 1.5rem 0 0;
+
+    font-size: clamp(4rem, 7vw, 7.4rem);
     font-weight: 500;
-    line-height: 1.02;
-    letter-spacing: -0.04em;
+    line-height: 0.92;
+    letter-spacing: -0.055em;
   }
 
   h1 span {
     display: block;
-    margin-top: 0.28em;
+    margin-top: 0.16em;
 
     color: var(--muted);
     font-weight: 400;
   }
 
-  .lead {
-    max-width: 670px;
+
+  h1 .cjk-nowrap {
+    display: block;
+    margin-top: 0;
+
+    color: var(--text);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+
+  :root[data-lang='zh-CN'] h1,
+  :root[data-lang='ja'] h1,
+  :root[data-lang='zh-CN'] .split-heading > h2,
+  :root[data-lang='ja'] .split-heading > h2,
+  :root[data-lang='zh-CN'] .roadmap-card h3,
+  :root[data-lang='ja'] .roadmap-card h3 {
+    letter-spacing: 0;
+  }
+
+
+  :root[data-lang='ja'] .hero-inner {
+    column-gap: 6.5rem;
+  }
+
+  :root[data-lang='ja'] h1 {
+    font-size: clamp(3.6rem, 6.2vw, 6.35rem);
+  }
+
+
+  :root[data-lang='ja'] .split-heading > h2 {
+    font-size: clamp(2.45rem, 3.4vw, 3rem);
+    line-height: 1.12;
+  }
+
+  .hero-lead {
+    max-width: 640px;
     margin: 2rem 0 0;
 
     color: var(--muted);
 
-    font-size: clamp(1.08rem, 2vw, 1.32rem);
-    line-height: 1.65;
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    line-height: 1.6;
   }
 
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.9rem;
+  .definition {
+    margin: 1rem 0 0;
 
-    margin-top: 2.3rem;
-  }
-
-  .actions a {
-    padding: 0.88rem 1.3rem;
-
-    border: 1px solid transparent;
-    border-radius: 0.6rem;
+    color: var(--subtle);
 
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.88rem;
+    font-size: 0.76rem;
+  }
+
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0.85rem 1.2rem;
+
+    border: 1px solid transparent;
+    border-radius: 0.55rem;
+
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
     font-weight: 500;
 
     text-decoration: none;
-
-    transition:
-      transform 160ms ease,
-      border-color 160ms ease,
-      background 160ms ease;
   }
 
-  .actions a:hover {
-    transform: translateY(-2px);
-  }
-
-  .primary {
+  .button-primary {
     color: #06120a;
     background: var(--green);
   }
 
-  .primary:hover {
-    background: var(--green-light);
-  }
-
-  .secondary {
-    color: var(--text);
-    border-color: rgb(170 183 197 / 30%) !important;
-    background: rgb(255 255 255 / 4%);
-  }
-
-  .secondary:hover {
-    border-color: var(--purple) !important;
-  }
 
   .status {
     display: flex;
     align-items: center;
     gap: 0.65rem;
 
-    margin-top: 2.4rem;
+    margin: 2rem 0 0;
 
-    color: #7f8c99;
+    color: var(--subtle);
 
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
+    font-size: 0.7rem;
   }
 
-  .status span {
+  .status > span {
     width: 0.5rem;
     height: 0.5rem;
 
+    flex: 0 0 auto;
+
     border-radius: 50%;
     background: var(--yellow);
-
-    box-shadow: 0 0 1rem rgb(240 240 0 / 55%);
   }
 
-  .visual {
-    position: relative;
+  .hero-visual {
+    display: grid;
+    place-items: center;
+
+    min-height: 480px;
+  }
+
+  .hero-visual img {
+    width: min(100%, 480px);
+    height: auto;
+
+    filter: drop-shadow(0 2rem 4rem var(--shadow));
+
+    animation: logo-float 8s ease-in-out infinite;
+  }
+
+  .split-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    grid-template-areas:
+      'eyebrow .'
+      'title lead';
+    column-gap: 5rem;
+    row-gap: 1.35rem;
+    align-items: start;
+  }
+
+  .split-heading > .eyebrow {
+    grid-area: eyebrow;
+  }
+
+  .split-heading > h2 {
+    grid-area: title;
+
+    margin: 0;
+
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .split-heading > .lead {
+    grid-area: lead;
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    line-height: 1.65;
+  }
+
+
+  .compute-map {
+    margin-top: 4rem;
+  }
+
+  .compute-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .compute-node {
+    min-height: 5rem;
 
     display: grid;
     place-items: center;
 
-    min-height: 520px;
-  }
-
-  .visual img {
-    position: relative;
-    z-index: 2;
-
-    width: min(100%, 470px);
-    height: auto;
-
-    filter: drop-shadow(0 2rem 4rem rgb(0 0 0 / 38%));
-
-    animation: float 7s ease-in-out infinite;
-  }
-
-  .glow {
-    position: absolute;
-
-    width: 72%;
-    aspect-ratio: 1;
-
-    border-radius: 50%;
+    border: 1px solid var(--border);
+    border-radius: 0.8rem;
 
     background:
-      radial-gradient(circle, rgb(128 32 224 / 18%), transparent 62%);
-
-    filter: blur(1.5rem);
-  }
-
-  footer {
-    width: min(1180px, calc(100% - 3rem));
-    height: 5rem;
-    margin: 0 auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-
-    border-top: 1px solid rgb(255 255 255 / 8%);
-
-    color: #72808e;
+      linear-gradient(145deg, rgb(126 138 148 / 9%), rgb(126 138 148 / 3%));
 
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.9rem;
+    font-weight: 500;
   }
 
-  @keyframes float {
+  .vendor-row .intel {
+    background: linear-gradient(145deg, rgb(0 113 197 / 14%), rgb(0 113 197 / 5%));
+  }
+
+  .vendor-row .amd {
+    background: linear-gradient(145deg, rgb(220 20 60 / 13%), rgb(220 20 60 / 4%));
+  }
+
+  .vendor-row .nvidia {
+    background: linear-gradient(145deg, rgb(118 185 0 / 15%), rgb(118 185 0 / 5%));
+  }
+
+  .opencl-core {
+    width: 11rem;
+
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+
+    margin: 1.35rem auto;
+    padding: 0.9rem 1.2rem;
+
+    border: 1px solid rgb(80 192 112 / 42%);
+    border-radius: 999px;
+
+    background: rgb(80 192 112 / 7%);
+  }
+
+  .opencl-core small,
+  .opencl-core strong {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .opencl-core small {
+    color: var(--subtle);
+
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  .opencl-core strong {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.55fr 1fr;
+    gap: 1rem;
+
+    margin-top: 4rem;
+  }
+
+  .roadmap-card {
+    min-height: 210px;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    padding: 1.6rem;
+
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+  }
+
+  .roadmap-done {
+    background: linear-gradient(145deg, rgb(80 192 112 / 14%), rgb(80 192 112 / 5%));
+  }
+
+  .roadmap-active {
+    background:
+      radial-gradient(circle at 76% 62%, rgb(128 32 224 / 7%), transparent 15rem),
+      linear-gradient(145deg, rgb(240 240 0 / 13%), rgb(240 240 0 / 4%));
+  }
+
+  .roadmap-later {
+    background: linear-gradient(145deg, rgb(128 32 224 / 12%), rgb(128 32 224 / 4%));
+  }
+
+  .roadmap-label,
+  .next > span {
+    width: fit-content;
+
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.67rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .roadmap-done .roadmap-label {
+    color: var(--green);
+  }
+
+  .roadmap-active .roadmap-label {
+    color: var(--progress-label);
+  }
+
+  .roadmap-later .roadmap-label,
+  .next > span {
+    color: var(--purple);
+  }
+
+  .roadmap-card h3 {
+    align-self: start;
+
+    margin: 3rem 0 0;
+
+    font-size: clamp(1.08rem, 1.45vw, 1.32rem);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .next {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.9rem;
+
+    padding-top: 1rem;
+
+    border-top: 1px solid var(--border);
+  }
+
+  .next strong {
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    font-weight: 500;
+  }
+
+
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .footer-inner {
+    min-height: 5.5rem;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .footer-brand img {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+
+  .footer-brand strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .footer-brand span,
+  address {
+    color: var(--subtle);
+
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+  }
+
+  address {
+    justify-self: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-style: normal;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  address strong {
+    color: var(--muted);
+
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+  }
+
+  address span {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  @keyframes logo-float {
     0%,
     100% {
       transform: translateY(0) rotate(-1deg);
@@ -302,52 +1788,136 @@ import '@fontsource/jetbrains-mono/500.css';
     }
   }
 
-  @media (max-width: 850px) {
-    .hero {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-
-      padding-top: 4rem;
+  @media (max-width: 900px) {
+    :root[data-lang='ja'] .hero-inner {
+      column-gap: 0;
     }
 
-    .visual {
-      order: -1;
+    .brand-copy small {
+      display: none;
+    }
+
+    .header-inner {
+      min-height: 4.7rem;
+    }
+
+    .hero {
       min-height: auto;
     }
 
-    .visual img {
+    .hero-inner,
+    .split-heading {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-inner {
+      gap: 2rem;
+    }
+
+    .hero-visual {
+      min-height: 300px;
+    }
+
+    .hero-visual img {
       width: min(72vw, 360px);
     }
 
-    h1 {
-      font-size: clamp(2.8rem, 13vw, 5rem);
+    .split-heading {
+      grid-template-areas:
+        'eyebrow'
+        'title'
+        'lead';
+      gap: 1.35rem;
+    }
+
+    .split-heading > .lead {
+      margin-top: 1rem;
+    }
+
+    .compute-row,
+    .roadmap-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .roadmap-card {
+      min-height: 0;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .roadmap-card h3 {
+      margin-top: 1.8rem;
+    }
+
+    .next {
+      margin-top: 1.5rem;
+    }
+
+    .footer-inner {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 0.8rem;
+
+      padding-block: 1.2rem;
     }
   }
 
-  @media (max-width: 520px) {
-    .hero,
-    footer {
+  @media (max-width: 560px) {
+    .language-switcher summary {
+      width: 2.65rem;
+
+      justify-content: center;
+
+      padding: 0;
+    }
+
+    .current-code,
+    .chevron {
+      display: none !important;
+    }
+
+    .container {
       width: min(100% - 2rem, 1180px);
     }
 
-    footer {
-      height: auto;
-      padding: 1.5rem 0;
+    .section {
+      padding-block: 4rem;
+    }
 
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 0.5rem;
+    .header-actions {
+      gap: 0.4rem;
+    }
+
+    .brand-copy small {
+      display: none;
+    }
+
+    .language-switcher button {
+      padding-inline: 0.5rem;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 15vw, 4.8rem);
+    }
+
+    .split-heading > h2 {
+      font-size: clamp(2.5rem, 11vw, 4rem);
+    }
+
+    .next {
+      grid-template-columns: 1fr;
+      gap: 0.7rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .visual img {
-      animation: none;
+    html {
+      scroll-behavior: auto;
     }
 
-    .actions a {
-      transition: none;
+    .hero-visual img {
+      animation: none;
     }
   }
 </style>
-
