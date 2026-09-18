@@ -80,7 +80,7 @@ const fr: Record<TranslationKey, string> = {
   'homePhysics.lead':
     'GGEMS est structuré autour du transport des particules et des interactions physiques utiles à l’imagerie médicale, la dosimétrie et aux simulations orientées thérapie.',
   'homePhysics.gamma': 'Gamma',
-  'homePhysics.electrons': 'Électron · Positron',
+  'homePhysics.electrons': 'Électron · Positon',
   'homePhysics.proton': 'Proton',
   'homePhysics.alpha': 'Alpha · GenericIon',
   'homePhysics.neutron': 'Neutron',

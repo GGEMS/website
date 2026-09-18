@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableCompute from '../sections/PortableCompute.astro';
+import VisualizationDebugging from '../sections/VisualizationDebugging.astro';
+
 import type { Lang } from '../../i18n/config';
 import { useTranslations } from '../../i18n';
+import { useTechnologyTranslations } from '../../i18n/technology';
 
 interface Props {
   lang: Lang;
@@ -9,34 +13,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const tt = useTechnologyTranslations(lang);
 
-const technologies = [
-  {
-    name: t('technologyPage.cpp.title'),
-    body: t('technologyPage.cpp.body'),
-    accent: 'green',
-  },
-  {
-    name: t('technologyPage.opencl.title'),
-    body: t('technologyPage.opencl.body'),
-    accent: 'purple',
-  },
-  {
-    name: t('technologyPage.python.title'),
-    body: t('technologyPage.python.body'),
-    accent: 'yellow',
-  },
-  {
-    name: t('technologyPage.vulkan.title'),
-    body: t('technologyPage.vulkan.body'),
-    accent: 'green',
-  },
-  {
-    name: t('technologyPage.imgui.title'),
-    body: t('technologyPage.imgui.body'),
-    accent: 'purple',
-  },
-];
+const compilers = ['MSVC', 'Intel', 'GNU', 'Clang'];
 ---
 
 <BaseLayout
@@ -44,17 +23,15 @@ const technologies = [
   title={t('meta.technology.title')}
   description={t('meta.technology.description')}
 >
-  <main>
+  <main class="technology-page">
     <section class="page-hero">
       <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">{t('technologyPage.eyebrow')}</p>
+        <p class="eyebrow">{t('technologyPage.eyebrow')}</p>
 
-          <h1 class="display">
-            {t('technologyPage.hero.primary')}
-            <span>{t('technologyPage.hero.secondary')}</span>
-          </h1>
-        </div>
+        <h1 class="heading-1">
+          {t('technologyPage.hero.primary')}
+          <span>{t('technologyPage.hero.secondary')}</span>
+        </h1>
 
         <p class="lead">
           {t('technologyPage.hero.lead')}
@@ -62,111 +39,103 @@ const technologies = [
       </div>
     </section>
 
-    <section class="section stack">
-      <div class="container stack-grid">
-        <div>
-          <p class="eyebrow">{t('technologyPage.stack.eyebrow')}</p>
+    <section class="section modern-core">
+      <div class="container core-heading">
+        <p class="eyebrow">{tt('core.eyebrow')}</p>
 
-          <h2 class="heading-1">
-            {t('technologyPage.stack.title.primary')}
-            <span>{t('technologyPage.stack.title.secondary')}</span>
-          </h2>
-        </div>
-
-        <div class="technology-list">
-          {
-            technologies.map((item) => (
-              <article>
-                <span class={`dot ${item.accent}`}></span>
-
-                <div>
-                  <h3>{item.name}</h3>
-                  <p>{item.body}</p>
-                </div>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="section principle">
-      <div class="container principle-grid">
-        <div>
-          <p class="eyebrow">{t('technologyPage.principle.eyebrow')}</p>
-
-          <h2 class="heading-1">
-            {t('technologyPage.principle.title.primary')}
-            <span>{t('technologyPage.principle.title.secondary')}</span>
-          </h2>
-        </div>
+        <h2 class="heading-1">
+          {tt('core.title.primary')}
+          <span>{tt('core.title.secondary')}</span>
+        </h2>
 
         <p class="lead">
-          {t('technologyPage.principle.body')}
+          {tt('core.lead')}
         </p>
       </div>
+
+      <div class="container core-grid">
+        <article class="core-block native-block">
+          <div>
+            <p class="core-kicker">{tt('core.native.toolchains')}</p>
+            <h3>{tt('core.native.title')}</h3>
+            <p>{tt('core.native.body')}</p>
+          </div>
+
+          <div class="compiler-grid" aria-label={tt('core.native.toolchains')}>
+            {compilers.map((compiler) => (
+              <span>{compiler}</span>
+            ))}
+          </div>
+        </article>
+
+        <article class="core-block python-block">
+          <div>
+            <p class="core-kicker">{tt('core.python.bridge')}</p>
+            <h3>{tt('core.python.title')}</h3>
+            <p>{tt('core.python.body')}</p>
+          </div>
+
+          <div class="python-bridge" aria-hidden="true">
+            <span>C++</span>
+            <span class="bridge-arrow">↔</span>
+            <span>Python</span>
+          </div>
+        </article>
+      </div>
     </section>
+
+    <PortableCompute lang={lang} />
+    <VisualizationDebugging lang={lang} />
   </main>
 </BaseLayout>
 
 <style>
+  .technology-page {
+    --technology-band-a: #07111b;
+    --technology-band-b: #0d1b27;
+    --technology-section-padding: 4.5rem;
+  }
+
+  :global([data-theme='light']) .technology-page {
+    --technology-band-a: #f8faf9;
+    --technology-band-b: #dce7df;
+  }
+
   .page-hero {
-    position: relative;
+    padding-block: 5.5rem;
 
-    padding-block: 6.5rem 6rem;
-
-    overflow: hidden;
-
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .page-hero::before {
-    content: '';
-
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
-
-    background:
-      radial-gradient(circle at 82% 30%, rgb(128 32 224 / 11%), transparent 27rem),
-      radial-gradient(circle at 14% 82%, rgb(80 192 112 / 7%), transparent 27rem);
+    background: var(--technology-band-a);
   }
 
   .hero-grid,
-  .stack-grid,
-  .principle-grid {
-    position: relative;
-
+  .core-heading {
     display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
-    gap: 5rem;
-  }
-
-  .hero-grid,
-  .principle-grid {
-    align-items: end;
-  }
-
-  .stack-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    grid-template-areas:
+      'eyebrow .'
+      'title lead';
+    column-gap: 5rem;
+    row-gap: 1.25rem;
     align-items: start;
   }
 
-  .display,
-  .heading-1 {
-    margin-top: 1.25rem;
+  .hero-grid > .eyebrow,
+  .core-heading > .eyebrow {
+    grid-area: eyebrow;
   }
 
-  .page-hero .display {
-    font-size: clamp(3.8rem, 6vw, 6.2rem);
+  .hero-grid > .heading-1,
+  .core-heading > .heading-1 {
+    grid-area: title;
+    margin: 0;
   }
 
-  .stack .heading-1,
-  .principle .heading-1 {
-    font-size: clamp(2.5rem, 4vw, 4.1rem);
+  .hero-grid > .lead,
+  .core-heading > .lead {
+    grid-area: lead;
+    margin: 0;
   }
 
-  .display span,
   .heading-1 span {
     display: block;
 
@@ -174,81 +143,151 @@ const technologies = [
     font-weight: 400;
   }
 
-  .hero-grid .lead,
-  .principle-grid .lead {
-    margin: 0;
+  .modern-core,
+  :global(.portable-compute),
+  :global(.visualization-debugging) {
+    padding-block: var(--technology-section-padding);
   }
 
-  .technology-list {
-    border-top: 1px solid var(--color-border);
+  .modern-core {
+    background: var(--technology-band-b);
   }
 
-  .technology-list article {
+  .technology-page :global(.portable-compute) {
+    background: var(--technology-band-a);
+  }
+
+  .technology-page :global(.visualization-debugging) {
+    background: var(--technology-band-b);
+  }
+
+  .core-grid {
     display: grid;
-    grid-template-columns: 1rem 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
 
-    padding: 1.55rem 0;
-
-    border-bottom: 1px solid var(--color-border);
+    margin-top: 3.5rem;
   }
 
-  .dot {
-    width: 0.48rem;
-    height: 0.48rem;
+  .core-block {
+    min-width: 0;
+    min-height: 18rem;
 
-    margin-top: 0.45rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
 
-    border-radius: 50%;
+    padding: 1.75rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    background: rgb(127 127 127 / 2%);
   }
 
-  .dot.green {
-    background: var(--color-green);
-  }
-
-  .dot.purple {
-    background: var(--color-purple);
-  }
-
-  .dot.yellow {
-    background: var(--color-yellow);
-  }
-
-  .technology-list h3 {
+  .core-kicker {
     margin: 0;
+
+    color: var(--color-green-light);
 
     font-family: var(--font-mono);
-    font-size: 1rem;
+    font-size: 0.66rem;
     font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  .technology-list p {
-    max-width: 38rem;
+  .core-block h3 {
+    margin: 1rem 0 0;
 
-    margin: 0.75rem 0 0;
+    font-size: 1.65rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .core-block > div > p:last-child {
+    max-width: 36rem;
+    margin: 1rem 0 0;
 
     color: var(--color-text-muted);
 
     line-height: 1.7;
   }
 
-  .stack,
-  .principle {
-    padding-block: 6rem;
+  .compiler-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.7rem;
   }
 
-  .principle {
-    border-top: 1px solid var(--color-border);
+  .compiler-grid span,
+  .python-bridge span:not(.bridge-arrow) {
+    min-height: 3.25rem;
 
-    background: var(--color-bg-soft);
+    display: grid;
+    place-items: center;
+
+    padding-inline: 0.8rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+
+    color: var(--color-text);
+    background: var(--color-control-bg);
+
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  .python-bridge {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .bridge-arrow {
+    color: var(--color-purple);
+
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
   }
 
   @media (max-width: 900px) {
     .hero-grid,
-    .stack-grid,
-    .principle-grid {
+    .core-heading {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      grid-template-areas:
+        'eyebrow'
+        'title'
+        'lead';
+      gap: 1.35rem;
+    }
+
+    .hero-grid > .lead,
+    .core-heading > .lead {
+      max-width: 44rem;
+      margin-top: 1.1rem;
+    }
+
+    .core-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .technology-page {
+      --technology-section-padding: 4rem;
+    }
+
+    .page-hero {
+      padding-block: 4.5rem;
+    }
+
+    .compiler-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

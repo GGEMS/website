@@ -12,28 +12,32 @@ const t = useTranslations(lang);
 
 const applications = [
   {
-    label: 'CT · CBCT',
     title: t('applications.ct.title'),
     body: t('applicationsPage.ct.body'),
-    accent: 'green',
+    visual: 'CT · CBCT',
+    visualClass: 'visual-green',
+    reverse: false,
   },
   {
-    label: 'PET · SPECT',
     title: t('applications.pet.title'),
     body: t('applicationsPage.pet.body'),
-    accent: 'purple',
+    visual: 'PET · SPECT',
+    visualClass: 'visual-purple',
+    reverse: true,
   },
   {
-    label: 'DOSE',
     title: t('applications.dosimetry.title'),
     body: t('applicationsPage.dose.body'),
-    accent: 'yellow',
+    visual: t('applications.dosimetry.visual'),
+    visualClass: 'visual-yellow',
+    reverse: false,
   },
   {
-    label: 'PARTICLE',
     title: t('applications.therapy.title'),
     body: t('applicationsPage.therapy.body'),
-    accent: 'mixed',
+    visual: t('applications.therapy.visual'),
+    visualClass: 'visual-mixed',
+    reverse: true,
   },
 ];
 ---
@@ -43,17 +47,15 @@ const applications = [
   title={t('meta.applications.title')}
   description={t('meta.applications.description')}
 >
-  <main>
+  <main class="applications-page">
     <section class="page-hero">
       <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">{t('applicationsPage.eyebrow')}</p>
+        <p class="eyebrow">{t('applicationsPage.eyebrow')}</p>
 
-          <h1 class="display">
-            {t('applicationsPage.hero.primary')}
-            <span>{t('applicationsPage.hero.secondary')}</span>
-          </h1>
-        </div>
+        <h1 class="display">
+          {t('applicationsPage.hero.primary')}
+          <span>{t('applicationsPage.hero.secondary')}</span>
+        </h1>
 
         <p class="lead">
           {t('applicationsPage.hero.lead')}
@@ -71,87 +73,78 @@ const applications = [
         </h2>
       </div>
 
-      <div class="container application-grid">
+      <div class="container application-list">
         {
           applications.map((item) => (
-            <article class={`application-card ${item.accent}`}>
-              <div class="application-label">{item.label}</div>
-
+            <article class:list={['application', { 'application-reverse': item.reverse }]}>
               <div class="application-copy">
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
+              </div>
+
+              <div class:list={['application-visual', item.visualClass]}>
+                <span>{item.visual}</span>
               </div>
             </article>
           ))
         }
       </div>
     </section>
-
-    <section class="section development-note">
-      <div class="container note-grid">
-        <div>
-          <p class="eyebrow">{t('applicationsPage.note.eyebrow')}</p>
-
-          <h2 class="heading-1">
-            {t('applicationsPage.note.title.primary')}
-            <span>{t('applicationsPage.note.title.secondary')}</span>
-          </h2>
-        </div>
-
-        <p class="lead">
-          {t('applicationsPage.note.body')}
-        </p>
-      </div>
-    </section>
   </main>
 </BaseLayout>
 
 <style>
+  .applications-page {
+    --applications-band-a: #07111b;
+    --applications-band-b: #0d1b27;
+    --applications-section-padding: 4.5rem;
+  }
+
+  :global([data-theme='light']) .applications-page {
+    --applications-band-a: #f8faf9;
+    --applications-band-b: #dce7df;
+  }
+
   .page-hero {
-    position: relative;
+    padding-block: 5.5rem;
 
-    padding-block: 6.5rem 6rem;
-
-    overflow: hidden;
-
-    border-bottom: 1px solid var(--color-border);
+    background: var(--applications-band-a);
   }
 
-  .page-hero::before {
-    content: '';
-
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
-
-    background:
-      radial-gradient(circle at 80% 30%, rgb(80 192 112 / 8%), transparent 26rem),
-      radial-gradient(circle at 18% 80%, rgb(128 32 224 / 9%), transparent 28rem);
-  }
-
-  .hero-grid,
-  .note-grid {
-    position: relative;
-
+  .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-    align-items: end;
-    gap: 5rem;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+    grid-template-areas:
+      'eyebrow .'
+      'title lead';
+    column-gap: 4rem;
+    row-gap: 1.25rem;
+    align-items: start;
   }
 
-  .display,
-  .heading-1 {
-    margin-top: 1.25rem;
+  .hero-grid > .eyebrow {
+    grid-area: eyebrow;
   }
 
-  .page-hero .display {
-    font-size: clamp(3.8rem, 6vw, 6.2rem);
+  .hero-grid > .display {
+    grid-area: title;
+
+    max-width: 12ch;
+    margin: 0;
+
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
   }
 
-  .application-scope .heading-1,
-  .development-note .heading-1 {
-    font-size: clamp(2.5rem, 4vw, 4.1rem);
+  .hero-grid > .lead {
+    grid-area: lead;
+
+    max-width: 30rem;
+    margin: 0;
+
+    align-self: start;
   }
 
   .display span,
@@ -162,128 +155,210 @@ const applications = [
     font-weight: 400;
   }
 
-  .hero-grid .lead,
-  .note-grid .lead {
-    margin: 0;
+  .application-scope {
+    padding-block: var(--applications-section-padding);
+
+    background: var(--applications-band-b);
   }
 
   .section-heading {
-    max-width: 850px;
+    margin-inline: auto;
   }
 
-  .application-grid {
+  .section-heading .heading-1 {
+    max-width: 18ch;
+    margin-top: 1.25rem;
+
+    font-size: clamp(2.8rem, 5vw, 5rem);
+  }
+
+  .application-list {
+    margin-top: 3.5rem;
+  }
+
+  .application {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: clamp(2rem, 3vw, 3rem);
 
-    margin-top: 4rem;
-
-    border-top: 1px solid var(--color-border);
-    border-left: 1px solid var(--color-border);
+    padding-block: 2.5rem;
   }
 
-  .application-card {
-    position: relative;
-
-    min-height: 255px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 3.25rem;
-
-    padding: 1.75rem;
-
-    overflow: hidden;
-
-    border-right: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+  .application-reverse {
+    grid-template-columns: minmax(0, 1.28fr) minmax(280px, 0.72fr);
   }
 
-  .application-card::before {
-    content: '';
-
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
+  .application-reverse .application-copy {
+    order: 2;
   }
 
-  .application-card.green::before {
-    background: radial-gradient(circle at 85% 18%, rgb(80 192 112 / 13%), transparent 16rem);
-  }
-
-  .application-card.purple::before {
-    background: radial-gradient(circle at 85% 18%, rgb(128 32 224 / 13%), transparent 16rem);
-  }
-
-  .application-card.yellow::before {
-    background: radial-gradient(circle at 85% 18%, rgb(240 240 0 / 8%), transparent 16rem);
-  }
-
-  .application-card.mixed::before {
-    background:
-      radial-gradient(circle at 82% 20%, rgb(128 32 224 / 10%), transparent 15rem),
-      radial-gradient(circle at 68% 34%, rgb(80 192 112 / 8%), transparent 14rem);
-  }
-
-  .application-label,
-  .application-copy {
-    position: relative;
-  }
-
-  .application-label {
-    color: var(--color-text-subtle);
-
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
+  .application-reverse .application-visual {
+    order: 1;
   }
 
   .application-copy {
     max-width: 31rem;
   }
 
-  .application-card h3 {
+  .application h3 {
     margin: 0;
 
-    font-size: clamp(1.8rem, 3vw, 2.9rem);
+    font-size: clamp(2rem, 3.5vw, 3.6rem);
     font-weight: 500;
+    line-height: 1;
     letter-spacing: -0.04em;
   }
 
-  .application-card p {
-    margin: 1.1rem 0 0;
+  .application-copy > p {
+    margin: 1.5rem 0 0;
 
     color: var(--color-text-muted);
 
-    font-size: 1.02rem;
-    line-height: 1.7;
+    line-height: 1.75;
   }
 
-  .application-scope,
-  .development-note {
-    padding-block: 6rem;
+  .application-visual {
+    position: relative;
+
+    min-height: 320px;
+
+    display: grid;
+    place-items: center;
+
+    overflow: hidden;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+
+    background: var(--color-surface);
   }
 
-  .development-note {
-    border-top: 1px solid var(--color-border);
+  .application-visual::before,
+  .application-visual::after {
+    content: '';
 
-    background: var(--color-bg-soft);
+    position: absolute;
+
+    border-radius: 50%;
+  }
+
+  .application-visual::before {
+    width: 17rem;
+    height: 17rem;
+
+    border: 1px solid var(--color-visual-line);
+  }
+
+  .application-visual::after {
+    width: 25rem;
+    height: 9rem;
+
+    border: 1px solid var(--color-visual-line-soft);
+
+    transform: rotate(-18deg);
+  }
+
+  .application-visual span {
+    position: relative;
+    z-index: 2;
+
+    color: var(--color-text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+  }
+
+  .visual-green {
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        rgb(80 192 112 / 16%),
+        transparent 18rem
+      ),
+      var(--color-surface);
+  }
+
+  .visual-purple {
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        rgb(128 32 224 / 18%),
+        transparent 18rem
+      ),
+      var(--color-surface);
+  }
+
+  .visual-yellow {
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        rgb(240 240 0 / 10%),
+        transparent 18rem
+      ),
+      var(--color-surface);
+  }
+
+  .visual-mixed {
+    background:
+      radial-gradient(
+        circle at 38% 45%,
+        rgb(80 192 112 / 13%),
+        transparent 14rem
+      ),
+      radial-gradient(
+        circle at 65% 55%,
+        rgb(128 32 224 / 16%),
+        transparent 16rem
+      ),
+      var(--color-surface);
   }
 
   @media (max-width: 900px) {
-    .hero-grid,
-    .note-grid {
+    .hero-grid {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      grid-template-areas:
+        'eyebrow'
+        'title'
+        'lead';
+      gap: 1.35rem;
     }
 
-    .application-grid {
-      grid-template-columns: 1fr;
+    .hero-grid > .display {
+      max-width: 12ch;
     }
 
-    .application-card {
-      min-height: 230px;
-      gap: 2.5rem;
+    .hero-grid > .lead {
+      max-width: 44rem;
+      margin-top: 1.1rem;
+    }
+
+    .application,
+    .application-reverse {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+
+      padding-block: 2.25rem;
+    }
+
+    .application-reverse .application-copy,
+    .application-reverse .application-visual {
+      order: initial;
+    }
+
+    .application-visual {
+      min-height: 300px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .applications-page {
+      --applications-section-padding: 4rem;
+    }
+
+    .page-hero {
+      padding-block: 4.5rem;
     }
   }
 </style>

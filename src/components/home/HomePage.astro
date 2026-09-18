@@ -6,7 +6,7 @@ import HomeApplications from './HomeApplications.astro';
 import HomePhysics from './HomePhysics.astro';
 import PortableCompute from '../sections/PortableCompute.astro';
 import VisualizationDebugging from '../sections/VisualizationDebugging.astro';
-import HomeRoadmap from './HomeRoadmap.astro';
+import HomeEcosystem from './HomeEcosystem.astro';
 
 import type { Lang } from '../../i18n/config';
 import { useTranslations } from '../../i18n';
@@ -31,7 +31,7 @@ const t = useTranslations(lang);
     <HomePhysics lang={lang} />
     <PortableCompute lang={lang} />
     <VisualizationDebugging lang={lang} />
-    <HomeRoadmap lang={lang} />
+    <HomeEcosystem lang={lang} />
   </main>
 </BaseLayout>
 
@@ -50,7 +50,7 @@ const t = useTranslations(lang);
 
   :global([data-theme='light']) .home-page {
     --home-band-a: #f8faf9;
-    --home-band-b: #cfddd1;
+    --home-band-b: #dce7df;
   }
 
   /*
@@ -105,22 +105,9 @@ const t = useTranslations(lang);
     background: var(--home-band-b);
   }
 
-  /* A — Roadmap */
-  .home-page :global(.home-roadmap) {
-    border-top: 0;
-
-    background:
-      radial-gradient(
-        circle at 12% 22%,
-        rgb(80 192 112 / 8%),
-        transparent 24rem
-      ),
-      radial-gradient(
-        circle at 82% 74%,
-        rgb(128 32 224 / 8%),
-        transparent 28rem
-      ),
-      var(--home-band-a);
+  /* A — Ecosystem */
+  .home-page :global(.home-ecosystem) {
+    background: var(--home-band-a);
   }
 
   /* The alternating section tones now provide the large-scale separation. */
