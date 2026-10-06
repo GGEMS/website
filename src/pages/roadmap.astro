@@ -8,327 +8,1586 @@ import '@fontsource/jetbrains-mono/500.css';
 const sections = [
   {
     status: 'complete',
-    eyebrow: 'Completed',
-    title: 'Core rebuild',
-    description:
-      'A modern GPU-first software foundation for the new GGEMS implementation.',
+    text: {
+      en: {
+        eyebrow: 'Completed',
+        title: 'Core rebuild',
+        description: 'A modern GPU-first software foundation for the new GGEMS implementation.',
+      },
+      fr: {
+        eyebrow: 'Terminé',
+        title: 'Reconstruction du cœur',
+        description: 'Une fondation logicielle moderne, GPU-first, pour la nouvelle implémentation de GGEMS.',
+      },
+      de: {
+        eyebrow: 'Abgeschlossen',
+        title: 'Neuaufbau des Kerns',
+        description: 'Moderne GPU-first-Softwarebasis für die neue GGEMS-Implementierung.',
+      },
+          it: {
+        eyebrow: 'Completato',
+        title: 'Ricostruzione del core',
+        description: 'Una base software moderna e GPU-first per la nuova implementazione di GGEMS.',
+      },
+      es: {
+        eyebrow: 'Completado',
+        title: 'Reconstrucción del núcleo',
+        description: 'Una base de software moderna y GPU-first para la nueva implementación de GGEMS.',
+      },
+      'pt-BR': {
+        eyebrow: 'Concluído',
+        title: 'Reconstrução do núcleo',
+        description: 'Uma base de software moderna e GPU-first para a nova implementação do GGEMS.',
+      },
+},
     groups: [
       {
-        title: 'Core',
-        items: [
-          'Modern C++ architecture',
-          'Project structure',
-          'OpenCL foundation',
-          'GPU-first execution model',
-        ],
+        title: {
+          en: 'Core',
+          fr: 'Cœur',
+          de: 'Kern',
+                  it: 'Core',
+          es: 'Núcleo',
+          'pt-BR': 'Núcleo',
+},
+        items: {
+          en: [
+            'Modern C++ architecture',
+            'Project structure',
+            'OpenCL foundation',
+            'GPU-first execution model',
+          ],
+          fr: [
+            'Architecture C++ moderne',
+            'Structure du projet',
+            'Fondation OpenCL',
+            'Modèle d’exécution GPU-first',
+          ],
+          de: [
+            'Moderne C++-Architektur',
+            'Projektstruktur',
+            'OpenCL-Basis',
+            'GPU-first-Ausführungsmodell',
+          ],
+                  it: [
+            'Architettura C++ moderna',
+            'Struttura del progetto',
+            'Base OpenCL',
+            'Modello di esecuzione GPU-first',
+          ],
+          es: [
+            'Arquitectura C++ moderna',
+            'Estructura del proyecto',
+            'Base OpenCL',
+            'Modelo de ejecución GPU-first',
+          ],
+          'pt-BR': [
+            'Arquitetura C++ moderna',
+            'Estrutura do projeto',
+            'Base OpenCL',
+            'Modelo de execução GPU-first',
+          ],
+},
       },
     ],
   },
   {
     status: 'complete',
-    eyebrow: 'Completed',
-    title: 'Source system',
-    description:
-      'A dedicated source subsystem for controlled and reproducible particle generation.',
+    text: {
+      en: {
+        eyebrow: 'Completed',
+        title: 'Source system',
+        description: 'A dedicated source subsystem for controlled and reproducible particle generation.',
+      },
+      fr: {
+        eyebrow: 'Terminé',
+        title: 'Système de sources',
+        description: 'Un sous-système de sources dédié à la génération contrôlée et reproductible de particules.',
+      },
+      de: {
+        eyebrow: 'Abgeschlossen',
+        title: 'Quellsystem',
+        description: 'Eigenes Quellsystem für kontrollierte und reproduzierbare Partikelerzeugung.',
+      },
+          it: {
+        eyebrow: 'Completato',
+        title: 'Sistema di sorgenti',
+        description: 'Un sistema dedicato alla generazione controllata e riproducibile di particelle.',
+      },
+      es: {
+        eyebrow: 'Completado',
+        title: 'Sistema de fuentes',
+        description: 'Un sistema dedicado a la generación controlada y reproducible de partículas.',
+      },
+      'pt-BR': {
+        eyebrow: 'Concluído',
+        title: 'Sistema de fontes',
+        description: 'Um sistema dedicado à geração controlada e reprodutível de partículas.',
+      },
+},
     groups: [
       {
-        title: 'Sampling',
-        items: [
-          'General source sampling',
-          'Geometry / angle / energy / time',
-          'Random / reproducibility foundations',
-        ],
+        title: {
+          en: 'Sampling',
+          fr: 'Échantillonnage',
+          de: 'Sampling',
+                  it: 'Campionamento',
+          es: 'Muestreo',
+          'pt-BR': 'Amostragem',
+},
+        items: {
+          en: [
+            'General source sampling',
+            'Geometry / angle / energy / time',
+            'Random / reproducibility foundations',
+          ],
+          fr: [
+            'Échantillonnage général des sources',
+            'Géométrie / angle / énergie / temps',
+            'Fondations de l’aléatoire et de la reproductibilité',
+          ],
+          de: [
+            'Allgemeines Quellen-Sampling',
+            'Geometrie / Winkel / Energie / Zeit',
+            'Zufall & Reproduzierbarkeit',
+          ],
+                  it: [
+            'Campionamento generale delle sorgenti',
+            'Geometria / angolo / energia / tempo',
+            'Casualità & riproducibilità',
+          ],
+          es: [
+            'Muestreo general de fuentes',
+            'Geometría / ángulo / energía / tiempo',
+            'Aleatoriedad & reproducibilidad',
+          ],
+          'pt-BR': [
+            'Amostragem geral das fontes',
+            'Geometria / ângulo / energia / tempo',
+            'Aleatoriedade & reprodutibilidade',
+          ],
+},
       },
     ],
   },
   {
     status: 'complete',
-    eyebrow: 'Completed',
-    title: 'Radionuclides',
-    description:
-      'Activity-driven source workflows and a medical radionuclide foundation.',
+    text: {
+      en: {
+        eyebrow: 'Completed',
+        title: 'Radionuclides',
+        description: 'Activity-driven source workflows and a medical radionuclide foundation.',
+      },
+      fr: {
+        eyebrow: 'Terminé',
+        title: 'Radionucléides',
+        description: 'Des workflows de sources pilotés par l’activité et une base de radionucléides médicaux.',
+      },
+      de: {
+        eyebrow: 'Abgeschlossen',
+        title: 'Radionuklide',
+        description: 'Aktivitätsgesteuerte Quellen und eine Basis medizinischer Radionuklide.',
+      },
+          it: {
+        eyebrow: 'Completato',
+        title: 'Radionuclidi',
+        description: 'Sorgenti guidate dall’attività e una base di radionuclidi per uso medico.',
+      },
+      es: {
+        eyebrow: 'Completado',
+        title: 'Radionúclidos',
+        description: 'Fuentes controladas por actividad y una base de radionúclidos de uso médico.',
+      },
+      'pt-BR': {
+        eyebrow: 'Concluído',
+        title: 'Radionuclídeos',
+        description: 'Fontes guiadas pela atividade e uma base de radionuclídeos de uso médico.',
+      },
+},
     groups: [
       {
-        title: 'Radionuclide sources',
-        items: [
-          'Activity-driven sources',
-          'Medical radionuclide catalog',
-          'LNHB / MIRDsoft data foundations',
-        ],
+        title: {
+          en: 'Radionuclide sources',
+          fr: 'Sources radionucléides',
+          de: 'Radionuklidquellen',
+                  it: 'Sorgenti radionuclidiche',
+          es: 'Fuentes de radionúclidos',
+          'pt-BR': 'Fontes de radionuclídeos',
+},
+        items: {
+          en: [
+            'Activity-driven sources',
+            'Medical radionuclide catalog',
+            'LNHB / MIRDsoft data foundations',
+          ],
+          fr: [
+            'Sources pilotées par l’activité',
+            'Catalogue de radionucléides médicaux',
+            'Fondations de données LNHB / MIRDsoft',
+          ],
+          de: [
+            'Aktivitätsgesteuerte Quellen',
+            'Katalog medizinischer Radionuklide',
+            'Datenbasis LNHB / MIRDsoft',
+          ],
+                  it: [
+            'Sorgenti guidate dall’attività',
+            'Catalogo di radionuclidi medici',
+            'Base dati LNHB / MIRDsoft',
+          ],
+          es: [
+            'Fuentes controladas por actividad',
+            'Catálogo de radionúclidos médicos',
+            'Base de datos LNHB / MIRDsoft',
+          ],
+          'pt-BR': [
+            'Fontes guiadas pela atividade',
+            'Catálogo de radionuclídeos médicos',
+            'Base de dados LNHB / MIRDsoft',
+          ],
+},
       },
     ],
   },
   {
     status: 'complete',
-    eyebrow: 'Completed',
-    title: 'Testing & validation framework',
-    description:
-      'A reproducible validation workflow accompanies implementation from the beginning.',
+    text: {
+      en: {
+        eyebrow: 'Completed',
+        title: 'Testing & validation framework',
+        description: 'A reproducible validation workflow accompanies implementation from the beginning.',
+      },
+      fr: {
+        eyebrow: 'Terminé',
+        title: 'Cadre de tests & validation',
+        description: 'Un workflow de validation reproductible accompagne l’implémentation depuis le début.',
+      },
+      de: {
+        eyebrow: 'Abgeschlossen',
+        title: 'Tests & Validierung',
+        description: 'Ein reproduzierbarer Validierungsablauf begleitet die Implementierung von Beginn an.',
+      },
+          it: {
+        eyebrow: 'Completato',
+        title: 'Test & validazione',
+        description: 'Un processo di validazione riproducibile accompagna l’implementazione fin dall’inizio.',
+      },
+      es: {
+        eyebrow: 'Completado',
+        title: 'Pruebas & validación',
+        description: 'Un proceso de validación reproducible acompaña la implementación desde el principio.',
+      },
+      'pt-BR': {
+        eyebrow: 'Concluído',
+        title: 'Testes & validação',
+        description: 'Um processo de validação reprodutível acompanha a implementação desde o início.',
+      },
+},
     groups: [
       {
-        title: 'Validation infrastructure',
-        items: [
-          'C++ unit tests',
-          'Python validation tools',
-          'Campaign automation',
-          'Reference datasets',
-          'Statistical validation foundations',
-        ],
+        title: {
+          en: 'Validation infrastructure',
+          fr: 'Infrastructure de validation',
+          de: 'Validierung',
+                  it: 'Validazione',
+          es: 'Validación',
+          'pt-BR': 'Validação',
+},
+        items: {
+          en: [
+            'C++ unit tests',
+            'Python validation tools',
+            'Campaign automation',
+            'Reference datasets',
+            'Statistical validation foundations',
+          ],
+          fr: [
+            'Tests unitaires C++',
+            'Outils de validation Python',
+            'Automatisation des campagnes',
+            'Jeux de données de référence',
+            'Fondations de validation statistique',
+          ],
+          de: [
+            'C++-Unit-Tests',
+            'Python-Validierungstools',
+            'Automatisierte Kampagnen',
+            'Referenzdatensätze',
+            'Grundlagen der statistischen Validierung',
+          ],
+                  it: [
+            'Test unitari C++',
+            'Strumenti Python di validazione',
+            'Automazione delle campagne',
+            'Dataset di riferimento',
+            'Basi della validazione statistica',
+          ],
+          es: [
+            'Pruebas unitarias C++',
+            'Herramientas Python de validación',
+            'Automatización de campañas',
+            'Conjuntos de datos de referencia',
+            'Bases de validación estadística',
+          ],
+          'pt-BR': [
+            'Testes unitários C++',
+            'Ferramentas Python de validação',
+            'Automação de campanhas',
+            'Conjuntos de dados de referência',
+            'Bases de validação estatística',
+          ],
+},
       },
     ],
   },
   {
     status: 'complete',
-    eyebrow: 'Completed',
-    title: 'Materials & Cuts',
-    description:
-      'Material definition and production-cut foundations for the first physical transport chain.',
+    text: {
+      en: {
+        eyebrow: 'Completed',
+        title: 'Materials & Cuts',
+        description: 'Material definition and production-cut foundations for the first physical transport chain.',
+      },
+      fr: {
+        eyebrow: 'Terminé',
+        title: 'Matériaux & Cuts',
+        description: 'Les fondations de la définition des matériaux et des Cuts de production pour la première chaîne de transport physique.',
+      },
+      de: {
+        eyebrow: 'Abgeschlossen',
+        title: 'Materialien & Cuts',
+        description: 'Grundlagen für Materialdefinition und Production Cuts der ersten physikalischen Transportkette.',
+      },
+          it: {
+        eyebrow: 'Completato',
+        title: 'Materiali & Cuts',
+        description: 'Basi per la definizione dei materiali e i Production Cuts della prima catena di trasporto fisico.',
+      },
+      es: {
+        eyebrow: 'Completado',
+        title: 'Materiales & Cuts',
+        description: 'Bases para la definición de materiales y los Production Cuts de la primera cadena de transporte físico.',
+      },
+      'pt-BR': {
+        eyebrow: 'Concluído',
+        title: 'Materiais & Cuts',
+        description: 'Bases para a definição dos materiais e os Production Cuts da primeira cadeia de transporte físico.',
+      },
+},
     groups: [
       {
-        title: 'Materials',
-        items: [
-          'Isotopic materials',
-          'Material identity / compilation',
-        ],
+        title: {
+          en: 'Materials',
+          fr: 'Matériaux',
+          de: 'Materialien',
+                  it: 'Materiali',
+          es: 'Materiales',
+          'pt-BR': 'Materiais',
+},
+        items: {
+          en: [
+            'Isotopic materials',
+            'Material identity / compilation',
+          ],
+          fr: [
+            'Matériaux isotopiques',
+            'Identité / compilation des matériaux',
+          ],
+          de: [
+            'Isotopische Materialien',
+            'Materialidentität / Kompilierung',
+          ],
+                  it: [
+            'Materiali isotopici',
+            'Identità / compilazione dei materiali',
+          ],
+          es: [
+            'Materiales isotópicos',
+            'Identidad / compilación de materiales',
+          ],
+          'pt-BR': [
+            'Materiais isotópicos',
+            'Identidade / compilação dos materiais',
+          ],
+},
       },
       {
-        title: 'Production Cuts',
-        items: [
-          'Production Cuts',
-          'Material / Cut couples',
-        ],
+        title: {
+          en: 'Production Cuts',
+          fr: 'Production Cuts',
+          de: 'Production Cuts',
+                  it: 'Production Cuts',
+          es: 'Production Cuts',
+          'pt-BR': 'Production Cuts',
+},
+        items: {
+          en: [
+            'Production Cuts',
+            'Material / Cut couples',
+          ],
+          fr: [
+            'Production Cuts',
+            'Couples matériau / Cut',
+          ],
+          de: [
+            'Production Cuts',
+            'Material-/Cut-Paare',
+          ],
+                  it: [
+            'Production Cuts',
+            'Coppie materiale / Cut',
+          ],
+          es: [
+            'Production Cuts',
+            'Pares material / Cut',
+          ],
+          'pt-BR': [
+            'Production Cuts',
+            'Pares material / Cut',
+          ],
+},
       },
     ],
   },
   {
     status: 'complete',
-    eyebrow: 'Completed',
-    title: 'Software / UI / doc cleanup',
-    description:
-      'The software surface and developer-facing tools were consolidated before physical implementation continues.',
+    text: {
+      en: {
+        eyebrow: 'Completed',
+        title: 'Software / UI / doc cleanup',
+        description: 'The software surface and developer-facing tools were consolidated before physical implementation continues.',
+      },
+      fr: {
+        eyebrow: 'Terminé',
+        title: 'Nettoyage logiciel / UI / documentation',
+        description: 'La surface logicielle et les outils destinés aux développeurs ont été consolidés avant la poursuite de l’implémentation physique.',
+      },
+      de: {
+        eyebrow: 'Abgeschlossen',
+        title: 'Software / UI / Dokumentation',
+        description: 'Softwareoberfläche und Entwicklerwerkzeuge wurden vor der weiteren Physikimplementierung konsolidiert.',
+      },
+          it: {
+        eyebrow: 'Completato',
+        title: 'Software / UI / documentazione',
+        description: 'Software e strumenti per sviluppatori sono stati consolidati prima di proseguire con l’implementazione fisica.',
+      },
+      es: {
+        eyebrow: 'Completado',
+        title: 'Software / UI / documentación',
+        description: 'El software y las herramientas para desarrolladores se consolidaron antes de continuar con la implementación física.',
+      },
+      'pt-BR': {
+        eyebrow: 'Concluído',
+        title: 'Software / UI / documentação',
+        description: 'O software e as ferramentas para desenvolvedores foram consolidados antes de prosseguir com a implementação física.',
+      },
+},
     groups: [
       {
-        title: 'Software & UI',
-        items: [
-          'Renderer / Vulkan / ImGui restructuring',
-          'Public API cleanup',
-        ],
+        title: {
+          en: 'Software & UI',
+          fr: 'Logiciel & UI',
+          de: 'Software & UI',
+                  it: 'Software & UI',
+          es: 'Software & UI',
+          'pt-BR': 'Software & UI',
+},
+        items: {
+          en: [
+            'Renderer / Vulkan / ImGui restructuring',
+            'Public API cleanup',
+          ],
+          fr: [
+            'Restructuration Renderer / Vulkan / ImGui',
+            'Nettoyage de l’API publique',
+          ],
+          de: [
+            'Renderer / Vulkan / ImGui neu strukturiert',
+            'Öffentliche API bereinigt',
+          ],
+                  it: [
+            'Ristrutturazione Renderer / Vulkan / ImGui',
+            'Pulizia dell’API pubblica',
+          ],
+          es: [
+            'Reestructuración Renderer / Vulkan / ImGui',
+            'Limpieza de la API pública',
+          ],
+          'pt-BR': [
+            'Reestruturação Renderer / Vulkan / ImGui',
+            'Limpeza da API pública',
+          ],
+},
       },
       {
-        title: 'Documentation',
-        items: [
-          'Doxygen cleanup',
-          'Website / documentation foundations',
-        ],
+        title: {
+          en: 'Documentation',
+          fr: 'Documentation',
+          de: 'Dokumentation',
+                  it: 'Documentazione',
+          es: 'Documentación',
+          'pt-BR': 'Documentação',
+},
+        items: {
+          en: [
+            'Doxygen cleanup',
+            'Website / documentation foundations',
+          ],
+          fr: [
+            'Nettoyage Doxygen',
+            'Fondations du site web / de la documentation',
+          ],
+          de: [
+            'Doxygen bereinigt',
+            'Grundlagen für Website / Dokumentation',
+          ],
+                  it: [
+            'Pulizia Doxygen',
+            'Basi del sito web / documentazione',
+          ],
+          es: [
+            'Limpieza de Doxygen',
+            'Bases del sitio web / documentación',
+          ],
+          'pt-BR': [
+            'Limpeza do Doxygen',
+            'Bases do site / documentação',
+          ],
+},
       },
     ],
   },
   {
     status: 'current',
-    eyebrow: 'In progress',
-    title: 'Navigation',
-    description:
-      'Current implementation work focuses on the first bounded geometry slice.',
+    text: {
+      en: {
+        eyebrow: 'In progress',
+        title: 'Navigation',
+        description: 'Current implementation work focuses on the first bounded geometry slice.',
+      },
+      fr: {
+        eyebrow: 'En cours',
+        title: 'Navigation',
+        description: 'Le travail d’implémentation actuel porte sur la première géométrie bornée.',
+      },
+      de: {
+        eyebrow: 'In Arbeit',
+        title: 'Navigation',
+        description: 'Aktuell wird der erste klar begrenzte Geometriebaustein implementiert.',
+      },
+          it: {
+        eyebrow: 'In corso',
+        title: 'Navigazione',
+        description: 'Il lavoro attuale riguarda il primo caso di geometria delimitata.',
+      },
+      es: {
+        eyebrow: 'En curso',
+        title: 'Navegación',
+        description: 'El trabajo actual se centra en el primer caso de geometría acotada.',
+      },
+      'pt-BR': {
+        eyebrow: 'Em andamento',
+        title: 'Navegação',
+        description: 'O trabalho atual está focado no primeiro caso de geometria limitada.',
+      },
+},
     groups: [
       {
-        title: 'Geometry scope',
-        items: [
-          'Finite World',
-          'Analytic Box',
-          'Initial bounded navigation',
-        ],
+        title: {
+          en: 'Geometry scope',
+          fr: 'Périmètre géométrique',
+          de: 'Geometrie',
+                  it: 'Ambito geometrico',
+          es: 'Ámbito geométrico',
+          'pt-BR': 'Escopo geométrico',
+},
+        items: {
+          en: [
+            'Finite World',
+            'Analytic Box',
+            'Initial bounded navigation',
+          ],
+          fr: [
+            'World fini',
+            'Box analytique',
+            'Navigation bornée initiale',
+          ],
+          de: [
+            'Endliche World',
+            'Analytische Box',
+            'Erste begrenzte Navigation',
+          ],
+                  it: [
+            'World finita',
+            'Box analitica',
+            'Prima navigazione delimitata',
+          ],
+          es: [
+            'World finito',
+            'Box analítica',
+            'Navegación acotada inicial',
+          ],
+          'pt-BR': [
+            'World finito',
+            'Box analítica',
+            'Navegação limitada inicial',
+          ],
+},
       },
       {
-        title: 'Later extensions',
-        items: [
-          'Voxels',
-          'Mesh-based geometries',
-          'More complex navigation cases',
-        ],
+        title: {
+          en: 'Later extensions',
+          fr: 'Extensions ultérieures',
+          de: 'Spätere Erweiterungen',
+                  it: 'Estensioni successive',
+          es: 'Extensiones posteriores',
+          'pt-BR': 'Extensões posteriores',
+},
+        items: {
+          en: [
+            'Voxels',
+            'Mesh-based geometries',
+            'More complex navigation cases',
+          ],
+          fr: [
+            'Voxels',
+            'Géométries maillées',
+            'Cas de navigation plus complexes',
+          ],
+          de: [
+            'Voxels',
+            'Mesh-Geometrien',
+            'Komplexere Navigationsfälle',
+          ],
+                  it: [
+            'Voxels',
+            'Geometrie a mesh',
+            'Casi di navigazione più complessi',
+          ],
+          es: [
+            'Voxels',
+            'Geometrías malladas',
+            'Casos de navegación más complejos',
+          ],
+          'pt-BR': [
+            'Voxels',
+            'Geometrias em malha',
+            'Casos de navegação mais complexos',
+          ],
+},
       },
     ],
   },
   {
     status: 'future',
-    eyebrow: 'Planned',
-    title: 'Physical Processes',
-    description:
-      'Physics is implemented and validated by particle family, starting from the first medically relevant transport chains.',
+    text: {
+      en: {
+        eyebrow: 'Planned',
+        title: 'Physical Processes',
+        description: 'Physics is implemented and validated by particle family, starting from the first medically relevant transport chains.',
+      },
+      fr: {
+        eyebrow: 'Prévu',
+        title: 'Processus physiques',
+        description: 'La physique est implémentée et validée par famille de particules, en commençant par les premières chaînes de transport pertinentes pour les applications médicales.',
+      },
+      de: {
+        eyebrow: 'Geplant',
+        title: 'Physikalische Prozesse',
+        description: 'Die Physik wird nach Teilchenfamilien implementiert und validiert, beginnend mit medizinisch relevanten Transportketten.',
+      },
+          it: {
+        eyebrow: 'Previsto',
+        title: 'Processi fisici',
+        description: 'La fisica viene implementata e validata per famiglia di particelle, iniziando dalle catene di trasporto di interesse medico.',
+      },
+      es: {
+        eyebrow: 'Previsto',
+        title: 'Procesos físicos',
+        description: 'La física se implementa y valida por familia de partículas, empezando por las cadenas de transporte de interés médico.',
+      },
+      'pt-BR': {
+        eyebrow: 'Previsto',
+        title: 'Processos físicos',
+        description: 'A física é implementada e validada por família de partículas, começando pelas cadeias de transporte de interesse médico.',
+      },
+},
     groups: [
       {
-        title: 'Gamma',
-        items: [
-          'Compton scattering',
-          'Rayleigh scattering',
-          'Photoelectric effect',
-          'Pair production',
-          'Atomic relaxation',
-        ],
+        title: {
+          en: 'Gamma',
+          fr: 'Gamma',
+          de: 'Gamma',
+                  it: 'Gamma',
+          es: 'Gamma',
+          'pt-BR': 'Gamma',
+},
+        items: {
+          en: [
+            'Compton scattering',
+            'Rayleigh scattering',
+            'Photoelectric effect',
+            'Pair production',
+            'Atomic relaxation',
+          ],
+          fr: [
+            'Diffusion Compton',
+            'Diffusion Rayleigh',
+            'Effet photoélectrique',
+            'Création de paires',
+            'Relaxation atomique',
+          ],
+          de: [
+            'Compton-Streuung',
+            'Rayleigh-Streuung',
+            'Photoeffekt',
+            'Paarbildung',
+            'Atomare Relaxation',
+          ],
+                  it: [
+            'Diffusione Compton',
+            'Diffusione Rayleigh',
+            'Effetto fotoelettrico',
+            'Produzione di coppie',
+            'Rilassamento atomico',
+          ],
+          es: [
+            'Dispersión Compton',
+            'Dispersión Rayleigh',
+            'Efecto fotoeléctrico',
+            'Producción de pares',
+            'Relajación atómica',
+          ],
+          'pt-BR': [
+            'Espalhamento Compton',
+            'Espalhamento Rayleigh',
+            'Efeito fotoelétrico',
+            'Produção de pares',
+            'Relaxação atômica',
+          ],
+},
       },
       {
-        title: 'Electron / Positron',
-        items: [
-          'Ionization',
-          'Bremsstrahlung',
-          'Annihilation',
-          'Multiple scattering',
-          'Stopping / range',
-        ],
+        title: {
+          en: 'Electron / Positron',
+          fr: 'Électron / Positon',
+          de: 'Elektron / Positron',
+                  it: 'Elettrone / Positrone',
+          es: 'Electrón / Positrón',
+          'pt-BR': 'Elétron / Pósitron',
+},
+        items: {
+          en: [
+            'Ionization',
+            'Bremsstrahlung',
+            'Annihilation',
+            'Multiple scattering',
+            'Stopping / range',
+          ],
+          fr: [
+            'Ionisation',
+            'Bremsstrahlung',
+            'Annihilation',
+            'Diffusion multiple',
+            'Pouvoir d’arrêt / portée',
+          ],
+          de: [
+            'Ionisation',
+            'Bremsstrahlung',
+            'Annihilation',
+            'Mehrfachstreuung',
+            'Bremsvermögen / Reichweite',
+          ],
+                  it: [
+            'Ionizzazione',
+            'Bremsstrahlung',
+            'Annichilazione',
+            'Diffusione multipla',
+            'Potere frenante / range',
+          ],
+          es: [
+            'Ionización',
+            'Bremsstrahlung',
+            'Aniquilación',
+            'Dispersión múltiple',
+            'Poder de frenado / alcance',
+          ],
+          'pt-BR': [
+            'Ionização',
+            'Bremsstrahlung',
+            'Aniquilação',
+            'Espalhamento múltiplo',
+            'Poder de frenagem / alcance',
+          ],
+},
       },
       {
-        title: 'Proton / Alpha',
-        items: [
-          'Stopping',
-          'Ionization',
-          'Multiple scattering',
-          'NIEL',
-        ],
+        title: {
+          en: 'Proton / Alpha',
+          fr: 'Proton / Alpha',
+          de: 'Proton / Alpha',
+                  it: 'Protone / Alfa',
+          es: 'Protón / Alfa',
+          'pt-BR': 'Próton / Alfa',
+},
+        items: {
+          en: [
+            'Stopping',
+            'Ionization',
+            'Multiple scattering',
+            'NIEL',
+          ],
+          fr: [
+            'Pouvoir d’arrêt',
+            'Ionisation',
+            'Diffusion multiple',
+            'NIEL',
+          ],
+          de: [
+            'Bremsvermögen',
+            'Ionisation',
+            'Mehrfachstreuung',
+            'NIEL',
+          ],
+                  it: [
+            'Potere frenante',
+            'Ionizzazione',
+            'Diffusione multipla',
+            'NIEL',
+          ],
+          es: [
+            'Poder de frenado',
+            'Ionización',
+            'Dispersión múltiple',
+            'NIEL',
+          ],
+          'pt-BR': [
+            'Poder de frenagem',
+            'Ionização',
+            'Espalhamento múltiplo',
+            'NIEL',
+          ],
+},
       },
       {
-        title: 'Neutron',
-        items: [
-          'Evaluated nuclear data',
-          'Elastic / inelastic / capture',
-          'Thermal treatment / HP-HPT',
-        ],
+        title: {
+          en: 'Neutron',
+          fr: 'Neutron',
+          de: 'Neutron',
+                  it: 'Neutrone',
+          es: 'Neutrón',
+          'pt-BR': 'Nêutron',
+},
+        items: {
+          en: [
+            'Evaluated nuclear data',
+            'Elastic / inelastic / capture',
+            'Thermal treatment / HP-HPT',
+          ],
+          fr: [
+            'Données nucléaires évaluées',
+            'Élastique / inélastique / capture',
+            'Traitement thermique / HP-HPT',
+          ],
+          de: [
+            'Evaluierte Nukleardaten',
+            'Elastisch / inelastisch / Einfang',
+            'Thermische Behandlung / HP-HPT',
+          ],
+                  it: [
+            'Dati nucleari valutati',
+            'Elastico / anelastico / cattura',
+            'Trattamento termico / HP-HPT',
+          ],
+          es: [
+            'Datos nucleares evaluados',
+            'Elástica / inelástica / captura',
+            'Tratamiento térmico / HP-HPT',
+          ],
+          'pt-BR': [
+            'Dados nucleares avaliados',
+            'Elástico / inelástico / captura',
+            'Tratamento térmico / HP-HPT',
+          ],
+},
       },
     ],
   },
   {
     status: 'future',
-    eyebrow: 'Planned',
-    title: 'Transport',
-    description:
-      'Transport connects geometry and physical processes into complete particle histories.',
+    text: {
+      en: {
+        eyebrow: 'Planned',
+        title: 'Transport',
+        description: 'Transport connects geometry and physical processes into complete particle histories.',
+      },
+      fr: {
+        eyebrow: 'Prévu',
+        title: 'Transport',
+        description: 'Le transport relie la géométrie et les processus physiques pour former des histoires complètes de particules.',
+      },
+      de: {
+        eyebrow: 'Geplant',
+        title: 'Transport',
+        description: 'Transport verbindet Geometrie und physikalische Prozesse zu vollständigen Teilchenhistorien.',
+      },
+          it: {
+        eyebrow: 'Previsto',
+        title: 'Trasporto',
+        description: 'Il trasporto collega geometria e processi fisici in storie complete delle particelle.',
+      },
+      es: {
+        eyebrow: 'Previsto',
+        title: 'Transporte',
+        description: 'El transporte conecta la geometría y los procesos físicos en historias completas de partículas.',
+      },
+      'pt-BR': {
+        eyebrow: 'Previsto',
+        title: 'Transporte',
+        description: 'O transporte conecta a geometria e os processos físicos em histórias completas de partículas.',
+      },
+},
     groups: [
       {
-        title: 'First transport chain',
-        items: [
-          'Process / geometry competition',
-          'Physical step',
-          'Secondary production',
-          'Time of flight',
-          'Field-free transport',
-        ],
+        title: {
+          en: 'First transport chain',
+          fr: 'Première chaîne de transport',
+          de: 'Erste Transportkette',
+                  it: 'Prima catena di trasporto',
+          es: 'Primera cadena de transporte',
+          'pt-BR': 'Primeira cadeia de transporte',
+},
+        items: {
+          en: [
+            'Process / geometry competition',
+            'Physical step',
+            'Secondary production',
+            'Time of flight',
+            'Field-free transport',
+          ],
+          fr: [
+            'Compétition processus / géométrie',
+            'Pas physique',
+            'Production de secondaires',
+            'Temps de vol',
+            'Transport sans champ',
+          ],
+          de: [
+            'Prozess-/Geometriekonkurrenz',
+            'Physikalischer Schritt',
+            'Sekundärerzeugung',
+            'Flugzeit',
+            'Transport ohne Feld',
+          ],
+                  it: [
+            'Competizione processo / geometria',
+            'Passo fisico',
+            'Produzione di secondari',
+            'Tempo di volo',
+            'Trasporto senza campo',
+          ],
+          es: [
+            'Competencia proceso / geometría',
+            'Paso físico',
+            'Producción de secundarios',
+            'Tiempo de vuelo',
+            'Transporte sin campo',
+          ],
+          'pt-BR': [
+            'Competição processo / geometria',
+            'Passo físico',
+            'Produção de secundários',
+            'Tempo de voo',
+            'Transporte sem campo',
+          ],
+},
       },
       {
-        title: 'Later transport scope',
-        items: [
-          'Charged-particle transport extensions',
-          'Multiple-scattering integration',
-          'Magnetic-field support',
-        ],
+        title: {
+          en: 'Later transport scope',
+          fr: 'Extensions ultérieures du transport',
+          de: 'Spätere Erweiterungen',
+                  it: 'Estensioni successive',
+          es: 'Extensiones posteriores',
+          'pt-BR': 'Extensões posteriores',
+},
+        items: {
+          en: [
+            'Charged-particle transport extensions',
+            'Multiple-scattering integration',
+            'Magnetic-field support',
+          ],
+          fr: [
+            'Extensions du transport des particules chargées',
+            'Intégration de la diffusion multiple',
+            'Prise en charge du champ magnétique',
+          ],
+          de: [
+            'Transport geladener Teilchen',
+            'Integration der Mehrfachstreuung',
+            'Magnetfeld-Unterstützung',
+          ],
+                  it: [
+            'Trasporto di particelle cariche',
+            'Integrazione della diffusione multipla',
+            'Supporto del campo magnetico',
+          ],
+          es: [
+            'Transporte de partículas cargadas',
+            'Integración de la dispersión múltiple',
+            'Soporte de campo magnético',
+          ],
+          'pt-BR': [
+            'Transporte de partículas carregadas',
+            'Integração do espalhamento múltiplo',
+            'Suporte a campo magnético',
+          ],
+},
       },
     ],
   },
   {
     status: 'future',
-    eyebrow: 'Planned',
-    title: 'Scoring',
-    description:
-      'Accepted particle transport becomes measurable scientific output.',
+    text: {
+      en: {
+        eyebrow: 'Planned',
+        title: 'Scoring',
+        description: 'Accepted particle transport becomes measurable scientific output.',
+      },
+      fr: {
+        eyebrow: 'Prévu',
+        title: 'Scoring',
+        description: 'Le transport de particules accepté devient une sortie scientifique mesurable.',
+      },
+      de: {
+        eyebrow: 'Geplant',
+        title: 'Scoring',
+        description: 'Akzeptierter Teilchentransport wird zu messbaren wissenschaftlichen Ergebnissen.',
+      },
+          it: {
+        eyebrow: 'Previsto',
+        title: 'Scoring',
+        description: 'Il trasporto accettato delle particelle diventa un risultato scientifico misurabile.',
+      },
+      es: {
+        eyebrow: 'Previsto',
+        title: 'Scoring',
+        description: 'El transporte aceptado de partículas se convierte en un resultado científico medible.',
+      },
+      'pt-BR': {
+        eyebrow: 'Previsto',
+        title: 'Scoring',
+        description: 'O transporte aceito de partículas se torna um resultado científico mensurável.',
+      },
+},
     groups: [
       {
-        title: 'Scientific quantities',
-        items: [
-          'Energy deposition',
-          'Dose',
-          'Photon TLE',
-          'History statistics',
-        ],
+        title: {
+          en: 'Scientific quantities',
+          fr: 'Grandeurs scientifiques',
+          de: 'Wissenschaftliche Größen',
+                  it: 'Grandezze scientifiche',
+          es: 'Magnitudes científicas',
+          'pt-BR': 'Grandezas científicas',
+},
+        items: {
+          en: [
+            'Energy deposition',
+            'Dose',
+            'Photon TLE',
+            'History statistics',
+          ],
+          fr: [
+            'Dépôt d’énergie',
+            'Dose',
+            'TLE photon',
+            'Statistiques par histoire',
+          ],
+          de: [
+            'Energiedeposition',
+            'Dosis',
+            'Photon-TLE',
+            'Historienstatistik',
+          ],
+                  it: [
+            'Deposizione di energia',
+            'Dose',
+            'TLE fotonico',
+            'Statistiche per storia',
+          ],
+          es: [
+            'Deposición de energía',
+            'Dosis',
+            'TLE de fotones',
+            'Estadísticas por historia',
+          ],
+          'pt-BR': [
+            'Deposição de energia',
+            'Dose',
+            'TLE de fótons',
+            'Estatísticas por história',
+          ],
+},
       },
     ],
   },
   {
     status: 'future',
-    eyebrow: 'Planned',
-    title: 'Detector & Acquisition',
-    description:
-      'The detector chain transforms physical interactions into acquisition-level data products.',
+    text: {
+      en: {
+        eyebrow: 'Planned',
+        title: 'Detector & Acquisition',
+        description: 'The detector chain transforms physical interactions into acquisition-level data products.',
+      },
+      fr: {
+        eyebrow: 'Prévu',
+        title: 'Détecteur & acquisition',
+        description: 'La chaîne de détection transforme les interactions physiques en produits de données au niveau de l’acquisition.',
+      },
+      de: {
+        eyebrow: 'Geplant',
+        title: 'Detektor & Akquisition',
+        description: 'Die Detektorkette wandelt physikalische Wechselwirkungen in Akquisitionsdaten um.',
+      },
+          it: {
+        eyebrow: 'Previsto',
+        title: 'Rivelatore & acquisizione',
+        description: 'La catena di rivelazione trasforma le interazioni fisiche in dati a livello di acquisizione.',
+      },
+      es: {
+        eyebrow: 'Previsto',
+        title: 'Detector & adquisición',
+        description: 'La cadena de detección transforma las interacciones físicas en datos de adquisición.',
+      },
+      'pt-BR': {
+        eyebrow: 'Previsto',
+        title: 'Detector & aquisição',
+        description: 'A cadeia de detecção transforma as interações físicas em dados de aquisição.',
+      },
+},
     groups: [
       {
-        title: 'Sensitive detector',
-        items: [
-          'Detector elements',
-          'Raw Hits',
-        ],
+        title: {
+          en: 'Sensitive detector',
+          fr: 'Détecteur sensible',
+          de: 'Sensitiver Detektor',
+                  it: 'Rivelatore sensibile',
+          es: 'Detector sensible',
+          'pt-BR': 'Detector sensível',
+},
+        items: {
+          en: [
+            'Detector elements',
+            'Raw Hits',
+          ],
+          fr: [
+            'Éléments détecteurs',
+            'Hits bruts',
+          ],
+          de: [
+            'Detektorelemente',
+            'Rohe Hits',
+          ],
+                  it: [
+            'Elementi del rivelatore',
+            'Hit grezzi',
+          ],
+          es: [
+            'Elementos del detector',
+            'Hits brutos',
+          ],
+          'pt-BR': [
+            'Elementos do detector',
+            'Hits brutos',
+          ],
+},
       },
       {
-        title: 'Digitizer',
-        items: [
-          'Detector response',
-          'Energy and timing response',
-          'Efficiency and thresholds',
-          'Energy windows',
-          'Dead time',
-        ],
+        title: {
+          en: 'Digitizer',
+          fr: 'Digitizer',
+          de: 'Digitizer',
+                  it: 'Digitizer',
+          es: 'Digitizer',
+          'pt-BR': 'Digitizer',
+},
+        items: {
+          en: [
+            'Detector response',
+            'Energy and timing response',
+            'Efficiency and thresholds',
+            'Energy windows',
+            'Dead time',
+          ],
+          fr: [
+            'Réponse du détecteur',
+            'Réponse en énergie et en temps',
+            'Efficacité et seuils',
+            'Fenêtres en énergie',
+            'Temps mort',
+          ],
+          de: [
+            'Detektorantwort',
+            'Energie- und Zeitantwort',
+            'Effizienz & Schwellen',
+            'Energiefenster',
+            'Totzeit',
+          ],
+                  it: [
+            'Risposta del rivelatore',
+            'Risposta in energia e tempo',
+            'Efficienza & soglie',
+            'Finestre energetiche',
+            'Tempo morto',
+          ],
+          es: [
+            'Respuesta del detector',
+            'Respuesta en energía y tiempo',
+            'Eficiencia & umbrales',
+            'Ventanas de energía',
+            'Tiempo muerto',
+          ],
+          'pt-BR': [
+            'Resposta do detector',
+            'Resposta em energia e tempo',
+            'Eficiência & limiares',
+            'Janelas de energia',
+            'Tempo morto',
+          ],
+},
       },
       {
-        title: 'Acquisition',
-        items: [
-          'Scanner states',
-          'Motion',
-          'Exposures and projections',
-          'Temporal acquisition logic',
-        ],
+        title: {
+          en: 'Acquisition',
+          fr: 'Acquisition',
+          de: 'Akquisition',
+                  it: 'Acquisizione',
+          es: 'Adquisición',
+          'pt-BR': 'Aquisição',
+},
+        items: {
+          en: [
+            'Scanner states',
+            'Motion',
+            'Exposures and projections',
+            'Temporal acquisition logic',
+          ],
+          fr: [
+            'États du scanner',
+            'Mouvement',
+            'Expositions et projections',
+            'Logique temporelle d’acquisition',
+          ],
+          de: [
+            'Scannerzustände',
+            'Bewegung',
+            'Expositionen & Projektionen',
+            'Zeitlogik der Akquisition',
+          ],
+                  it: [
+            'Stati dello scanner',
+            'Movimento',
+            'Esposizioni & proiezioni',
+            'Logica temporale di acquisizione',
+          ],
+          es: [
+            'Estados del escáner',
+            'Movimiento',
+            'Exposiciones & proyecciones',
+            'Lógica temporal de adquisición',
+          ],
+          'pt-BR': [
+            'Estados do scanner',
+            'Movimento',
+            'Exposições & projeções',
+            'Lógica temporal de aquisição',
+          ],
+},
       },
       {
-        title: 'Detector data',
-        items: [
-          'Singles',
-          'Coincidences',
-          'PET / SPECT products',
-          'CT / CBCT products',
-        ],
+        title: {
+          en: 'Detector data',
+          fr: 'Données détecteur',
+          de: 'Detektordaten',
+                  it: 'Dati del rivelatore',
+          es: 'Datos del detector',
+          'pt-BR': 'Dados do detector',
+},
+        items: {
+          en: [
+            'Singles',
+            'Coincidences',
+            'PET / SPECT products',
+            'CT / CBCT products',
+          ],
+          fr: [
+            'Singles',
+            'Coïncidences',
+            'Produits PET / SPECT',
+            'Produits CT / CBCT',
+          ],
+          de: [
+            'Singles',
+            'Koinzidenzen',
+            'PET / SPECT-Produkte',
+            'CT / CBCT-Produkte',
+          ],
+                  it: [
+            'Singles',
+            'Coincidenze',
+            'Prodotti PET / SPECT',
+            'Prodotti CT / CBCT',
+          ],
+          es: [
+            'Singles',
+            'Coincidencias',
+            'Productos PET / SPECT',
+            'Productos CT / CBCT',
+          ],
+          'pt-BR': [
+            'Singles',
+            'Coincidências',
+            'Produtos PET / SPECT',
+            'Produtos CT / CBCT',
+          ],
+},
       },
     ],
   },
   {
     status: 'future',
-    eyebrow: 'Planned',
-    title: 'Scientific I/O & Reconstruction',
-    description:
-      'Committed GGEMS scientific products are exposed through explicit data formats and reconstruction-oriented interoperability.',
+    text: {
+      en: {
+        eyebrow: 'Planned',
+        title: 'Scientific I/O & Reconstruction',
+        description: 'Committed GGEMS scientific products are exposed through explicit data formats and reconstruction-oriented interoperability.',
+      },
+      fr: {
+        eyebrow: 'Prévu',
+        title: 'E/S scientifiques & reconstruction',
+        description: 'Les produits scientifiques validés de GGEMS sont exposés via des formats de données explicites et une interopérabilité orientée reconstruction.',
+      },
+      de: {
+        eyebrow: 'Geplant',
+        title: 'Daten-I/O & Rekonstruktion',
+        description: 'GGEMS stellt seine wissenschaftlichen Datenprodukte über klare Formate und rekonstruktionsorientierte Schnittstellen bereit.',
+      },
+          it: {
+        eyebrow: 'Previsto',
+        title: 'I/O scientifico & ricostruzione',
+        description: 'I prodotti scientifici di GGEMS sono esposti tramite formati dati espliciti e interoperabilità orientata alla ricostruzione.',
+      },
+      es: {
+        eyebrow: 'Previsto',
+        title: 'E/S científica & reconstrucción',
+        description: 'Los productos científicos de GGEMS se exponen mediante formatos de datos explícitos e interoperabilidad orientada a la reconstrucción.',
+      },
+      'pt-BR': {
+        eyebrow: 'Previsto',
+        title: 'I/O científico & reconstrução',
+        description: 'Os produtos científicos do GGEMS são expostos por formatos de dados explícitos e interoperabilidade voltada à reconstrução.',
+      },
+},
     groups: [
       {
-        title: 'Scientific I/O',
-        items: [
-          'MHD',
-          '...',
-        ],
+        title: {
+          en: 'Scientific I/O',
+          fr: 'E/S scientifiques',
+          de: 'Daten-I/O',
+                  it: 'I/O scientifico',
+          es: 'E/S científica',
+          'pt-BR': 'I/O científico',
+},
+        items: {
+          en: [
+            'MHD',
+            '...',
+          ],
+          fr: [
+            'MHD',
+            '...',
+          ],
+          de: [
+            'MHD',
+            '...',
+          ],
+                  it: [
+            'MHD',
+            '...',
+          ],
+          es: [
+            'MHD',
+            '...',
+          ],
+          'pt-BR': [
+            'MHD',
+            '...',
+          ],
+},
       },
       {
-        title: 'Reconstruction ecosystem',
-        items: [
-          'STIR',
-          'CASToR',
-          '...',
-        ],
+        title: {
+          en: 'Reconstruction ecosystem',
+          fr: 'Écosystème de reconstruction',
+          de: 'Rekonstruktionsökosystem',
+                  it: 'Ecosistema di ricostruzione',
+          es: 'Ecosistema de reconstrucción',
+          'pt-BR': 'Ecossistema de reconstrução',
+},
+        items: {
+          en: [
+            'STIR',
+            'CASToR',
+            '...',
+          ],
+          fr: [
+            'STIR',
+            'CASToR',
+            '...',
+          ],
+          de: [
+            'STIR',
+            'CASToR',
+            '...',
+          ],
+                  it: [
+            'STIR',
+            'CASToR',
+            '...',
+          ],
+          es: [
+            'STIR',
+            'CASToR',
+            '...',
+          ],
+          'pt-BR': [
+            'STIR',
+            'CASToR',
+            '...',
+          ],
+},
       },
     ],
   },
   {
     status: 'future',
-    eyebrow: 'Planned',
-    title: 'Integration, Validation & Performance',
-    description:
-      'Complete workflows are qualified only after their scientific components and cross-domain behavior are established.',
+    text: {
+      en: {
+        eyebrow: 'Planned',
+        title: 'Integration, Validation & Performance',
+        description: 'Complete workflows are qualified only after their scientific components and cross-domain behavior are established.',
+      },
+      fr: {
+        eyebrow: 'Prévu',
+        title: 'Intégration, validation & performances',
+        description: 'Les workflows complets ne sont qualifiés qu’une fois leurs composants scientifiques et leur comportement entre domaines établis.',
+      },
+      de: {
+        eyebrow: 'Geplant',
+        title: 'Integration, Validierung & Leistung',
+        description: 'Komplette Workflows werden erst qualifiziert, wenn ihre wissenschaftlichen Komponenten und ihr domänenübergreifendes Verhalten feststehen.',
+      },
+          it: {
+        eyebrow: 'Previsto',
+        title: 'Integrazione, validazione & prestazioni',
+        description: 'I workflow completi vengono qualificati solo dopo aver stabilito i componenti scientifici e il comportamento tra domini.',
+      },
+      es: {
+        eyebrow: 'Previsto',
+        title: 'Integración, validación & rendimiento',
+        description: 'Los workflows completos se califican solo después de establecer sus componentes científicos y su comportamiento entre dominios.',
+      },
+      'pt-BR': {
+        eyebrow: 'Previsto',
+        title: 'Integração, validação & desempenho',
+        description: 'Os workflows completos só são qualificados depois de estabelecidos seus componentes científicos e o comportamento entre domínios.',
+      },
+},
     groups: [
       {
-        title: 'Integration',
-        items: [
-          'Named modalities',
-          'Multi-device',
-          'Reproducibility',
-        ],
+        title: {
+          en: 'Integration',
+          fr: 'Intégration',
+          de: 'Integration',
+                  it: 'Integrazione',
+          es: 'Integración',
+          'pt-BR': 'Integração',
+},
+        items: {
+          en: [
+            'Named modalities',
+            'Multi-device',
+            'Reproducibility',
+          ],
+          fr: [
+            'Modalités identifiées',
+            'Multi-device',
+            'Reproductibilité',
+          ],
+          de: [
+            'Konkrete Modalitäten',
+            'Multi-Device',
+            'Reproduzierbarkeit',
+          ],
+                  it: [
+            'Modalità definite',
+            'Multi-device',
+            'Riproducibilità',
+          ],
+          es: [
+            'Modalidades definidas',
+            'Multi-device',
+            'Reproducibilidad',
+          ],
+          'pt-BR': [
+            'Modalidades definidas',
+            'Multi-device',
+            'Reprodutibilidade',
+          ],
+},
       },
       {
-        title: 'Qualification',
-        items: [
-          'Scientific validation',
-          'Performance characterization',
-          'Optimization without changing the science',
-        ],
+        title: {
+          en: 'Qualification',
+          fr: 'Qualification',
+          de: 'Qualifikation',
+                  it: 'Qualificazione',
+          es: 'Calificación',
+          'pt-BR': 'Qualificação',
+},
+        items: {
+          en: [
+            'Scientific validation',
+            'Performance characterization',
+            'Optimization without changing the science',
+          ],
+          fr: [
+            'Validation scientifique',
+            'Caractérisation des performances',
+            'Optimisation sans modifier la science',
+          ],
+          de: [
+            'Wissenschaftliche Validierung',
+            'Leistungsanalyse',
+            'Optimierung bei unveränderter Wissenschaft',
+          ],
+                  it: [
+            'Validazione scientifica',
+            'Caratterizzazione delle prestazioni',
+            'Ottimizzazione senza alterare la scienza',
+          ],
+          es: [
+            'Validación científica',
+            'Caracterización del rendimiento',
+            'Optimización sin alterar la ciencia',
+          ],
+          'pt-BR': [
+            'Validação científica',
+            'Caracterização do desempenho',
+            'Otimização sem alterar a ciência',
+          ],
+},
       },
     ],
   },
@@ -361,6 +1620,16 @@ const sections = [
             : 'dark');
 
         document.documentElement.dataset.theme = theme;
+
+        const storedLang = localStorage.getItem('ggems-language');
+        const supportedLanguages = ['en', 'fr', 'de', 'it', 'es', 'pt-BR'];
+        const lang =
+          storedLang && supportedLanguages.includes(storedLang)
+            ? storedLang
+            : 'en';
+
+        document.documentElement.lang = lang;
+        document.documentElement.dataset.lang = lang;
       })();
     </script>
   </head>
@@ -376,106 +1645,386 @@ const sections = [
           </span>
         </a>
 
-        <button
-          class="theme-toggle"
-          type="button"
-          aria-label="Switch color theme"
-          title="Switch color theme"
-        >
-          <span class="theme-icon theme-dark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="presentation">
-              <circle cx="12" cy="12" r="3.5"></circle>
-              <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M18.72 5.28 17.3 6.7M6.7 17.3l-1.42 1.42"></path>
-            </svg>
-          </span>
+        <div class="header-actions">
+          <details class="language-switcher">
+            <summary aria-label="Language" title="Language">
+              <span class="flag current-flag current-flag-en" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="20" fill="#fff" />
+                  <g fill="#b22234">
+                    <rect y="0" width="28" height="1.54" />
+                    <rect y="3.08" width="28" height="1.54" />
+                    <rect y="6.16" width="28" height="1.54" />
+                    <rect y="9.24" width="28" height="1.54" />
+                    <rect y="12.32" width="28" height="1.54" />
+                    <rect y="15.40" width="28" height="1.54" />
+                    <rect y="18.46" width="28" height="1.54" />
+                  </g>
+                  <rect width="11.8" height="10.77" fill="#3c3b6e" />
+                </svg>
+              </span>
 
-          <span class="theme-icon theme-light" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="presentation">
-              <path d="M20 15.3A8.4 8.4 0 0 1 8.7 4a8.4 8.4 0 1 0 11.3 11.3Z"></path>
-            </svg>
-          </span>
-        </button>
+              <span class="flag current-flag current-flag-fr" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="9.34" height="20" x="0" fill="#0055a4" />
+                  <rect width="9.34" height="20" x="9.33" fill="#fff" />
+                  <rect width="9.34" height="20" x="18.66" fill="#ef4135" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-de" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="6.67" y="0" fill="#000" />
+                  <rect width="28" height="6.67" y="6.66" fill="#dd0000" />
+                  <rect width="28" height="6.67" y="13.33" fill="#ffce00" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-it" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="9.34" height="20" x="0" fill="#009246" />
+                  <rect width="9.34" height="20" x="9.33" fill="#fff" />
+                  <rect width="9.34" height="20" x="18.66" fill="#ce2b37" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-es" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="5" y="0" fill="#aa151b" />
+                  <rect width="28" height="10" y="5" fill="#f1bf00" />
+                  <rect width="28" height="5" y="15" fill="#aa151b" />
+                </svg>
+              </span>
+
+              <span class="flag current-flag current-flag-pt-br" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="20" fill="#009c3b" />
+                  <polygon points="14,2 26,10 14,18 2,10" fill="#ffdf00" />
+                  <circle cx="14" cy="10" r="4.2" fill="#002776" />
+                </svg>
+              </span>
+
+              <span class="current-code current-code-en">EN</span>
+              <span class="current-code current-code-fr">FR</span>
+              <span class="current-code current-code-de">DE</span>
+              <span class="current-code current-code-it">IT</span>
+              <span class="current-code current-code-es">ES</span>
+              <span class="current-code current-code-pt-br">PT-BR</span>
+              <span class="chevron" aria-hidden="true">⌄</span>
+            </summary>
+
+            <div class="language-menu">
+              <button type="button" data-language="en">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="20" fill="#fff" />
+                      <g fill="#b22234">
+                        <rect y="0" width="28" height="1.54" />
+                        <rect y="3.08" width="28" height="1.54" />
+                        <rect y="6.16" width="28" height="1.54" />
+                        <rect y="9.24" width="28" height="1.54" />
+                        <rect y="12.32" width="28" height="1.54" />
+                        <rect y="15.40" width="28" height="1.54" />
+                        <rect y="18.46" width="28" height="1.54" />
+                      </g>
+                      <rect width="11.8" height="10.77" fill="#3c3b6e" />
+                    </svg>
+                  </span>
+                  <span>English</span>
+                </span>
+                <small>EN</small>
+              </button>
+
+              <button type="button" data-language="fr">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="9.34" height="20" x="0" fill="#0055a4" />
+                      <rect width="9.34" height="20" x="9.33" fill="#fff" />
+                      <rect width="9.34" height="20" x="18.66" fill="#ef4135" />
+                    </svg>
+                  </span>
+                  <span>Français</span>
+                </span>
+                <small>FR</small>
+              </button>
+
+              <button type="button" data-language="de">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="6.67" y="0" fill="#000" />
+                      <rect width="28" height="6.67" y="6.66" fill="#dd0000" />
+                      <rect width="28" height="6.67" y="13.33" fill="#ffce00" />
+                    </svg>
+                  </span>
+                  <span>Deutsch</span>
+                </span>
+                <small>DE</small>
+              </button>
+
+              <button type="button" data-language="it">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="9.34" height="20" x="0" fill="#009246" />
+                      <rect width="9.34" height="20" x="9.33" fill="#fff" />
+                      <rect width="9.34" height="20" x="18.66" fill="#ce2b37" />
+                    </svg>
+                  </span>
+                  <span>Italiano</span>
+                </span>
+                <small>IT</small>
+              </button>
+
+              <button type="button" data-language="es">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="5" y="0" fill="#aa151b" />
+                      <rect width="28" height="10" y="5" fill="#f1bf00" />
+                      <rect width="28" height="5" y="15" fill="#aa151b" />
+                    </svg>
+                  </span>
+                  <span>Español</span>
+                </span>
+                <small>ES</small>
+              </button>
+
+              <button type="button" data-language="pt-BR">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="20" fill="#009c3b" />
+                      <polygon points="14,2 26,10 14,18 2,10" fill="#ffdf00" />
+                      <circle cx="14" cy="10" r="4.2" fill="#002776" />
+                    </svg>
+                  </span>
+                  <span>Português (Brasil)</span>
+                </span>
+                <small>PT-BR</small>
+              </button>
+            </div>
+          </details>
+
+          <button
+            class="theme-toggle"
+            type="button"
+            aria-label="Switch color theme"
+            title="Switch color theme"
+          >
+            <span class="theme-icon theme-dark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="presentation">
+                <circle cx="12" cy="12" r="3.5"></circle>
+                <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M18.72 5.28 17.3 6.7M6.7 17.3l-1.42 1.42"></path>
+              </svg>
+            </span>
+
+            <span class="theme-icon theme-light" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M20 15.3A8.4 8.4 0 0 1 8.7 4a8.4 8.4 0 1 0 11.3 11.3Z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
       </div>
     </header>
 
     <main class="roadmap-page">
-    <section class="roadmap-hero">
-      <div class="container hero-grid">
-        <p class="eyebrow">Roadmap</p>
+      <section class="roadmap-hero">
+        <div class="container hero-grid">
+          <p class="eyebrow">Roadmap</p>
 
-        <h1 class="heading-1">
-          From validated foundations
-          <span>to the GGEMS release.</span>
-        </h1>
+          <h1 class="heading-1" data-i18n="en">
+            From validated foundations
+            <span>to the GGEMS release.</span>
+          </h1>
 
-        <p class="lead">
-          GGEMS is built incrementally: each domain is developed on top of
-          validated foundations, integrated only when its upstream behavior is
-          ready, and organized toward a public scientific release.
-        </p>
-      </div>
-    </section>
+          <h1 class="heading-1" data-i18n="fr">
+            Des fondations validées
+            <span>à la sortie de GGEMS.</span>
+          </h1>
 
-    <section class="roadmap-flow">
-      <div class="container flow-shell">
-        <div class="roadmap-arrow" aria-hidden="true">
-          <span class="arrow-line"></span>
-          <span class="arrow-head"></span>
+          <h1 class="heading-1" data-i18n="de">
+            Von validierten Grundlagen
+            <span>zum GGEMS-Release.</span>
+          </h1>
+
+          <h1 class="heading-1" data-i18n="it">
+            Dalle basi validate
+            <span>al rilascio di GGEMS.</span>
+          </h1>
+
+          <h1 class="heading-1" data-i18n="es">
+            De bases validadas
+            <span>al lanzamiento de GGEMS.</span>
+          </h1>
+
+          <h1 class="heading-1" data-i18n="pt-BR">
+            Das bases validadas
+            <span>ao lançamento do GGEMS.</span>
+          </h1>
+
+          <p class="lead" data-i18n="en">
+            GGEMS is built incrementally: each domain is developed on top of
+            validated foundations, integrated only when its upstream behavior is
+            ready, and organized toward a public scientific release.
+          </p>
+
+          <p class="lead" data-i18n="fr">
+            GGEMS est construit progressivement : chaque domaine est développé sur
+            des fondations validées, intégré uniquement lorsque les comportements
+            en amont sont prêts, et organisé en vue d’une première version
+            scientifique publique.
+          </p>
+
+          <p class="lead" data-i18n="de">
+            GGEMS wird schrittweise aufgebaut: Jeder Bereich baut auf validierten
+            Grundlagen auf, wird erst integriert, wenn die vorgelagerten Bausteine
+            bereitstehen, und führt auf eine öffentliche wissenschaftliche Version hin.
+          </p>
+
+          <p class="lead" data-i18n="it">
+            GGEMS viene costruito progressivamente: ogni ambito si basa su fondazioni
+            validate, viene integrato solo quando i componenti a monte sono pronti,
+            e converge verso una versione scientifica pubblica.
+          </p>
+
+          <p class="lead" data-i18n="es">
+            GGEMS se construye de forma progresiva: cada área se apoya en fundamentos
+            validados, se integra solo cuando los componentes previos están listos
+            y avanza hacia una versión científica pública.
+          </p>
+
+          <p class="lead" data-i18n="pt-BR">
+            O GGEMS é construído progressivamente: cada área se apoia em bases
+            validadas, só é integrada quando os componentes anteriores estão prontos
+            e avança rumo a uma versão científica pública.
+          </p>
         </div>
+      </section>
 
-        <div class="roadmap-sections">
-          <article class="start-section">
-            <div class="start-card">
-              <h2>GGEMS 2.0 Begins</h2>
-              <p>October 2025</p>
-            </div>
-          </article>
+      <section class="roadmap-flow">
+        <div class="container flow-shell">
+          <div class="roadmap-arrow" aria-hidden="true">
+            <span class="arrow-line"></span>
+            <span class="arrow-head"></span>
+          </div>
 
-          {
-            sections.map((section) => (
-              <article class:list={['roadmap-section', `status-${section.status}`]}>
-                <div class="section-content">
-                  <header class="section-heading">
-                    <div>
-                      <p class="section-status">{section.eyebrow}</p>
-                      <h2>{section.title}</h2>
-                    </div>
+          <div class="roadmap-sections">
+            <article class="start-section">
+              <div class="start-card">
+                <h2 data-i18n="en">GGEMS 2.0 Begins</h2>
+                <h2 data-i18n="fr">Début de GGEMS 2.0</h2>
+                <h2 data-i18n="de">Beginn von GGEMS 2.0</h2>
+                <h2 data-i18n="it">Inizio di GGEMS 2.0</h2>
+                <h2 data-i18n="es">Inicio de GGEMS 2.0</h2>
+                <h2 data-i18n="pt-BR">Início do GGEMS 2.0</h2>
+                <p data-i18n="en">October 2025</p>
+                <p data-i18n="fr">Octobre 2025</p>
+                <p data-i18n="de">Oktober 2025</p>
+                <p data-i18n="it">Ottobre 2025</p>
+                <p data-i18n="es">Octubre 2025</p>
+                <p data-i18n="pt-BR">Outubro de 2025</p>
+              </div>
+            </article>
 
-                    <p>{section.description}</p>
-                  </header>
-
-                  {
-                    section.groups.length > 0 && (
-                      <div class:list={['group-grid', `groups-${Math.min(section.groups.length, 4)}`]}>
-                        {
-                          section.groups.map((group) => (
-                            <section class="roadmap-group">
-                              <h3>{group.title}</h3>
-
-                              <ul>
-                                {group.items.map((item) => <li>{item}</li>)}
-                              </ul>
-                            </section>
-                          ))
-                        }
+            {
+              sections.map((section) => (
+                <article class:list={['roadmap-section', `status-${section.status}`]}>
+                  <div class="section-content">
+                    <header class="section-heading">
+                      <div>
+                        <p class="section-status" data-i18n="en">{section.text.en.eyebrow}</p>
+                        <p class="section-status" data-i18n="fr">{section.text.fr.eyebrow}</p>
+                        <p class="section-status" data-i18n="de">{section.text.de.eyebrow}</p>
+                        <p class="section-status" data-i18n="it">{section.text.it.eyebrow}</p>
+                        <p class="section-status" data-i18n="es">{section.text.es.eyebrow}</p>
+                        <p class="section-status" data-i18n="pt-BR">{section.text['pt-BR'].eyebrow}</p>
+                        <h2 data-i18n="en">{section.text.en.title}</h2>
+                        <h2 data-i18n="fr">{section.text.fr.title}</h2>
+                        <h2 data-i18n="de">{section.text.de.title}</h2>
+                        <h2 data-i18n="it">{section.text.it.title}</h2>
+                        <h2 data-i18n="es">{section.text.es.title}</h2>
+                        <h2 data-i18n="pt-BR">{section.text['pt-BR'].title}</h2>
                       </div>
-                    )
-                  }
-                </div>
-              </article>
-            ))
-          }
 
-          <article class="release-section">
-            <div class="release-card">
-              <h2>GGEMS Release</h2>
-              <p class="release-date">1st semester 2027</p>
-            </div>
-          </article>
+                      <p data-i18n="en">{section.text.en.description}</p>
+                      <p data-i18n="fr">{section.text.fr.description}</p>
+                      <p data-i18n="de">{section.text.de.description}</p>
+                      <p data-i18n="it">{section.text.it.description}</p>
+                      <p data-i18n="es">{section.text.es.description}</p>
+                      <p data-i18n="pt-BR">{section.text['pt-BR'].description}</p>
+                    </header>
+
+                    {
+                      section.groups.length > 0 && (
+                        <div class:list={['group-grid', `groups-${Math.min(section.groups.length, 4)}`]}>
+                          {
+                            section.groups.map((group) => (
+                              <section class="roadmap-group">
+                                <h3 data-i18n="en">{group.title.en}</h3>
+                                <h3 data-i18n="fr">{group.title.fr}</h3>
+                                <h3 data-i18n="de">{group.title.de}</h3>
+                                <h3 data-i18n="it">{group.title.it}</h3>
+                                <h3 data-i18n="es">{group.title.es}</h3>
+                                <h3 data-i18n="pt-BR">{group.title['pt-BR']}</h3>
+
+                                <ul data-i18n="en">
+                                  {group.items.en.map((item) => <li>{item}</li>)}
+                                </ul>
+
+                                <ul data-i18n="fr">
+                                  {group.items.fr.map((item) => <li>{item}</li>)}
+                                </ul>
+
+                                <ul data-i18n="de">
+                                  {group.items.de.map((item) => <li>{item}</li>)}
+                                </ul>
+
+                                <ul data-i18n="it">
+                                  {group.items.it.map((item) => <li>{item}</li>)}
+                                </ul>
+
+                                <ul data-i18n="es">
+                                  {group.items.es.map((item) => <li>{item}</li>)}
+                                </ul>
+
+                                <ul data-i18n="pt-BR">
+                                  {group.items['pt-BR'].map((item) => <li>{item}</li>)}
+                                </ul>
+                              </section>
+                            ))
+                          }
+                        </div>
+                      )
+                    }
+                  </div>
+                </article>
+              ))
+            }
+
+            <article class="release-section">
+              <div class="release-card">
+                <h2 data-i18n="en">GGEMS Release</h2>
+                <h2 data-i18n="fr">Sortie de GGEMS</h2>
+                <h2 data-i18n="de">GGEMS-Release</h2>
+                <h2 data-i18n="it">Rilascio di GGEMS</h2>
+                <h2 data-i18n="es">Lanzamiento de GGEMS</h2>
+                <h2 data-i18n="pt-BR">Lançamento do GGEMS</h2>
+                <p class="release-date" data-i18n="en">1st semester 2027</p>
+                <p class="release-date" data-i18n="fr">1er semestre 2027</p>
+                <p class="release-date" data-i18n="de">1. Halbjahr 2027</p>
+                <p class="release-date" data-i18n="it">1° semestre 2027</p>
+                <p class="release-date" data-i18n="es">1.er semestre de 2027</p>
+                <p class="release-date" data-i18n="pt-BR">1º semestre de 2027</p>
+              </div>
+            </article>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
     <footer class="site-footer">
       <div class="container footer-inner">
@@ -496,12 +2045,77 @@ const sections = [
       (() => {
         const root = document.documentElement;
         const themeButton = document.querySelector('.theme-toggle');
+        const languageButtons = document.querySelectorAll('[data-language]');
+        const description = document.querySelector('meta[name="description"]');
+
+        const updateMetadata = () => {
+          if (root.dataset.lang === 'fr') {
+            document.title = 'Roadmap — GGEMS';
+            description?.setAttribute(
+              'content',
+              'Suivez la roadmap de développement de GGEMS jusqu’à la première version publique.'
+            );
+          } else if (root.dataset.lang === 'de') {
+            document.title = 'Roadmap — GGEMS';
+            description?.setAttribute(
+              'content',
+              'Verfolgen Sie die GGEMS-Entwicklungsroadmap bis zur ersten öffentlichen Version.'
+            );
+          } else if (root.dataset.lang === 'it') {
+            document.title = 'Roadmap — GGEMS';
+            description?.setAttribute(
+              'content',
+              'Segui la roadmap di sviluppo di GGEMS fino alla prima versione pubblica.'
+            );
+          } else if (root.dataset.lang === 'es') {
+            document.title = 'Roadmap — GGEMS';
+            description?.setAttribute(
+              'content',
+              'Sigue la hoja de ruta de desarrollo de GGEMS hasta la primera versión pública.'
+            );
+          } else if (root.dataset.lang === 'pt-BR') {
+            document.title = 'Roadmap — GGEMS';
+            description?.setAttribute(
+              'content',
+              'Acompanhe o roadmap de desenvolvimento do GGEMS até a primeira versão pública.'
+            );
+          } else {
+            document.title = 'Roadmap — GGEMS';
+            description?.setAttribute(
+              'content',
+              'Follow the GGEMS development roadmap toward the first public release.'
+            );
+          }
+        };
+
+        const setLanguage = (lang) => {
+          root.dataset.lang = lang;
+          root.lang = lang;
+          localStorage.setItem('ggems-language', lang);
+
+          languageButtons.forEach((button) => {
+            button.classList.toggle('active', button.dataset.language === lang);
+          });
+
+          document.querySelector('.language-switcher')?.removeAttribute('open');
+          updateMetadata();
+        };
+
+        languageButtons.forEach((button) => {
+          button.addEventListener('click', () => setLanguage(button.dataset.language));
+        });
 
         themeButton?.addEventListener('click', () => {
           const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
           root.dataset.theme = nextTheme;
           localStorage.setItem('ggems-theme', nextTheme);
         });
+
+        setLanguage(
+          ['en', 'fr', 'de', 'it', 'es', 'pt-BR'].includes(root.dataset.lang)
+            ? root.dataset.lang
+            : 'en'
+        );
       })();
     </script>
   </body>
@@ -675,6 +2289,194 @@ const sections = [
     color: var(--color-text-subtle);
     font-size: 0.68rem;
     white-space: nowrap;
+  }
+
+  :root[data-lang='en'] [data-i18n]:not([data-i18n='en']),
+  :root[data-lang='fr'] [data-i18n]:not([data-i18n='fr']),
+  :root[data-lang='de'] [data-i18n]:not([data-i18n='de']),
+  :root[data-lang='it'] [data-i18n]:not([data-i18n='it']),
+  :root[data-lang='es'] [data-i18n]:not([data-i18n='es']),
+  :root[data-lang='pt-BR'] [data-i18n]:not([data-i18n='pt-BR']) {
+    display: none !important;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .language-switcher {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .language-switcher summary {
+    height: 2.65rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding-inline: 0.7rem;
+
+    color: var(--color-text-muted);
+
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+
+    background: rgb(127 127 127 / 4%);
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .language-switcher summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .flag {
+    width: 1.35rem;
+    aspect-ratio: 7 / 5;
+
+    display: inline-grid;
+    flex: 0 0 auto;
+    overflow: hidden;
+
+    border: 1px solid var(--color-border-strong);
+    border-radius: 0.18rem;
+  }
+
+  .flag svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .current-flag-fr,
+  .current-code-fr,
+  .current-flag-de,
+  .current-code-de,
+  .current-flag-it,
+  .current-code-it,
+  .current-flag-es,
+  .current-code-es,
+  .current-flag-pt-br,
+  .current-code-pt-br {
+    display: none;
+  }
+
+  :root[data-lang='fr'] .current-flag-en,
+  :root[data-lang='fr'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='fr'] .current-flag-fr,
+  :root[data-lang='fr'] .current-code-fr {
+    display: inline-grid;
+  }
+
+  :root[data-lang='de'] .current-flag-en,
+  :root[data-lang='de'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='de'] .current-flag-de,
+  :root[data-lang='de'] .current-code-de {
+    display: inline-grid;
+  }
+
+  :root[data-lang='it'] .current-flag-en,
+  :root[data-lang='it'] .current-code-en,
+  :root[data-lang='es'] .current-flag-en,
+  :root[data-lang='es'] .current-code-en,
+  :root[data-lang='pt-BR'] .current-flag-en,
+  :root[data-lang='pt-BR'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='it'] .current-flag-it,
+  :root[data-lang='it'] .current-code-it,
+  :root[data-lang='es'] .current-flag-es,
+  :root[data-lang='es'] .current-code-es,
+  :root[data-lang='pt-BR'] .current-flag-pt-br,
+  :root[data-lang='pt-BR'] .current-code-pt-br {
+    display: inline-grid;
+  }
+
+  .current-code {
+    line-height: 1;
+  }
+
+  .chevron {
+    color: var(--color-green-light);
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .language-menu {
+    position: absolute;
+    z-index: 200;
+    right: 0;
+    top: calc(100% + 0.65rem);
+
+    width: 13.5rem;
+    padding: 0.4rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+
+    background: var(--color-surface);
+
+    box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 24%);
+  }
+
+  .language-menu button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding: 0.75rem 0.8rem;
+
+    color: var(--color-text-muted);
+
+    border: 0;
+    border-radius: 0.5rem;
+
+    background: transparent;
+
+    font: inherit;
+    font-size: 0.82rem;
+
+    cursor: pointer;
+  }
+
+  .language-menu button:hover,
+  .language-menu button.active {
+    color: var(--color-text);
+    background: var(--color-control-hover);
+  }
+
+  .language-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .language-menu small {
+    color: var(--color-text-subtle);
+
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
   }
 
   .theme-toggle {
@@ -924,15 +2726,13 @@ const sections = [
   .roadmap-section.status-complete {
     border-color: rgb(80 192 112 / 28%);
     background:
-      linear-gradient(145deg, rgb(80 192 112 / 7%), transparent 45%),
-      rgb(127 127 127 / 2%);
+      color-mix(in srgb, var(--roadmap-band-b) 94%, var(--color-green) 6%);
   }
 
   .roadmap-section.status-current {
     border-color: rgb(240 240 0 / 30%);
     background:
-      linear-gradient(145deg, rgb(240 240 0 / 6%), transparent 45%),
-      rgb(127 127 127 / 2%);
+      color-mix(in srgb, var(--roadmap-band-b) 93%, var(--color-yellow) 7%);
   }
 
   .section-heading {
@@ -1070,8 +2870,7 @@ const sections = [
     border-radius: var(--radius-lg);
 
     background:
-      radial-gradient(circle at 85% 30%, rgb(80 192 112 / 14%), transparent 24rem),
-      var(--roadmap-band-a);
+      color-mix(in srgb, var(--roadmap-band-a) 92%, var(--color-green) 8%);
 
     text-align: center;
   }
@@ -1117,8 +2916,7 @@ const sections = [
     border-radius: var(--radius-lg);
 
     background:
-      radial-gradient(circle at 85% 30%, rgb(128 32 224 / 14%), transparent 24rem),
-      var(--roadmap-band-a);
+      color-mix(in srgb, var(--roadmap-band-a) 92%, var(--color-purple) 8%);
 
     text-align: center;
   }
