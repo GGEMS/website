@@ -5,75 +5,132 @@ import '@fontsource/space-grotesk/600.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
 
-const sections = [
+const languages = ['en', 'fr', 'de', 'it', 'es', 'pt-BR', 'ru', 'zh-CN', 'ja', 'ko'] as const;
+type Language = (typeof languages)[number];
+type Localized<T> = Record<Language, T>;
+
+const pageDescriptions: Localized<string> = {
+  en: 'Follow the GGEMS development roadmap toward the first public release.',
+  fr: 'Suivez la roadmap de développement de GGEMS jusqu’à la première version publique.',
+  de: 'Verfolgen Sie die GGEMS-Entwicklungsroadmap bis zur ersten öffentlichen Version.',
+  it: 'Segui la roadmap di sviluppo di GGEMS fino alla prima versione pubblica.',
+  es: 'Sigue la hoja de ruta de desarrollo de GGEMS hasta la primera versión pública.',
+  'pt-BR': 'Acompanhe o roadmap de desenvolvimento do GGEMS até a primeira versão pública.',
+  ru: 'Следите за планом разработки GGEMS до первой публичной версии.',
+  'zh-CN': '查看 GGEMS 从当前开发阶段到首个公开版本的路线图。',
+  ja: 'GGEMS の開発から最初の公開版までのロードマップをご覧ください。',
+  ko: 'GGEMS 개발 현황부터 첫 공개 버전까지의 로드맵을 확인하세요.',
+};
+
+const sameForAll = <T,>(value: T): Localized<T> =>
+  Object.fromEntries(languages.map((lang) => [lang, value])) as Localized<T>;
+
+type Status = 'complete' | 'current' | 'future';
+
+interface RoadmapSection {
+  status: Status;
+  text: Localized<{ title: string; description: string }>;
+  groups: { title: Localized<string>; items: Localized<string[]> }[];
+}
+
+const statusLabels: Record<Status, Localized<string>> = {
+  complete: {
+    en: 'Completed',
+    fr: 'Terminé',
+    de: 'Abgeschlossen',
+    it: 'Completato',
+    es: 'Completado',
+    'pt-BR': 'Concluído',
+    ru: 'Завершено',
+    'zh-CN': '已完成',
+    ja: '完了',
+    ko: '완료',
+  },
+  current: {
+    en: 'In progress',
+    fr: 'En cours',
+    de: 'In Arbeit',
+    it: 'In corso',
+    es: 'En curso',
+    'pt-BR': 'Em andamento',
+    ru: 'В работе',
+    'zh-CN': '进行中',
+    ja: '進行中',
+    ko: '진행 중',
+  },
+  future: {
+    en: 'Planned',
+    fr: 'Prévu',
+    de: 'Geplant',
+    it: 'Previsto',
+    es: 'Previsto',
+    'pt-BR': 'Previsto',
+    ru: 'Запланировано',
+    'zh-CN': '计划中',
+    ja: '予定',
+    ko: '예정',
+  },
+};
+
+const sections: RoadmapSection[] = [
   {
     status: 'complete',
     text: {
       en: {
-        eyebrow: 'Completed',
         title: 'Core rebuild',
         description: 'A modern GPU-first software foundation for the new GGEMS implementation.',
       },
       fr: {
-        eyebrow: 'Terminé',
         title: 'Reconstruction du cœur',
-        description: 'Une fondation logicielle moderne, GPU-first, pour la nouvelle implémentation de GGEMS.',
+        description: 'Une base logicielle moderne, GPU-first, pour la nouvelle implémentation de GGEMS.',
       },
       de: {
-        eyebrow: 'Abgeschlossen',
         title: 'Neuaufbau des Kerns',
         description: 'Moderne GPU-first-Softwarebasis für die neue GGEMS-Implementierung.',
       },
-          it: {
-        eyebrow: 'Completato',
+      it: {
         title: 'Ricostruzione del core',
         description: 'Una base software moderna e GPU-first per la nuova implementazione di GGEMS.',
       },
       es: {
-        eyebrow: 'Completado',
         title: 'Reconstrucción del núcleo',
         description: 'Una base de software moderna y GPU-first para la nueva implementación de GGEMS.',
       },
       'pt-BR': {
-        eyebrow: 'Concluído',
         title: 'Reconstrução do núcleo',
         description: 'Uma base de software moderna e GPU-first para a nova implementação do GGEMS.',
       },
       ru: {
-        eyebrow: 'Завершено',
         title: 'Перестройка ядра',
         description: 'Современная GPU-first основа для новой реализации GGEMS.',
       },
       'zh-CN': {
-        eyebrow: '已完成',
         title: '核心重构',
         description: '为新的 GGEMS 实现建立现代化、GPU-first 的软件基础。',
       },
       ja: {
-        eyebrow: '完了',
         title: 'コア再構築',
         description: '新しい GGEMS 実装のための、モダンで GPU-first なソフトウェア基盤。',
       },
       ko: {
-        eyebrow: '완료',
         title: '코어 재구축',
         description: '새로운 GGEMS 구현을 위한 현대적 GPU-first 소프트웨어 기반.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Core',
           fr: 'Cœur',
           de: 'Kern',
-                  it: 'Core',
+          it: 'Core',
           es: 'Núcleo',
           'pt-BR': 'Núcleo',
           ru: 'Ядро',
           'zh-CN': '核心',
           ja: 'コア',
           ko: '코어',
-},
+        },
         items: {
           en: [
             'Modern C++ architecture',
@@ -84,7 +141,7 @@ const sections = [
           fr: [
             'Architecture C++ moderne',
             'Structure du projet',
-            'Fondation OpenCL',
+            'Base OpenCL',
             'Modèle d’exécution GPU-first',
           ],
           de: [
@@ -93,7 +150,7 @@ const sections = [
             'OpenCL-Basis',
             'GPU-first-Ausführungsmodell',
           ],
-                  it: [
+          it: [
             'Architettura C++ moderna',
             'Struttura del progetto',
             'Base OpenCL',
@@ -135,7 +192,7 @@ const sections = [
             'OpenCL 기반',
             'GPU-first 실행 모델',
           ],
-},
+        },
       },
     ],
   },
@@ -143,70 +200,60 @@ const sections = [
     status: 'complete',
     text: {
       en: {
-        eyebrow: 'Completed',
         title: 'Source system',
         description: 'A dedicated source subsystem for controlled and reproducible particle generation.',
       },
       fr: {
-        eyebrow: 'Terminé',
         title: 'Système de sources',
         description: 'Un sous-système de sources dédié à la génération contrôlée et reproductible de particules.',
       },
       de: {
-        eyebrow: 'Abgeschlossen',
         title: 'Quellsystem',
-        description: 'Eigenes Quellsystem für kontrollierte und reproduzierbare Partikelerzeugung.',
+        description: 'Eigenes Quellsystem für kontrollierte und reproduzierbare Teilchenerzeugung.',
       },
-          it: {
-        eyebrow: 'Completato',
+      it: {
         title: 'Sistema di sorgenti',
         description: 'Un sistema dedicato alla generazione controllata e riproducibile di particelle.',
       },
       es: {
-        eyebrow: 'Completado',
         title: 'Sistema de fuentes',
         description: 'Un sistema dedicado a la generación controlada y reproducible de partículas.',
       },
       'pt-BR': {
-        eyebrow: 'Concluído',
         title: 'Sistema de fontes',
         description: 'Um sistema dedicado à geração controlada e reprodutível de partículas.',
       },
       ru: {
-        eyebrow: 'Завершено',
         title: 'Система источников',
         description: 'Специализированная система для управляемого и воспроизводимого рождения частиц.',
       },
       'zh-CN': {
-        eyebrow: '已完成',
         title: '源系统',
         description: '专用源系统，用于受控且可复现的粒子生成。',
       },
       ja: {
-        eyebrow: '完了',
         title: 'ソースシステム',
         description: '制御可能で再現性のある粒子生成のための専用ソースシステム。',
       },
       ko: {
-        eyebrow: '완료',
         title: '소스 시스템',
         description: '제어 가능하고 재현 가능한 입자 생성을 위한 전용 소스 시스템.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Sampling',
           fr: 'Échantillonnage',
           de: 'Sampling',
-                  it: 'Campionamento',
+          it: 'Campionamento',
           es: 'Muestreo',
           'pt-BR': 'Amostragem',
           ru: 'Сэмплирование',
           'zh-CN': '采样',
           ja: 'サンプリング',
           ko: '샘플링',
-},
+        },
         items: {
           en: [
             'General source sampling',
@@ -216,14 +263,14 @@ const sections = [
           fr: [
             'Échantillonnage général des sources',
             'Géométrie / angle / énergie / temps',
-            'Fondations de l’aléatoire et de la reproductibilité',
+            'Bases de l’aléatoire et de la reproductibilité',
           ],
           de: [
             'Allgemeines Quellen-Sampling',
             'Geometrie / Winkel / Energie / Zeit',
             'Zufall & Reproduzierbarkeit',
           ],
-                  it: [
+          it: [
             'Campionamento generale delle sorgenti',
             'Geometria / angolo / energia / tempo',
             'Casualità & riproducibilità',
@@ -249,7 +296,7 @@ const sections = [
             '随机性与可复现性基础',
           ],
           ja: [
-            '一般ソースサンプリング',
+            '汎用ソースサンプリング',
             'ジオメトリ / 角度 / エネルギー / 時間',
             '乱数と再現性の基盤',
           ],
@@ -258,7 +305,7 @@ const sections = [
             '지오메트리 / 각도 / 에너지 / 시간',
             '난수 / 재현성 기반',
           ],
-},
+        },
       },
     ],
   },
@@ -266,70 +313,60 @@ const sections = [
     status: 'complete',
     text: {
       en: {
-        eyebrow: 'Completed',
         title: 'Radionuclides',
         description: 'Activity-driven source workflows and a medical radionuclide foundation.',
       },
       fr: {
-        eyebrow: 'Terminé',
         title: 'Radionucléides',
         description: 'Des workflows de sources pilotés par l’activité et une base de radionucléides médicaux.',
       },
       de: {
-        eyebrow: 'Abgeschlossen',
         title: 'Radionuklide',
         description: 'Aktivitätsgesteuerte Quellen und eine Basis medizinischer Radionuklide.',
       },
-          it: {
-        eyebrow: 'Completato',
+      it: {
         title: 'Radionuclidi',
         description: 'Sorgenti guidate dall’attività e una base di radionuclidi per uso medico.',
       },
       es: {
-        eyebrow: 'Completado',
         title: 'Radionúclidos',
         description: 'Fuentes controladas por actividad y una base de radionúclidos de uso médico.',
       },
       'pt-BR': {
-        eyebrow: 'Concluído',
         title: 'Radionuclídeos',
         description: 'Fontes guiadas pela atividade e uma base de radionuclídeos de uso médico.',
       },
       ru: {
-        eyebrow: 'Завершено',
         title: 'Радионуклиды',
         description: 'Источники, управляемые активностью, и база медицинских радионуклидов.',
       },
       'zh-CN': {
-        eyebrow: '已完成',
         title: '放射性核素',
         description: '由活度驱动的源工作流，以及医学放射性核素基础。',
       },
       ja: {
-        eyebrow: '完了',
         title: '放射性核種',
         description: '放射能に基づくソース処理と、医療用放射性核種の基盤。',
       },
       ko: {
-        eyebrow: '완료',
         title: '방사성 핵종',
-        description: '활동도 기반 소스 워크플로와 의료용 방사성 핵종 기반.',
+        description: '방사능 기반 소스 워크플로와 의료용 방사성 핵종 기반.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Radionuclide sources',
-          fr: 'Sources radionucléides',
+          fr: 'Sources de radionucléides',
           de: 'Radionuklidquellen',
-                  it: 'Sorgenti radionuclidiche',
+          it: 'Sorgenti radionuclidiche',
           es: 'Fuentes de radionúclidos',
           'pt-BR': 'Fontes de radionuclídeos',
           ru: 'Радионуклидные источники',
           'zh-CN': '放射性核素源',
           ja: '放射性核種ソース',
           ko: '방사성 핵종 소스',
-},
+        },
         items: {
           en: [
             'Activity-driven sources',
@@ -339,14 +376,14 @@ const sections = [
           fr: [
             'Sources pilotées par l’activité',
             'Catalogue de radionucléides médicaux',
-            'Fondations de données LNHB / MIRDsoft',
+            'Base de données LNHB / MIRDsoft',
           ],
           de: [
             'Aktivitätsgesteuerte Quellen',
             'Katalog medizinischer Radionuklide',
             'Datenbasis LNHB / MIRDsoft',
           ],
-                  it: [
+          it: [
             'Sorgenti guidate dall’attività',
             'Catalogo di radionuclidi medici',
             'Base dati LNHB / MIRDsoft',
@@ -377,11 +414,11 @@ const sections = [
             'LNHB / MIRDsoft データ基盤',
           ],
           ko: [
-            '활동도 기반 소스',
+            '방사능 기반 소스',
             '의료용 방사성 핵종 카탈로그',
             'LNHB / MIRDsoft 데이터 기반',
           ],
-},
+        },
       },
     ],
   },
@@ -389,70 +426,60 @@ const sections = [
     status: 'complete',
     text: {
       en: {
-        eyebrow: 'Completed',
         title: 'Testing & validation framework',
         description: 'A reproducible validation workflow accompanies implementation from the beginning.',
       },
       fr: {
-        eyebrow: 'Terminé',
         title: 'Cadre de tests & validation',
-        description: 'Un workflow de validation reproductible accompagne l’implémentation depuis le début.',
+        description: 'Un processus de validation reproductible accompagne l’implémentation depuis le début.',
       },
       de: {
-        eyebrow: 'Abgeschlossen',
         title: 'Tests & Validierung',
         description: 'Ein reproduzierbarer Validierungsablauf begleitet die Implementierung von Beginn an.',
       },
-          it: {
-        eyebrow: 'Completato',
+      it: {
         title: 'Test & validazione',
         description: 'Un processo di validazione riproducibile accompagna l’implementazione fin dall’inizio.',
       },
       es: {
-        eyebrow: 'Completado',
         title: 'Pruebas & validación',
         description: 'Un proceso de validación reproducible acompaña la implementación desde el principio.',
       },
       'pt-BR': {
-        eyebrow: 'Concluído',
         title: 'Testes & validação',
         description: 'Um processo de validação reprodutível acompanha a implementação desde o início.',
       },
       ru: {
-        eyebrow: 'Завершено',
         title: 'Тестирование и валидация',
         description: 'Воспроизводимый процесс валидации сопровождает реализацию с самого начала.',
       },
       'zh-CN': {
-        eyebrow: '已完成',
         title: '测试与验证',
-        description: '从开发初期起，就以可复现的验证流程伴随实现。',
+        description: '从开发初期起，可复现的验证流程就贯穿实现过程。',
       },
       ja: {
-        eyebrow: '完了',
         title: 'テスト & 検証',
         description: '実装の初期段階から、再現可能な検証ワークフローを整備。',
       },
       ko: {
-        eyebrow: '완료',
         title: '테스트 & 검증',
         description: '재현 가능한 검증 워크플로가 구현 초기부터 함께 진행됩니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Validation infrastructure',
           fr: 'Infrastructure de validation',
           de: 'Validierung',
-                  it: 'Validazione',
+          it: 'Validazione',
           es: 'Validación',
           'pt-BR': 'Validação',
           ru: 'Валидация',
           'zh-CN': '验证体系',
           ja: '検証基盤',
           ko: '검증 기반',
-},
+        },
         items: {
           en: [
             'C++ unit tests',
@@ -466,7 +493,7 @@ const sections = [
             'Outils de validation Python',
             'Automatisation des campagnes',
             'Jeux de données de référence',
-            'Fondations de validation statistique',
+            'Bases de la validation statistique',
           ],
           de: [
             'C++-Unit-Tests',
@@ -475,7 +502,7 @@ const sections = [
             'Referenzdatensätze',
             'Grundlagen der statistischen Validierung',
           ],
-                  it: [
+          it: [
             'Test unitari C++',
             'Strumenti Python di validazione',
             'Automazione delle campagne',
@@ -524,7 +551,7 @@ const sections = [
             '참조 데이터셋',
             '통계 검증 기반',
           ],
-},
+        },
       },
     ],
   },
@@ -532,70 +559,60 @@ const sections = [
     status: 'complete',
     text: {
       en: {
-        eyebrow: 'Completed',
         title: 'Materials & Cuts',
         description: 'Material definition and production-cut foundations for the first physical transport chain.',
       },
       fr: {
-        eyebrow: 'Terminé',
         title: 'Matériaux & Cuts',
-        description: 'Les fondations de la définition des matériaux et des Cuts de production pour la première chaîne de transport physique.',
+        description: 'Les bases de la définition des matériaux et des Production Cuts pour la première chaîne de transport physique.',
       },
       de: {
-        eyebrow: 'Abgeschlossen',
         title: 'Materialien & Cuts',
         description: 'Grundlagen für Materialdefinition und Production Cuts der ersten physikalischen Transportkette.',
       },
-          it: {
-        eyebrow: 'Completato',
+      it: {
         title: 'Materiali & Cuts',
         description: 'Basi per la definizione dei materiali e i Production Cuts della prima catena di trasporto fisico.',
       },
       es: {
-        eyebrow: 'Completado',
         title: 'Materiales & Cuts',
         description: 'Bases para la definición de materiales y los Production Cuts de la primera cadena de transporte físico.',
       },
       'pt-BR': {
-        eyebrow: 'Concluído',
         title: 'Materiais & Cuts',
         description: 'Bases para a definição dos materiais e os Production Cuts da primeira cadeia de transporte físico.',
       },
       ru: {
-        eyebrow: 'Завершено',
         title: 'Материалы и Cuts',
         description: 'Основа материалов и Production Cuts для первой физической транспортной цепочки.',
       },
       'zh-CN': {
-        eyebrow: '已完成',
         title: '材料与 Cuts',
         description: '为首条物理输运链建立材料定义和 Production Cuts 基础。',
       },
       ja: {
-        eyebrow: '完了',
         title: '材料 & Cuts',
         description: '最初の物理輸送チェーンに向けた材料定義と Production Cuts の基盤。',
       },
       ko: {
-        eyebrow: '완료',
         title: '재료 & Cuts',
         description: '첫 물리 수송 체인을 위한 재료 정의와 Production Cuts 기반.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Materials',
           fr: 'Matériaux',
           de: 'Materialien',
-                  it: 'Materiali',
+          it: 'Materiali',
           es: 'Materiales',
           'pt-BR': 'Materiais',
           ru: 'Материалы',
           'zh-CN': '材料',
           ja: '材料',
           ko: '재료',
-},
+        },
         items: {
           en: [
             'Isotopic materials',
@@ -609,7 +626,7 @@ const sections = [
             'Isotopische Materialien',
             'Materialidentität / Kompilierung',
           ],
-                  it: [
+          it: [
             'Materiali isotopici',
             'Identità / compilazione dei materiali',
           ],
@@ -637,21 +654,10 @@ const sections = [
             '동위원소 재료',
             '재료 식별 / 컴파일',
           ],
-},
+        },
       },
       {
-        title: {
-          en: 'Production Cuts',
-          fr: 'Production Cuts',
-          de: 'Production Cuts',
-                  it: 'Production Cuts',
-          es: 'Production Cuts',
-          'pt-BR': 'Production Cuts',
-          ru: 'Production Cuts',
-          'zh-CN': 'Production Cuts',
-          ja: 'Production Cuts',
-          ko: 'Production Cuts',
-},
+        title: sameForAll('Production Cuts'),
         items: {
           en: [
             'Production Cuts',
@@ -665,7 +671,7 @@ const sections = [
             'Production Cuts',
             'Material-/Cut-Paare',
           ],
-                  it: [
+          it: [
             'Production Cuts',
             'Coppie materiale / Cut',
           ],
@@ -693,7 +699,7 @@ const sections = [
             'Production Cuts',
             '재료 / Cut 쌍',
           ],
-},
+        },
       },
     ],
   },
@@ -701,70 +707,60 @@ const sections = [
     status: 'complete',
     text: {
       en: {
-        eyebrow: 'Completed',
         title: 'Software / UI / doc cleanup',
         description: 'The software surface and developer-facing tools were consolidated before physical implementation continues.',
       },
       fr: {
-        eyebrow: 'Terminé',
         title: 'Nettoyage logiciel / UI / documentation',
         description: 'La surface logicielle et les outils destinés aux développeurs ont été consolidés avant la poursuite de l’implémentation physique.',
       },
       de: {
-        eyebrow: 'Abgeschlossen',
         title: 'Software / UI / Dokumentation',
         description: 'Softwareoberfläche und Entwicklerwerkzeuge wurden vor der weiteren Physikimplementierung konsolidiert.',
       },
-          it: {
-        eyebrow: 'Completato',
+      it: {
         title: 'Software / UI / documentazione',
         description: 'Software e strumenti per sviluppatori sono stati consolidati prima di proseguire con l’implementazione fisica.',
       },
       es: {
-        eyebrow: 'Completado',
         title: 'Software / UI / documentación',
         description: 'El software y las herramientas para desarrolladores se consolidaron antes de continuar con la implementación física.',
       },
       'pt-BR': {
-        eyebrow: 'Concluído',
         title: 'Software / UI / documentação',
         description: 'O software e as ferramentas para desenvolvedores foram consolidados antes de prosseguir com a implementação física.',
       },
       ru: {
-        eyebrow: 'Завершено',
         title: 'ПО / UI / документация',
         description: 'Программная часть и инструменты разработчика были упорядочены до продолжения физической реализации.',
       },
       'zh-CN': {
-        eyebrow: '已完成',
         title: '软件 / UI / 文档整理',
         description: '在继续物理实现之前，软件层和开发者工具已完成整理与整合。',
       },
       ja: {
-        eyebrow: '完了',
         title: 'ソフトウェア / UI / 文書整備',
         description: '物理実装を進める前に、ソフトウェア面と開発者向けツールを整理・統合。',
       },
       ko: {
-        eyebrow: '완료',
         title: '소프트웨어 / UI / 문서 정리',
         description: '물리 구현을 이어가기 전에 소프트웨어와 개발자 도구를 정리·통합했습니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Software & UI',
           fr: 'Logiciel & UI',
           de: 'Software & UI',
-                  it: 'Software & UI',
+          it: 'Software & UI',
           es: 'Software & UI',
           'pt-BR': 'Software & UI',
           ru: 'ПО и UI',
           'zh-CN': '软件与 UI',
           ja: 'ソフトウェア & UI',
           ko: '소프트웨어 & UI',
-},
+        },
         items: {
           en: [
             'Renderer / Vulkan / ImGui restructuring',
@@ -778,7 +774,7 @@ const sections = [
             'Renderer / Vulkan / ImGui neu strukturiert',
             'Öffentliche API bereinigt',
           ],
-                  it: [
+          it: [
             'Ristrutturazione Renderer / Vulkan / ImGui',
             'Pulizia dell’API pubblica',
           ],
@@ -806,21 +802,21 @@ const sections = [
             'Renderer / Vulkan / ImGui 재구성',
             '공개 API 정리',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Documentation',
           fr: 'Documentation',
           de: 'Dokumentation',
-                  it: 'Documentazione',
+          it: 'Documentazione',
           es: 'Documentación',
           'pt-BR': 'Documentação',
           ru: 'Документация',
           'zh-CN': '文档',
           ja: 'ドキュメント',
           ko: '문서',
-},
+        },
         items: {
           en: [
             'Doxygen cleanup',
@@ -834,7 +830,7 @@ const sections = [
             'Doxygen bereinigt',
             'Grundlagen für Website / Dokumentation',
           ],
-                  it: [
+          it: [
             'Pulizia Doxygen',
             'Basi del sito web / documentazione',
           ],
@@ -862,7 +858,7 @@ const sections = [
             'Doxygen 정리',
             '웹사이트 / 문서 기반',
           ],
-},
+        },
       },
     ],
   },
@@ -870,70 +866,60 @@ const sections = [
     status: 'current',
     text: {
       en: {
-        eyebrow: 'In progress',
         title: 'Navigation',
         description: 'Current implementation work focuses on the first bounded geometry slice.',
       },
       fr: {
-        eyebrow: 'En cours',
         title: 'Navigation',
         description: 'Le travail d’implémentation actuel porte sur la première géométrie bornée.',
       },
       de: {
-        eyebrow: 'In Arbeit',
         title: 'Navigation',
         description: 'Aktuell wird der erste klar begrenzte Geometriebaustein implementiert.',
       },
-          it: {
-        eyebrow: 'In corso',
+      it: {
         title: 'Navigazione',
         description: 'Il lavoro attuale riguarda il primo caso di geometria delimitata.',
       },
       es: {
-        eyebrow: 'En curso',
         title: 'Navegación',
         description: 'El trabajo actual se centra en el primer caso de geometría acotada.',
       },
       'pt-BR': {
-        eyebrow: 'Em andamento',
         title: 'Navegação',
         description: 'O trabalho atual está focado no primeiro caso de geometria limitada.',
       },
       ru: {
-        eyebrow: 'В работе',
         title: 'Навигация',
         description: 'Текущая работа посвящена первому ограниченному геометрическому сценарию.',
       },
       'zh-CN': {
-        eyebrow: '进行中',
         title: '导航',
         description: '当前工作聚焦于第一个有界几何场景。',
       },
       ja: {
-        eyebrow: '進行中',
         title: 'ナビゲーション',
         description: '現在は、最初の有限境界ジオメトリの実装に集中しています。',
       },
       ko: {
-        eyebrow: '진행 중',
         title: '내비게이션',
         description: '현재는 첫 번째 유한 경계 지오메트리 구현에 집중하고 있습니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Geometry scope',
           fr: 'Périmètre géométrique',
           de: 'Geometrie',
-                  it: 'Ambito geometrico',
+          it: 'Ambito geometrico',
           es: 'Ámbito geométrico',
           'pt-BR': 'Escopo geométrico',
           ru: 'Геометрия',
           'zh-CN': '几何范围',
           ja: 'ジオメトリ範囲',
           ko: '지오메트리 범위',
-},
+        },
         items: {
           en: [
             'Finite World',
@@ -950,8 +936,8 @@ const sections = [
             'Analytische Box',
             'Erste begrenzte Navigation',
           ],
-                  it: [
-            'World finita',
+          it: [
+            'World finito',
             'Box analitica',
             'Prima navigazione delimitata',
           ],
@@ -985,21 +971,21 @@ const sections = [
             '해석적 Box',
             '초기 유한 경계 내비게이션',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Later extensions',
           fr: 'Extensions ultérieures',
           de: 'Spätere Erweiterungen',
-                  it: 'Estensioni successive',
+          it: 'Estensioni successive',
           es: 'Extensiones posteriores',
           'pt-BR': 'Extensões posteriores',
-          ru: 'Дальнейшее развитие',
+          ru: 'Дальнейшие расширения',
           'zh-CN': '后续扩展',
           ja: '今後の拡張',
           ko: '향후 확장',
-},
+        },
         items: {
           en: [
             'Voxels',
@@ -1012,17 +998,17 @@ const sections = [
             'Cas de navigation plus complexes',
           ],
           de: [
-            'Voxels',
+            'Voxel',
             'Mesh-Geometrien',
             'Komplexere Navigationsfälle',
           ],
-                  it: [
-            'Voxels',
+          it: [
+            'Voxel',
             'Geometrie a mesh',
             'Casi di navigazione più complessi',
           ],
           es: [
-            'Voxels',
+            'Vóxeles',
             'Geometrías malladas',
             'Casos de navegación más complejos',
           ],
@@ -1037,21 +1023,21 @@ const sections = [
             'Более сложные случаи навигации',
           ],
           'zh-CN': [
-            'Voxels',
+            '体素',
             '网格几何',
             '更复杂的导航场景',
           ],
           ja: [
-            'Voxels',
+            'ボクセル',
             'メッシュジオメトリ',
             'より複雑なナビゲーション',
           ],
           ko: [
-            'Voxels',
+            '복셀',
             '메시 기반 지오메트리',
             '더 복잡한 내비게이션 사례',
           ],
-},
+        },
       },
     ],
   },
@@ -1059,70 +1045,60 @@ const sections = [
     status: 'future',
     text: {
       en: {
-        eyebrow: 'Planned',
         title: 'Physical Processes',
         description: 'Physics is implemented and validated by particle family, starting from the first medically relevant transport chains.',
       },
       fr: {
-        eyebrow: 'Prévu',
         title: 'Processus physiques',
-        description: 'La physique est implémentée et validée par famille de particules, en commençant par les premières chaînes de transport pertinentes pour les applications médicales.',
+        description: 'La physique est implémentée et validée par famille de particules, en commençant par les premières chaînes de transport d’intérêt médical.',
       },
       de: {
-        eyebrow: 'Geplant',
         title: 'Physikalische Prozesse',
         description: 'Die Physik wird nach Teilchenfamilien implementiert und validiert, beginnend mit medizinisch relevanten Transportketten.',
       },
-          it: {
-        eyebrow: 'Previsto',
+      it: {
         title: 'Processi fisici',
         description: 'La fisica viene implementata e validata per famiglia di particelle, iniziando dalle catene di trasporto di interesse medico.',
       },
       es: {
-        eyebrow: 'Previsto',
         title: 'Procesos físicos',
         description: 'La física se implementa y valida por familia de partículas, empezando por las cadenas de transporte de interés médico.',
       },
       'pt-BR': {
-        eyebrow: 'Previsto',
         title: 'Processos físicos',
         description: 'A física é implementada e validada por família de partículas, começando pelas cadeias de transporte de interesse médico.',
       },
       ru: {
-        eyebrow: 'Запланировано',
         title: 'Физические процессы',
         description: 'Физика реализуется и проверяется по типам частиц, начиная с медицински значимых транспортных цепочек.',
       },
       'zh-CN': {
-        eyebrow: '计划中',
         title: '物理过程',
         description: '物理过程按粒子类别逐步实现并验证，首先从医学相关的输运链开始。',
       },
       ja: {
-        eyebrow: '予定',
         title: '物理プロセス',
         description: '粒子種ごとに実装と検証を進め、まず医療用途に重要な輸送チェーンから始めます。',
       },
       ko: {
-        eyebrow: '예정',
         title: '물리 프로세스',
         description: '입자 종류별로 물리를 구현하고 검증하며, 의료적으로 중요한 수송 체인부터 시작합니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Gamma',
           fr: 'Gamma',
           de: 'Gamma',
-                  it: 'Gamma',
+          it: 'Gamma',
           es: 'Gamma',
           'pt-BR': 'Gamma',
           ru: 'Гамма',
           'zh-CN': 'Gamma',
           ja: 'Gamma',
           ko: 'Gamma',
-},
+        },
         items: {
           en: [
             'Compton scattering',
@@ -1145,7 +1121,7 @@ const sections = [
             'Paarbildung',
             'Atomare Relaxation',
           ],
-                  it: [
+          it: [
             'Diffusione Compton',
             'Diffusione Rayleigh',
             'Effetto fotoelettrico',
@@ -1194,21 +1170,21 @@ const sections = [
             '쌍생성',
             '원자 완화',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Electron / Positron',
           fr: 'Électron / Positon',
           de: 'Elektron / Positron',
-                  it: 'Elettrone / Positrone',
+          it: 'Elettrone / Positrone',
           es: 'Electrón / Positrón',
           'pt-BR': 'Elétron / Pósitron',
           ru: 'Электрон / позитрон',
           'zh-CN': '电子 / 正电子',
           ja: '電子 / 陽電子',
           ko: '전자 / 양전자',
-},
+        },
         items: {
           en: [
             'Ionization',
@@ -1222,7 +1198,7 @@ const sections = [
             'Bremsstrahlung',
             'Annihilation',
             'Diffusion multiple',
-            'Pouvoir d’arrêt / portée',
+            'Pouvoir d’arrêt / parcours',
           ],
           de: [
             'Ionisation',
@@ -1231,7 +1207,7 @@ const sections = [
             'Mehrfachstreuung',
             'Bremsvermögen / Reichweite',
           ],
-                  it: [
+          it: [
             'Ionizzazione',
             'Bremsstrahlung',
             'Annichilazione',
@@ -1280,21 +1256,21 @@ const sections = [
             '다중 산란',
             '저지력 / 비정',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Proton / Alpha',
           fr: 'Proton / Alpha',
           de: 'Proton / Alpha',
-                  it: 'Protone / Alfa',
+          it: 'Protone / Alfa',
           es: 'Protón / Alfa',
           'pt-BR': 'Próton / Alfa',
           ru: 'Протон / альфа',
           'zh-CN': '质子 / Alpha',
           ja: '陽子 / Alpha',
           ko: '양성자 / 알파',
-},
+        },
         items: {
           en: [
             'Stopping',
@@ -1314,7 +1290,7 @@ const sections = [
             'Mehrfachstreuung',
             'NIEL',
           ],
-                  it: [
+          it: [
             'Potere frenante',
             'Ionizzazione',
             'Diffusione multipla',
@@ -1356,21 +1332,21 @@ const sections = [
             '다중 산란',
             'NIEL',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Neutron',
           fr: 'Neutron',
           de: 'Neutron',
-                  it: 'Neutrone',
+          it: 'Neutrone',
           es: 'Neutrón',
           'pt-BR': 'Nêutron',
           ru: 'Нейтрон',
           'zh-CN': '中子',
           ja: '中性子',
           ko: '중성자',
-},
+        },
         items: {
           en: [
             'Evaluated nuclear data',
@@ -1380,35 +1356,35 @@ const sections = [
           fr: [
             'Données nucléaires évaluées',
             'Élastique / inélastique / capture',
-            'Traitement thermique / HP-HPT',
+            'Neutrons thermiques / HP-HPT',
           ],
           de: [
             'Evaluierte Nukleardaten',
             'Elastisch / inelastisch / Einfang',
-            'Thermische Behandlung / HP-HPT',
+            'Thermische Neutronen / HP-HPT',
           ],
-                  it: [
+          it: [
             'Dati nucleari valutati',
             'Elastico / anelastico / cattura',
-            'Trattamento termico / HP-HPT',
+            'Neutroni termici / HP-HPT',
           ],
           es: [
             'Datos nucleares evaluados',
             'Elástica / inelástica / captura',
-            'Tratamiento térmico / HP-HPT',
+            'Neutrones térmicos / HP-HPT',
           ],
           'pt-BR': [
             'Dados nucleares avaliados',
             'Elástico / inelástico / captura',
-            'Tratamento térmico / HP-HPT',
+            'Nêutrons térmicos / HP-HPT',
           ],
           ru: [
             'Оценённые ядерные данные',
             'Упругое / неупругое / захват',
-            'Тепловая обработка / HP-HPT',
+            'Тепловые нейтроны / HP-HPT',
           ],
           'zh-CN': [
-            '评估核数据',
+            '评价核数据',
             '弹性 / 非弹性 / 俘获',
             '热中子处理 / HP-HPT',
           ],
@@ -1422,7 +1398,7 @@ const sections = [
             '탄성 / 비탄성 / 포획',
             '열중성자 처리 / HP-HPT',
           ],
-},
+        },
       },
     ],
   },
@@ -1430,70 +1406,60 @@ const sections = [
     status: 'future',
     text: {
       en: {
-        eyebrow: 'Planned',
         title: 'Transport',
         description: 'Transport connects geometry and physical processes into complete particle histories.',
       },
       fr: {
-        eyebrow: 'Prévu',
         title: 'Transport',
         description: 'Le transport relie la géométrie et les processus physiques pour former des histoires complètes de particules.',
       },
       de: {
-        eyebrow: 'Geplant',
         title: 'Transport',
         description: 'Transport verbindet Geometrie und physikalische Prozesse zu vollständigen Teilchenhistorien.',
       },
-          it: {
-        eyebrow: 'Previsto',
+      it: {
         title: 'Trasporto',
         description: 'Il trasporto collega geometria e processi fisici in storie complete delle particelle.',
       },
       es: {
-        eyebrow: 'Previsto',
         title: 'Transporte',
         description: 'El transporte conecta la geometría y los procesos físicos en historias completas de partículas.',
       },
       'pt-BR': {
-        eyebrow: 'Previsto',
         title: 'Transporte',
         description: 'O transporte conecta a geometria e os processos físicos em histórias completas de partículas.',
       },
       ru: {
-        eyebrow: 'Запланировано',
         title: 'Транспорт',
         description: 'Транспорт связывает геометрию и физические процессы в полные истории частиц.',
       },
       'zh-CN': {
-        eyebrow: '计划中',
         title: '输运',
         description: '输运将几何与物理过程连接成完整的粒子历史。',
       },
       ja: {
-        eyebrow: '予定',
         title: '輸送',
         description: '輸送はジオメトリと物理プロセスを結び、完全な粒子履歴を構成します。',
       },
       ko: {
-        eyebrow: '예정',
         title: '수송',
         description: '수송은 지오메트리와 물리 프로세스를 연결해 완전한 입자 히스토리를 구성합니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'First transport chain',
           fr: 'Première chaîne de transport',
           de: 'Erste Transportkette',
-                  it: 'Prima catena di trasporto',
+          it: 'Prima catena di trasporto',
           es: 'Primera cadena de transporte',
           'pt-BR': 'Primeira cadeia de transporte',
           ru: 'Первая транспортная цепочка',
           'zh-CN': '首条输运链',
           ja: '最初の輸送チェーン',
           ko: '첫 수송 체인',
-},
+        },
         items: {
           en: [
             'Process / geometry competition',
@@ -1516,7 +1482,7 @@ const sections = [
             'Flugzeit',
             'Transport ohne Feld',
           ],
-                  it: [
+          it: [
             'Competizione processo / geometria',
             'Passo fisico',
             'Produzione di secondari',
@@ -1565,21 +1531,21 @@ const sections = [
             '비행 시간',
             '외부장 없는 수송',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Later transport scope',
           fr: 'Extensions ultérieures du transport',
           de: 'Spätere Erweiterungen',
-                  it: 'Estensioni successive',
+          it: 'Estensioni successive',
           es: 'Extensiones posteriores',
           'pt-BR': 'Extensões posteriores',
-          ru: 'Дальнейшее развитие',
+          ru: 'Дальнейшие расширения',
           'zh-CN': '后续输运扩展',
           ja: '今後の輸送拡張',
           ko: '향후 수송 확장',
-},
+        },
         items: {
           en: [
             'Charged-particle transport extensions',
@@ -1596,7 +1562,7 @@ const sections = [
             'Integration der Mehrfachstreuung',
             'Magnetfeld-Unterstützung',
           ],
-                  it: [
+          it: [
             'Trasporto di particelle cariche',
             'Integrazione della diffusione multipla',
             'Supporto del campo magnetico',
@@ -1631,7 +1597,7 @@ const sections = [
             '다중 산란 통합',
             '자기장 지원',
           ],
-},
+        },
       },
     ],
   },
@@ -1639,70 +1605,60 @@ const sections = [
     status: 'future',
     text: {
       en: {
-        eyebrow: 'Planned',
         title: 'Scoring',
         description: 'Accepted particle transport becomes measurable scientific output.',
       },
       fr: {
-        eyebrow: 'Prévu',
         title: 'Scoring',
-        description: 'Le transport de particules accepté devient une sortie scientifique mesurable.',
+        description: 'Le transport de particules accepté devient un résultat scientifique mesurable.',
       },
       de: {
-        eyebrow: 'Geplant',
         title: 'Scoring',
         description: 'Akzeptierter Teilchentransport wird zu messbaren wissenschaftlichen Ergebnissen.',
       },
-          it: {
-        eyebrow: 'Previsto',
+      it: {
         title: 'Scoring',
         description: 'Il trasporto accettato delle particelle diventa un risultato scientifico misurabile.',
       },
       es: {
-        eyebrow: 'Previsto',
         title: 'Scoring',
         description: 'El transporte aceptado de partículas se convierte en un resultado científico medible.',
       },
       'pt-BR': {
-        eyebrow: 'Previsto',
         title: 'Scoring',
         description: 'O transporte aceito de partículas se torna um resultado científico mensurável.',
       },
       ru: {
-        eyebrow: 'Запланировано',
         title: 'Скоринг',
         description: 'Принятый транспорт частиц превращается в измеряемые научные величины.',
       },
       'zh-CN': {
-        eyebrow: '计划中',
         title: 'Scoring',
         description: '粒子输运结果被转换为可测量的科学量。',
       },
       ja: {
-        eyebrow: '予定',
         title: 'スコアリング',
         description: '粒子輸送の結果を、測定可能な科学量として出力します。',
       },
       ko: {
-        eyebrow: '예정',
         title: '스코어링',
         description: '입자 수송 결과를 측정 가능한 과학량으로 변환합니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Scientific quantities',
           fr: 'Grandeurs scientifiques',
           de: 'Wissenschaftliche Größen',
-                  it: 'Grandezze scientifiche',
+          it: 'Grandezze scientifiche',
           es: 'Magnitudes científicas',
           'pt-BR': 'Grandezas científicas',
           ru: 'Научные величины',
           'zh-CN': '科学量',
           ja: '科学量',
           ko: '과학량',
-},
+        },
         items: {
           en: [
             'Energy deposition',
@@ -1722,7 +1678,7 @@ const sections = [
             'Photon-TLE',
             'Historienstatistik',
           ],
-                  it: [
+          it: [
             'Deposizione di energia',
             'Dose',
             'TLE fotonico',
@@ -1741,30 +1697,30 @@ const sections = [
             'Estatísticas por história',
           ],
           ru: [
-            'Отложение энергии',
+            'Энерговыделение',
             'Доза',
-            'Photon TLE',
+            'TLE для фотонов',
             'Статистика историй',
           ],
           'zh-CN': [
             '能量沉积',
             '剂量',
-            'Photon TLE',
+            '光子 TLE',
             '历史统计',
           ],
           ja: [
             'エネルギー付与',
             '線量',
-            'Photon TLE',
+            '光子 TLE',
             '履歴統計',
           ],
           ko: [
             '에너지 침적',
             '선량',
-            'Photon TLE',
+            '광자 TLE',
             '히스토리 통계',
           ],
-},
+        },
       },
     ],
   },
@@ -1772,70 +1728,60 @@ const sections = [
     status: 'future',
     text: {
       en: {
-        eyebrow: 'Planned',
         title: 'Detector & Acquisition',
         description: 'The detector chain transforms physical interactions into acquisition-level data products.',
       },
       fr: {
-        eyebrow: 'Prévu',
         title: 'Détecteur & acquisition',
-        description: 'La chaîne de détection transforme les interactions physiques en produits de données au niveau de l’acquisition.',
+        description: 'La chaîne de détection transforme les interactions physiques en données au niveau de l’acquisition.',
       },
       de: {
-        eyebrow: 'Geplant',
         title: 'Detektor & Akquisition',
         description: 'Die Detektorkette wandelt physikalische Wechselwirkungen in Akquisitionsdaten um.',
       },
-          it: {
-        eyebrow: 'Previsto',
+      it: {
         title: 'Rivelatore & acquisizione',
         description: 'La catena di rivelazione trasforma le interazioni fisiche in dati a livello di acquisizione.',
       },
       es: {
-        eyebrow: 'Previsto',
         title: 'Detector & adquisición',
         description: 'La cadena de detección transforma las interacciones físicas en datos de adquisición.',
       },
       'pt-BR': {
-        eyebrow: 'Previsto',
         title: 'Detector & aquisição',
         description: 'A cadeia de detecção transforma as interações físicas em dados de aquisição.',
       },
       ru: {
-        eyebrow: 'Запланировано',
         title: 'Детектор и сбор данных',
         description: 'Детекторная цепочка превращает физические взаимодействия в данные уровня регистрации.',
       },
       'zh-CN': {
-        eyebrow: '计划中',
         title: '探测器与采集',
         description: '探测器链把物理相互作用转换为采集层的数据产品。',
       },
       ja: {
-        eyebrow: '予定',
         title: '検出器 & データ収集',
         description: '検出器チェーンは物理相互作用を収集レベルのデータへ変換します。',
       },
       ko: {
-        eyebrow: '예정',
         title: '검출기 & 데이터 획득',
         description: '검출기 체인은 물리 상호작용을 데이터 획득 단계의 결과로 변환합니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Sensitive detector',
           fr: 'Détecteur sensible',
           de: 'Sensitiver Detektor',
-                  it: 'Rivelatore sensibile',
+          it: 'Rivelatore sensibile',
           es: 'Detector sensible',
           'pt-BR': 'Detector sensível',
           ru: 'Чувствительный детектор',
-          'zh-CN': '敏感探测器',
+          'zh-CN': '灵敏探测器',
           ja: 'Sensitive Detector',
           ko: '민감 검출기',
-},
+        },
         items: {
           en: [
             'Detector elements',
@@ -1849,7 +1795,7 @@ const sections = [
             'Detektorelemente',
             'Rohe Hits',
           ],
-                  it: [
+          it: [
             'Elementi del rivelatore',
             'Hit grezzi',
           ],
@@ -1863,35 +1809,35 @@ const sections = [
           ],
           ru: [
             'Элементы детектора',
-            'Raw Hits',
+            'Необработанные Hits',
           ],
           'zh-CN': [
             '探测单元',
-            'Raw Hits',
+            '原始 Hits',
           ],
           ja: [
             '検出器要素',
-            'Raw Hits',
+            '未処理の Hits',
           ],
           ko: [
             '검출기 요소',
-            'Raw Hits',
+            '원시 Hits',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Digitizer',
           fr: 'Digitizer',
           de: 'Digitizer',
-                  it: 'Digitizer',
+          it: 'Digitizer',
           es: 'Digitizer',
           'pt-BR': 'Digitizer',
           ru: 'Digitizer',
           'zh-CN': 'Digitizer',
           ja: 'Digitizer',
           ko: 'Digitizer',
-},
+        },
         items: {
           en: [
             'Detector response',
@@ -1914,7 +1860,7 @@ const sections = [
             'Energiefenster',
             'Totzeit',
           ],
-                  it: [
+          it: [
             'Risposta del rivelatore',
             'Risposta in energia e tempo',
             'Efficienza & soglie',
@@ -1963,21 +1909,21 @@ const sections = [
             '에너지 윈도우',
             '불감시간',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Acquisition',
           fr: 'Acquisition',
           de: 'Akquisition',
-                  it: 'Acquisizione',
+          it: 'Acquisizione',
           es: 'Adquisición',
           'pt-BR': 'Aquisição',
           ru: 'Сбор данных',
           'zh-CN': '采集',
           ja: 'データ収集',
           ko: '데이터 획득',
-},
+        },
         items: {
           en: [
             'Scanner states',
@@ -1997,7 +1943,7 @@ const sections = [
             'Expositionen & Projektionen',
             'Zeitlogik der Akquisition',
           ],
-                  it: [
+          it: [
             'Stati dello scanner',
             'Movimento',
             'Esposizioni & proiezioni',
@@ -2039,21 +1985,21 @@ const sections = [
             '노출 / 투영',
             '시간 기반 획득 로직',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Detector data',
           fr: 'Données détecteur',
           de: 'Detektordaten',
-                  it: 'Dati del rivelatore',
+          it: 'Dati del rivelatore',
           es: 'Datos del detector',
           'pt-BR': 'Dados do detector',
           ru: 'Данные детектора',
           'zh-CN': '探测器数据',
           ja: '検出器データ',
           ko: '검출기 데이터',
-},
+        },
         items: {
           en: [
             'Singles',
@@ -2073,7 +2019,7 @@ const sections = [
             'PET / SPECT-Produkte',
             'CT / CBCT-Produkte',
           ],
-                  it: [
+          it: [
             'Singles',
             'Coincidenze',
             'Prodotti PET / SPECT',
@@ -2094,11 +2040,11 @@ const sections = [
           ru: [
             'Одиночные события',
             'Совпадения',
-            'PET / SPECT данные',
-            'CT / CBCT данные',
+            'Данные PET / SPECT',
+            'Данные CT / CBCT',
           ],
           'zh-CN': [
-            'Singles',
+            '单事件',
             '符合事件',
             'PET / SPECT 数据',
             'CT / CBCT 数据',
@@ -2115,7 +2061,7 @@ const sections = [
             'PET / SPECT 데이터',
             'CT / CBCT 데이터',
           ],
-},
+        },
       },
     ],
   },
@@ -2123,178 +2069,76 @@ const sections = [
     status: 'future',
     text: {
       en: {
-        eyebrow: 'Planned',
         title: 'Scientific I/O & Reconstruction',
         description: 'Committed GGEMS scientific products are exposed through explicit data formats and reconstruction-oriented interoperability.',
       },
       fr: {
-        eyebrow: 'Prévu',
         title: 'E/S scientifiques & reconstruction',
         description: 'Les produits scientifiques validés de GGEMS sont exposés via des formats de données explicites et une interopérabilité orientée reconstruction.',
       },
       de: {
-        eyebrow: 'Geplant',
         title: 'Daten-I/O & Rekonstruktion',
         description: 'GGEMS stellt seine wissenschaftlichen Datenprodukte über klare Formate und rekonstruktionsorientierte Schnittstellen bereit.',
       },
-          it: {
-        eyebrow: 'Previsto',
+      it: {
         title: 'I/O scientifico & ricostruzione',
         description: 'I prodotti scientifici di GGEMS sono esposti tramite formati dati espliciti e interoperabilità orientata alla ricostruzione.',
       },
       es: {
-        eyebrow: 'Previsto',
         title: 'E/S científica & reconstrucción',
         description: 'Los productos científicos de GGEMS se exponen mediante formatos de datos explícitos e interoperabilidad orientada a la reconstrucción.',
       },
       'pt-BR': {
-        eyebrow: 'Previsto',
         title: 'I/O científico & reconstrução',
         description: 'Os produtos científicos do GGEMS são expostos por formatos de dados explícitos e interoperabilidade voltada à reconstrução.',
       },
       ru: {
-        eyebrow: 'Запланировано',
         title: 'I/O и реконструкция',
         description: 'Научные данные GGEMS выдаются через явные форматы и интерфейсы, ориентированные на реконструкцию.',
       },
       'zh-CN': {
-        eyebrow: '计划中',
         title: '科学 I/O 与重建',
         description: 'GGEMS 的科学数据通过明确的数据格式和面向重建的互操作接口提供。',
       },
       ja: {
-        eyebrow: '予定',
-        title: '科学 I/O & 再構成',
+        title: '科学 I/O & 再\u2060構\u2060成',
         description: 'GGEMS の科学データを明示的な形式と再構成向けの相互運用性で提供します。',
       },
       ko: {
-        eyebrow: '예정',
         title: '과학 I/O & 재구성',
         description: 'GGEMS의 과학 데이터를 명확한 형식과 재구성 중심의 상호운용 인터페이스로 제공합니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Scientific I/O',
           fr: 'E/S scientifiques',
           de: 'Daten-I/O',
-                  it: 'I/O scientifico',
+          it: 'I/O scientifico',
           es: 'E/S científica',
           'pt-BR': 'I/O científico',
           ru: 'Научный I/O',
           'zh-CN': '科学 I/O',
           ja: '科学 I/O',
           ko: '과학 I/O',
-},
-        items: {
-          en: [
-            'MHD',
-            '...',
-          ],
-          fr: [
-            'MHD',
-            '...',
-          ],
-          de: [
-            'MHD',
-            '...',
-          ],
-                  it: [
-            'MHD',
-            '...',
-          ],
-          es: [
-            'MHD',
-            '...',
-          ],
-          'pt-BR': [
-            'MHD',
-            '...',
-          ],
-          ru: [
-            'MHD',
-            '...',
-          ],
-          'zh-CN': [
-            'MHD',
-            '...',
-          ],
-          ja: [
-            'MHD',
-            '...',
-          ],
-          ko: [
-            'MHD',
-            '...',
-          ],
-},
+        },
+        items: sameForAll(['MHD', '...']),
       },
       {
         title: {
           en: 'Reconstruction ecosystem',
           fr: 'Écosystème de reconstruction',
           de: 'Rekonstruktionsökosystem',
-                  it: 'Ecosistema di ricostruzione',
+          it: 'Ecosistema di ricostruzione',
           es: 'Ecosistema de reconstrucción',
           'pt-BR': 'Ecossistema de reconstrução',
           ru: 'Экосистема реконструкции',
           'zh-CN': '重建生态',
           ja: '再構成エコシステム',
           ko: '재구성 생태계',
-},
-        items: {
-          en: [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-          fr: [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-          de: [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-                  it: [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-          es: [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-          'pt-BR': [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-          ru: [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-          'zh-CN': [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-          ja: [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-          ko: [
-            'STIR',
-            'CASToR',
-            '...',
-          ],
-},
+        },
+        items: sameForAll(['STIR', 'CASToR', '...']),
       },
     ],
   },
@@ -2302,70 +2146,60 @@ const sections = [
     status: 'future',
     text: {
       en: {
-        eyebrow: 'Planned',
         title: 'Integration, Validation & Performance',
         description: 'Complete workflows are qualified only after their scientific components and cross-domain behavior are established.',
       },
       fr: {
-        eyebrow: 'Prévu',
         title: 'Intégration, validation & performances',
         description: 'Les workflows complets ne sont qualifiés qu’une fois leurs composants scientifiques et leur comportement entre domaines établis.',
       },
       de: {
-        eyebrow: 'Geplant',
         title: 'Integration, Validierung & Leistung',
         description: 'Komplette Workflows werden erst qualifiziert, wenn ihre wissenschaftlichen Komponenten und ihr domänenübergreifendes Verhalten feststehen.',
       },
-          it: {
-        eyebrow: 'Previsto',
+      it: {
         title: 'Integrazione, validazione & prestazioni',
         description: 'I workflow completi vengono qualificati solo dopo aver stabilito i componenti scientifici e il comportamento tra domini.',
       },
       es: {
-        eyebrow: 'Previsto',
         title: 'Integración, validación & rendimiento',
-        description: 'Los workflows completos se califican solo después de establecer sus componentes científicos y su comportamiento entre dominios.',
+        description: 'Los workflows completos se cualifican solo después de establecer sus componentes científicos y su comportamiento entre dominios.',
       },
       'pt-BR': {
-        eyebrow: 'Previsto',
         title: 'Integração, validação & desempenho',
         description: 'Os workflows completos só são qualificados depois de estabelecidos seus componentes científicos e o comportamento entre domínios.',
       },
       ru: {
-        eyebrow: 'Запланировано',
         title: 'Интеграция, валидация, производительность',
         description: 'Полные рабочие цепочки оцениваются только после проверки научных компонентов и взаимодействия между областями.',
       },
       'zh-CN': {
-        eyebrow: '计划中',
-        title: '集成、验证与性能',
-        description: '只有在科学组件和跨领域行为明确后，完整工作流才进入资格评估。',
+        title: '集成、验证与性\u2060能',
+        description: '只有在科学组件和跨领域行为确立后，才对完整工作流进行评估。',
       },
       ja: {
-        eyebrow: '予定',
-        title: '統合・検証・性能',
+        title: '統合・検証・性\u2060能',
         description: '科学要素と領域間の動作が確立したワークフローのみを評価対象とします。',
       },
       ko: {
-        eyebrow: '예정',
         title: '통합·검증·성능',
         description: '과학 구성요소와 영역 간 동작이 확립된 전체 워크플로만 평가 대상으로 삼습니다.',
       },
-},
+    },
     groups: [
       {
         title: {
           en: 'Integration',
           fr: 'Intégration',
           de: 'Integration',
-                  it: 'Integrazione',
+          it: 'Integrazione',
           es: 'Integración',
           'pt-BR': 'Integração',
           ru: 'Интеграция',
           'zh-CN': '集成',
           ja: '統合',
           ko: '통합',
-},
+        },
         items: {
           en: [
             'Named modalities',
@@ -2382,7 +2216,7 @@ const sections = [
             'Multi-Device',
             'Reproduzierbarkeit',
           ],
-                  it: [
+          it: [
             'Modalità definite',
             'Multi-device',
             'Riproducibilità',
@@ -2417,21 +2251,21 @@ const sections = [
             '다중 디바이스',
             '재현성',
           ],
-},
+        },
       },
       {
         title: {
           en: 'Qualification',
           fr: 'Qualification',
           de: 'Qualifikation',
-                  it: 'Qualificazione',
-          es: 'Calificación',
+          it: 'Qualificazione',
+          es: 'Cualificación',
           'pt-BR': 'Qualificação',
           ru: 'Оценка',
           'zh-CN': '评估',
           ja: '評価',
           ko: '평가',
-},
+        },
         items: {
           en: [
             'Scientific validation',
@@ -2448,7 +2282,7 @@ const sections = [
             'Leistungsanalyse',
             'Optimierung bei unveränderter Wissenschaft',
           ],
-                  it: [
+          it: [
             'Validazione scientifica',
             'Caratterizzazione delle prestazioni',
             'Ottimizzazione senza alterare la scienza',
@@ -2483,11 +2317,11 @@ const sections = [
             '성능 특성화',
             '과학 결과를 바꾸지 않는 최적화',
           ],
-},
+        },
       },
     ],
   },
-]
+];
 ---
 
 <!doctype html>
@@ -2495,10 +2329,7 @@ const sections = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content="Follow the GGEMS development roadmap toward the first public release."
-    />
+    <meta name="description" content={pageDescriptions.en} />
     <meta name="robots" content="noindex, nofollow, noarchive" />
 
     <link rel="icon" type="image/png" href="/images/ggems-logo.png" />
@@ -2506,7 +2337,7 @@ const sections = [
 
     <title>Roadmap — GGEMS</title>
 
-    <script is:inline>
+    <script is:inline define:vars={{ supportedLanguages: languages }}>
       (() => {
         const storedTheme = localStorage.getItem('ggems-theme');
         const theme =
@@ -2518,7 +2349,6 @@ const sections = [
         document.documentElement.dataset.theme = theme;
 
         const storedLang = localStorage.getItem('ggems-language');
-        const supportedLanguages = ['en', 'fr', 'de', 'it', 'es', 'pt-BR', 'ru', 'zh-CN', 'ja', 'ko'];
         const lang =
           storedLang && supportedLanguages.includes(storedLang)
             ? storedLang
@@ -2544,7 +2374,7 @@ const sections = [
         <div class="header-actions">
           <details class="language-switcher">
             <summary aria-label="Language" title="Language">
-              <span class="flag current-flag current-flag-en" aria-hidden="true">
+              <span class="flag" data-i18n="en" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#fff" />
                   <g fill="#b22234">
@@ -2560,7 +2390,7 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-fr" aria-hidden="true">
+              <span class="flag" data-i18n="fr" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="9.34" height="20" x="0" fill="#0055a4" />
                   <rect width="9.34" height="20" x="9.33" fill="#fff" />
@@ -2568,7 +2398,7 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-de" aria-hidden="true">
+              <span class="flag" data-i18n="de" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="6.67" y="0" fill="#000" />
                   <rect width="28" height="6.67" y="6.66" fill="#dd0000" />
@@ -2576,7 +2406,7 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-it" aria-hidden="true">
+              <span class="flag" data-i18n="it" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="9.34" height="20" x="0" fill="#009246" />
                   <rect width="9.34" height="20" x="9.33" fill="#fff" />
@@ -2584,7 +2414,7 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-es" aria-hidden="true">
+              <span class="flag" data-i18n="es" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="5" y="0" fill="#aa151b" />
                   <rect width="28" height="10" y="5" fill="#f1bf00" />
@@ -2592,7 +2422,7 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-pt-br" aria-hidden="true">
+              <span class="flag" data-i18n="pt-BR" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#009c3b" />
                   <polygon points="14,2 26,10 14,18 2,10" fill="#ffdf00" />
@@ -2600,7 +2430,7 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-ru" aria-hidden="true">
+              <span class="flag" data-i18n="ru" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="6.67" y="0" fill="#fff" />
                   <rect width="28" height="6.67" y="6.66" fill="#0039a6" />
@@ -2608,7 +2438,7 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-zh-cn" aria-hidden="true">
+              <span class="flag" data-i18n="zh-CN" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#de2910" />
                   <polygon points="5,2.4 5.8,4.8 8.3,4.8 6.25,6.25 7.05,8.6 5,7.15 2.95,8.6 3.75,6.25 1.7,4.8 4.2,4.8" fill="#ffde00" />
@@ -2619,14 +2449,14 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-ja" aria-hidden="true">
+              <span class="flag" data-i18n="ja" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#fff" />
                   <circle cx="14" cy="10" r="5.2" fill="#bc002d" />
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-ko" aria-hidden="true">
+              <span class="flag" data-i18n="ko" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#fff" />
                   <path d="M14 5.3a4.7 4.7 0 0 1 0 9.4 2.35 2.35 0 0 0 0-4.7 2.35 2.35 0 0 1 0-4.7Z" fill="#0047a0" />
@@ -2640,16 +2470,16 @@ const sections = [
                 </svg>
               </span>
 
-              <span class="current-code current-code-en">EN</span>
-              <span class="current-code current-code-fr">FR</span>
-              <span class="current-code current-code-de">DE</span>
-              <span class="current-code current-code-it">IT</span>
-              <span class="current-code current-code-es">ES</span>
-              <span class="current-code current-code-pt-br">PT-BR</span>
-              <span class="current-code current-code-ru">RU</span>
-              <span class="current-code current-code-zh-cn">ZH-CN</span>
-              <span class="current-code current-code-ja">JA</span>
-              <span class="current-code current-code-ko">KO</span>
+              <span class="current-code" data-i18n="en">EN</span>
+              <span class="current-code" data-i18n="fr">FR</span>
+              <span class="current-code" data-i18n="de">DE</span>
+              <span class="current-code" data-i18n="it">IT</span>
+              <span class="current-code" data-i18n="es">ES</span>
+              <span class="current-code" data-i18n="pt-BR">PT-BR</span>
+              <span class="current-code" data-i18n="ru">RU</span>
+              <span class="current-code" data-i18n="zh-CN">ZH-CN</span>
+              <span class="current-code" data-i18n="ja">JA</span>
+              <span class="current-code" data-i18n="ko">KO</span>
               <span class="chevron" aria-hidden="true">⌄</span>
             </summary>
 
@@ -2793,17 +2623,17 @@ const sections = [
               <button type="button" data-language="ko">
                 <span class="language-name">
                   <span class="flag" aria-hidden="true">
-                <svg viewBox="0 0 28 20" role="presentation">
-                  <rect width="28" height="20" fill="#fff" />
-                  <path d="M14 5.3a4.7 4.7 0 0 1 0 9.4 2.35 2.35 0 0 0 0-4.7 2.35 2.35 0 0 1 0-4.7Z" fill="#0047a0" />
-                  <path d="M14 14.7a4.7 4.7 0 0 1 0-9.4 2.35 2.35 0 0 0 0 4.7 2.35 2.35 0 0 1 0 4.7Z" fill="#cd2e3a" />
-                  <g stroke="#111" stroke-width=".72">
-                    <path d="M5.3 4.3 8.1 2.5M6 5.4 8.8 3.6M6.7 6.5 9.5 4.7" />
-                    <path d="M18.5 15.3 21.3 13.5M19.2 16.4 22 14.6M19.9 17.5 22.7 15.7" />
-                    <path d="M18.5 4.7 21.3 6.5M19.2 3.6 22 5.4M19.9 2.5 22.7 4.3" />
-                    <path d="M5.3 15.7 8.1 17.5M6 14.6 8.8 16.4M6.7 13.5 9.5 15.3" />
-                  </g>
-                </svg>
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="20" fill="#fff" />
+                      <path d="M14 5.3a4.7 4.7 0 0 1 0 9.4 2.35 2.35 0 0 0 0-4.7 2.35 2.35 0 0 1 0-4.7Z" fill="#0047a0" />
+                      <path d="M14 14.7a4.7 4.7 0 0 1 0-9.4 2.35 2.35 0 0 0 0 4.7 2.35 2.35 0 0 1 0 4.7Z" fill="#cd2e3a" />
+                      <g stroke="#111" stroke-width=".72">
+                        <path d="M5.3 4.3 8.1 2.5M6 5.4 8.8 3.6M6.7 6.5 9.5 4.7" />
+                        <path d="M18.5 15.3 21.3 13.5M19.2 16.4 22 14.6M19.9 17.5 22.7 15.7" />
+                        <path d="M18.5 4.7 21.3 6.5M19.2 3.6 22 5.4M19.9 2.5 22.7 4.3" />
+                        <path d="M5.3 15.7 8.1 17.5M6 14.6 8.8 16.4M6.7 13.5 9.5 15.3" />
+                      </g>
+                    </svg>
                   </span>
                   <span>한국어</span>
                 </span>
@@ -2877,12 +2707,12 @@ const sections = [
 
           <h1 class="heading-1" data-i18n="zh-CN">
             从已验证的基础
-            <span>走向 GGEMS 发布。</span>
+            <span>至GGEMS发布</span>
           </h1>
 
           <h1 class="heading-1" data-i18n="ja">
-            検証済みの基盤から
-            <span>GGEMS リリースへ。</span>
+            検証済基盤から
+            <span>GGEMS公開へ</span>
           </h1>
 
           <h1 class="heading-1" data-i18n="ko">
@@ -2899,14 +2729,14 @@ const sections = [
           <p class="lead" data-i18n="fr">
             GGEMS est construit progressivement : chaque domaine est développé sur
             des fondations validées, intégré uniquement lorsque les comportements
-            en amont sont prêts, et organisé en vue d’une première version
-            scientifique publique.
+            en amont sont prêts, et organisé en vue d’une version scientifique
+            publique.
           </p>
 
           <p class="lead" data-i18n="de">
             GGEMS wird schrittweise aufgebaut: Jeder Bereich baut auf validierten
             Grundlagen auf, wird erst integriert, wenn die vorgelagerten Bausteine
-            bereitstehen, und führt auf eine öffentliche wissenschaftliche Version hin.
+            bereitstehen, und ist auf eine öffentliche wissenschaftliche Version ausgerichtet.
           </p>
 
           <p class="lead" data-i18n="it">
@@ -2940,12 +2770,12 @@ const sections = [
 
           <p class="lead" data-i18n="ja">
             GGEMS は段階的に構築されます。各領域は検証済みの基盤の上に実装され、
-            上流の要素が整ってから統合され、公開科学リリースへ進みます。
+            上流の要素が整ってから統合され、科学的な公開リリースへ進みます。
           </p>
 
           <p class="lead" data-i18n="ko">
             GGEMS는 단계적으로 구축됩니다. 각 영역은 검증된 기반 위에 구현되고,
-            선행 요소가 준비된 뒤에만 통합되며, 공개 과학 릴리스를 향해 진행됩니다.
+            선행 요소가 준비된 뒤에만 통합되며, 과학적 공개 릴리스를 목표로 합니다.
           </p>
         </div>
       </section>
@@ -2989,38 +2819,17 @@ const sections = [
                   <div class="section-content">
                     <header class="section-heading">
                       <div>
-                        <p class="section-status" data-i18n="en">{section.text.en.eyebrow}</p>
-                        <p class="section-status" data-i18n="fr">{section.text.fr.eyebrow}</p>
-                        <p class="section-status" data-i18n="de">{section.text.de.eyebrow}</p>
-                        <p class="section-status" data-i18n="it">{section.text.it.eyebrow}</p>
-                        <p class="section-status" data-i18n="es">{section.text.es.eyebrow}</p>
-                        <p class="section-status" data-i18n="pt-BR">{section.text['pt-BR'].eyebrow}</p>
-                        <p class="section-status" data-i18n="ru">{section.text.ru.eyebrow}</p>
-                        <p class="section-status" data-i18n="zh-CN">{section.text['zh-CN'].eyebrow}</p>
-                        <p class="section-status" data-i18n="ja">{section.text.ja.eyebrow}</p>
-                        <p class="section-status" data-i18n="ko">{section.text.ko.eyebrow}</p>
-                        <h2 data-i18n="en">{section.text.en.title}</h2>
-                        <h2 data-i18n="fr">{section.text.fr.title}</h2>
-                        <h2 data-i18n="de">{section.text.de.title}</h2>
-                        <h2 data-i18n="it">{section.text.it.title}</h2>
-                        <h2 data-i18n="es">{section.text.es.title}</h2>
-                        <h2 data-i18n="pt-BR">{section.text['pt-BR'].title}</h2>
-                        <h2 data-i18n="ru">{section.text.ru.title}</h2>
-                        <h2 data-i18n="zh-CN">{section.text['zh-CN'].title}</h2>
-                        <h2 data-i18n="ja">{section.text.ja.title}</h2>
-                        <h2 data-i18n="ko">{section.text.ko.title}</h2>
+                        {languages.map((lang) => (
+                          <p class="section-status" data-i18n={lang}>{statusLabels[section.status][lang]}</p>
+                        ))}
+                        {languages.map((lang) => (
+                          <h2 data-i18n={lang}>{section.text[lang].title}</h2>
+                        ))}
                       </div>
 
-                      <p data-i18n="en">{section.text.en.description}</p>
-                      <p data-i18n="fr">{section.text.fr.description}</p>
-                      <p data-i18n="de">{section.text.de.description}</p>
-                      <p data-i18n="it">{section.text.it.description}</p>
-                      <p data-i18n="es">{section.text.es.description}</p>
-                      <p data-i18n="pt-BR">{section.text['pt-BR'].description}</p>
-                      <p data-i18n="ru">{section.text.ru.description}</p>
-                      <p data-i18n="zh-CN">{section.text['zh-CN'].description}</p>
-                      <p data-i18n="ja">{section.text.ja.description}</p>
-                      <p data-i18n="ko">{section.text.ko.description}</p>
+                      {languages.map((lang) => (
+                        <p data-i18n={lang}>{section.text[lang].description}</p>
+                      ))}
                     </header>
 
                     {
@@ -3029,56 +2838,15 @@ const sections = [
                           {
                             section.groups.map((group) => (
                               <section class="roadmap-group">
-                                <h3 data-i18n="en">{group.title.en}</h3>
-                                <h3 data-i18n="fr">{group.title.fr}</h3>
-                                <h3 data-i18n="de">{group.title.de}</h3>
-                                <h3 data-i18n="it">{group.title.it}</h3>
-                                <h3 data-i18n="es">{group.title.es}</h3>
-                                <h3 data-i18n="pt-BR">{group.title['pt-BR']}</h3>
-                                <h3 data-i18n="ru">{group.title.ru}</h3>
-                                <h3 data-i18n="zh-CN">{group.title['zh-CN']}</h3>
-                                <h3 data-i18n="ja">{group.title.ja}</h3>
-                                <h3 data-i18n="ko">{group.title.ko}</h3>
+                                {languages.map((lang) => (
+                                  <h3 data-i18n={lang}>{group.title[lang]}</h3>
+                                ))}
 
-                                <ul data-i18n="en">
-                                  {group.items.en.map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="fr">
-                                  {group.items.fr.map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="de">
-                                  {group.items.de.map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="it">
-                                  {group.items.it.map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="es">
-                                  {group.items.es.map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="pt-BR">
-                                  {group.items['pt-BR'].map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="ru">
-                                  {group.items.ru.map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="zh-CN">
-                                  {group.items['zh-CN'].map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="ja">
-                                  {group.items.ja.map((item) => <li>{item}</li>)}
-                                </ul>
-
-                                <ul data-i18n="ko">
-                                  {group.items.ko.map((item) => <li>{item}</li>)}
-                                </ul>
+                                {languages.map((lang) => (
+                                  <ul data-i18n={lang}>
+                                    {group.items[lang].map((item) => <li>{item}</li>)}
+                                  </ul>
+                                ))}
                               </section>
                             ))
                           }
@@ -3102,7 +2870,7 @@ const sections = [
                 <h2 data-i18n="zh-CN">GGEMS 发布</h2>
                 <h2 data-i18n="ja">GGEMS リリース</h2>
                 <h2 data-i18n="ko">GGEMS 릴리스</h2>
-                <p class="release-date" data-i18n="en">1st semester 2027</p>
+                <p class="release-date" data-i18n="en">First half of 2027</p>
                 <p class="release-date" data-i18n="fr">1er semestre 2027</p>
                 <p class="release-date" data-i18n="de">1. Halbjahr 2027</p>
                 <p class="release-date" data-i18n="it">1° semestre 2027</p>
@@ -3134,76 +2902,12 @@ const sections = [
       </div>
     </footer>
 
-    <script is:inline>
+    <script is:inline define:vars={{ supportedLanguages: languages, pageDescriptions }}>
       (() => {
         const root = document.documentElement;
         const themeButton = document.querySelector('.theme-toggle');
         const languageButtons = document.querySelectorAll('[data-language]');
         const description = document.querySelector('meta[name="description"]');
-
-        const updateMetadata = () => {
-          if (root.dataset.lang === 'fr') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'Suivez la roadmap de développement de GGEMS jusqu’à la première version publique.'
-            );
-          } else if (root.dataset.lang === 'de') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'Verfolgen Sie die GGEMS-Entwicklungsroadmap bis zur ersten öffentlichen Version.'
-            );
-          } else if (root.dataset.lang === 'it') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'Segui la roadmap di sviluppo di GGEMS fino alla prima versione pubblica.'
-            );
-          } else if (root.dataset.lang === 'es') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'Sigue la hoja de ruta de desarrollo de GGEMS hasta la primera versión pública.'
-            );
-          } else if (root.dataset.lang === 'pt-BR') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'Acompanhe o roadmap de desenvolvimento do GGEMS até a primeira versão pública.'
-            );
-          } else if (root.dataset.lang === 'ru') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'Следите за планом разработки GGEMS до первой публичной версии.'
-            );
-          } else if (root.dataset.lang === 'zh-CN') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              '查看 GGEMS 从当前开发阶段到首个公开版本的路线图。'
-            );
-          } else if (root.dataset.lang === 'ja') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'GGEMS の開発から最初の公開版までのロードマップをご覧ください。'
-            );
-          } else if (root.dataset.lang === 'ko') {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'GGEMS 개발 현황부터 첫 공개 버전까지의 로드맵을 확인하세요.'
-            );
-          } else {
-            document.title = 'Roadmap — GGEMS';
-            description?.setAttribute(
-              'content',
-              'Follow the GGEMS development roadmap toward the first public release.'
-            );
-          }
-        };
 
         const setLanguage = (lang) => {
           root.dataset.lang = lang;
@@ -3215,7 +2919,8 @@ const sections = [
           });
 
           document.querySelector('.language-switcher')?.removeAttribute('open');
-          updateMetadata();
+
+          description?.setAttribute('content', pageDescriptions[lang] ?? pageDescriptions.en);
         };
 
         languageButtons.forEach((button) => {
@@ -3229,7 +2934,7 @@ const sections = [
         });
 
         setLanguage(
-          ['en', 'fr', 'de', 'it', 'es', 'pt-BR', 'ru', 'zh-CN', 'ja', 'ko'].includes(root.dataset.lang)
+          supportedLanguages.includes(root.dataset.lang)
             ? root.dataset.lang
             : 'en'
         );
@@ -3243,9 +2948,7 @@ const sections = [
     color-scheme: dark;
 
     --color-bg: #07111b;
-    --color-bg-soft: #0a1520;
     --color-surface: #0b1723;
-    --color-surface-raised: #101e2c;
 
     --color-text: #f5f8fb;
     --color-text-muted: #aab7c5;
@@ -3253,7 +2956,6 @@ const sections = [
 
     --color-green: #50c070;
     --color-green-light: #80d0a0;
-    --color-green-dark: #309050;
     --color-purple: #8020e0;
     --color-yellow: #f0f000;
 
@@ -3267,20 +2969,15 @@ const sections = [
 
     --content-width: 1180px;
 
-    --radius-sm: 0.5rem;
     --radius-md: 0.75rem;
     --radius-lg: 1.25rem;
-
-    --transition-fast: 160ms ease;
   }
 
   :root[data-theme='light'] {
     color-scheme: light;
 
     --color-bg: #f8faf9;
-    --color-bg-soft: #edf2ef;
     --color-surface: #ffffff;
-    --color-surface-raised: #f8faf9;
 
     --color-text: #16221c;
     --color-text-muted: #5e7067;
@@ -3489,6 +3186,10 @@ const sections = [
     display: none !important;
   }
 
+  :root:not([data-lang]) .language-switcher summary [data-i18n]:not([data-i18n='en']) {
+    display: none !important;
+  }
+
   .header-actions {
     display: flex;
     align-items: center;
@@ -3545,93 +3246,6 @@ const sections = [
     width: 100%;
     height: 100%;
     display: block;
-  }
-
-  .current-flag-fr,
-  .current-code-fr,
-  .current-flag-de,
-  .current-code-de,
-  .current-flag-it,
-  .current-code-it,
-  .current-flag-es,
-  .current-code-es,
-  .current-flag-pt-br,
-  .current-code-pt-br,
-  .current-flag-ru,
-  .current-code-ru,
-  .current-flag-zh-cn,
-  .current-code-zh-cn,
-  .current-flag-ja,
-  .current-code-ja,
-  .current-flag-ko,
-  .current-code-ko {
-    display: none;
-  }
-
-  :root[data-lang='fr'] .current-flag-en,
-  :root[data-lang='fr'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='fr'] .current-flag-fr,
-  :root[data-lang='fr'] .current-code-fr {
-    display: inline-grid;
-  }
-
-  :root[data-lang='de'] .current-flag-en,
-  :root[data-lang='de'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='de'] .current-flag-de,
-  :root[data-lang='de'] .current-code-de {
-    display: inline-grid;
-  }
-
-  :root[data-lang='it'] .current-flag-en,
-  :root[data-lang='it'] .current-code-en,
-  :root[data-lang='es'] .current-flag-en,
-  :root[data-lang='es'] .current-code-en,
-  :root[data-lang='pt-BR'] .current-flag-en,
-  :root[data-lang='pt-BR'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='it'] .current-flag-it,
-  :root[data-lang='it'] .current-code-it,
-  :root[data-lang='es'] .current-flag-es,
-  :root[data-lang='es'] .current-code-es,
-  :root[data-lang='pt-BR'] .current-flag-pt-br,
-  :root[data-lang='pt-BR'] .current-code-pt-br {
-    display: inline-grid;
-  }
-
-  :root[data-lang='ru'] .current-flag-en,
-  :root[data-lang='ru'] .current-code-en,
-  :root[data-lang='zh-CN'] .current-flag-en,
-  :root[data-lang='zh-CN'] .current-code-en,
-  :root[data-lang='ja'] .current-flag-en,
-  :root[data-lang='ja'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='ru'] .current-flag-ru,
-  :root[data-lang='ru'] .current-code-ru,
-  :root[data-lang='zh-CN'] .current-flag-zh-cn,
-  :root[data-lang='zh-CN'] .current-code-zh-cn,
-  :root[data-lang='ja'] .current-flag-ja,
-  :root[data-lang='ja'] .current-code-ja {
-    display: inline-grid;
-  }
-
-  :root[data-lang='ko'] .current-flag-en,
-  :root[data-lang='ko'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='ko'] .current-flag-ko,
-  :root[data-lang='ko'] .current-code-ko {
-    display: inline-grid;
   }
 
   .current-code {

@@ -4,6 +4,22 @@ import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/600.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
+
+const languages = ['en', 'fr', 'de', 'it', 'es', 'pt-BR', 'ru', 'zh-CN', 'ja', 'ko'] as const;
+type Language = (typeof languages)[number];
+
+const pageTitles: Record<Language, string> = {
+  en: 'GGEMS — Website in progress',
+  fr: 'GGEMS — Nouveau site en préparation',
+  de: 'GGEMS — Website im Aufbau',
+  it: 'GGEMS — Sito in preparazione',
+  es: 'GGEMS — Sitio web en preparación',
+  'pt-BR': 'GGEMS — Site em preparação',
+  ru: 'GGEMS — сайт в разработке',
+  'zh-CN': 'GGEMS — 新网站建设中',
+  ja: 'GGEMS — 新サイト構築中',
+  ko: 'GGEMS — 새 웹사이트 준비 중',
+};
 ---
 
 <!doctype html>
@@ -20,9 +36,9 @@ import '@fontsource/jetbrains-mono/500.css';
     <link rel="icon" type="image/png" href="/images/ggems-logo.png" />
     <link rel="apple-touch-icon" href="/images/ggems-logo.png" />
 
-    <title>GGEMS — Website in progress</title>
+    <title>{pageTitles.en}</title>
 
-    <script is:inline>
+    <script is:inline define:vars={{ supportedLanguages: languages }}>
       (() => {
         const storedTheme = localStorage.getItem('ggems-theme');
         const theme =
@@ -34,15 +50,13 @@ import '@fontsource/jetbrains-mono/500.css';
         document.documentElement.dataset.theme = theme;
 
         const storedLang = localStorage.getItem('ggems-language');
-        const supportedLanguages = ['en', 'fr', 'de', 'es', 'it', 'pt-BR', 'ru', 'zh-CN', 'ja', 'ko'];
+        const lang =
+          storedLang && supportedLanguages.includes(storedLang)
+            ? storedLang
+            : 'en';
 
-        if (storedLang && supportedLanguages.includes(storedLang)) {
-          document.documentElement.lang = storedLang;
-          document.documentElement.dataset.lang = storedLang;
-        } else {
-          document.documentElement.lang = 'en';
-          document.documentElement.dataset.lang = 'en';
-        }
+        document.documentElement.lang = lang;
+        document.documentElement.dataset.lang = lang;
       })();
     </script>
   </head>
@@ -63,7 +77,7 @@ import '@fontsource/jetbrains-mono/500.css';
         <div class="header-actions">
           <details class="language-switcher">
             <summary aria-label="Language" title="Language">
-              <span class="flag current-flag current-flag-en" aria-hidden="true">
+              <span class="flag" data-i18n="en" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#fff" />
                   <g fill="#b22234">
@@ -108,7 +122,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-fr" aria-hidden="true">
+              <span class="flag" data-i18n="fr" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="9.34" height="20" x="0" fill="#0055a4" />
                   <rect width="9.34" height="20" x="9.33" fill="#fff" />
@@ -116,7 +130,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-de" aria-hidden="true">
+              <span class="flag" data-i18n="de" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="6.67" y="0" fill="#000" />
                   <rect width="28" height="6.67" y="6.66" fill="#dd0000" />
@@ -124,7 +138,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-it" aria-hidden="true">
+              <span class="flag" data-i18n="it" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="9.34" height="20" x="0" fill="#009246" />
                   <rect width="9.34" height="20" x="9.33" fill="#fff" />
@@ -132,7 +146,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-es" aria-hidden="true">
+              <span class="flag" data-i18n="es" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="5" y="0" fill="#aa151b" />
                   <rect width="28" height="10" y="5" fill="#f1bf00" />
@@ -140,7 +154,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-pt-br" aria-hidden="true">
+              <span class="flag" data-i18n="pt-BR" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#009c3b" />
                   <polygon points="14,2 26,10 14,18 2,10" fill="#ffdf00" />
@@ -148,7 +162,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-ru" aria-hidden="true">
+              <span class="flag" data-i18n="ru" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="6.67" y="0" fill="#fff" />
                   <rect width="28" height="6.67" y="6.66" fill="#0039a6" />
@@ -156,7 +170,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-zh-cn" aria-hidden="true">
+              <span class="flag" data-i18n="zh-CN" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#de2910" />
                   <polygon points="5,2.4 5.8,4.8 8.3,4.8 6.25,6.25 7.05,8.6 5,7.15 2.95,8.6 3.75,6.25 1.7,4.8 4.2,4.8" fill="#ffde00" />
@@ -167,14 +181,14 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-ja" aria-hidden="true">
+              <span class="flag" data-i18n="ja" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#fff" />
                   <circle cx="14" cy="10" r="5.2" fill="#bc002d" />
                 </svg>
               </span>
 
-              <span class="flag current-flag current-flag-ko" aria-hidden="true">
+              <span class="flag" data-i18n="ko" aria-hidden="true">
                 <svg viewBox="0 0 28 20" role="presentation">
                   <rect width="28" height="20" fill="#fff" />
                   <path d="M14 5.3a4.7 4.7 0 0 1 0 9.4 2.35 2.35 0 0 0 0-4.7 2.35 2.35 0 0 1 0-4.7Z" fill="#0047a0" />
@@ -188,16 +202,16 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
-              <span class="current-code current-code-en">EN</span>
-              <span class="current-code current-code-fr">FR</span>
-              <span class="current-code current-code-de">DE</span>
-              <span class="current-code current-code-es">ES</span>
-              <span class="current-code current-code-it">IT</span>
-              <span class="current-code current-code-pt-br">PT-BR</span>
-              <span class="current-code current-code-ru">RU</span>
-              <span class="current-code current-code-zh-cn">ZH-CN</span>
-              <span class="current-code current-code-ja">JA</span>
-              <span class="current-code current-code-ko">KO</span>
+              <span class="current-code" data-i18n="en">EN</span>
+              <span class="current-code" data-i18n="fr">FR</span>
+              <span class="current-code" data-i18n="de">DE</span>
+              <span class="current-code" data-i18n="es">ES</span>
+              <span class="current-code" data-i18n="it">IT</span>
+              <span class="current-code" data-i18n="pt-BR">PT-BR</span>
+              <span class="current-code" data-i18n="ru">RU</span>
+              <span class="current-code" data-i18n="zh-CN">ZH-CN</span>
+              <span class="current-code" data-i18n="ja">JA</span>
+              <span class="current-code" data-i18n="ko">KO</span>
               <span class="chevron" aria-hidden="true">⌄</span>
             </summary>
 
@@ -341,17 +355,17 @@ import '@fontsource/jetbrains-mono/500.css';
               <button type="button" data-language="ko">
                 <span class="language-name">
                   <span class="flag" aria-hidden="true">
-                <svg viewBox="0 0 28 20" role="presentation">
-                  <rect width="28" height="20" fill="#fff" />
-                  <path d="M14 5.3a4.7 4.7 0 0 1 0 9.4 2.35 2.35 0 0 0 0-4.7 2.35 2.35 0 0 1 0-4.7Z" fill="#0047a0" />
-                  <path d="M14 14.7a4.7 4.7 0 0 1 0-9.4 2.35 2.35 0 0 0 0 4.7 2.35 2.35 0 0 1 0 4.7Z" fill="#cd2e3a" />
-                  <g stroke="#111" stroke-width=".72">
-                    <path d="M5.3 4.3 8.1 2.5M6 5.4 8.8 3.6M6.7 6.5 9.5 4.7" />
-                    <path d="M18.5 15.3 21.3 13.5M19.2 16.4 22 14.6M19.9 17.5 22.7 15.7" />
-                    <path d="M18.5 4.7 21.3 6.5M19.2 3.6 22 5.4M19.9 2.5 22.7 4.3" />
-                    <path d="M5.3 15.7 8.1 17.5M6 14.6 8.8 16.4M6.7 13.5 9.5 15.3" />
-                  </g>
-                </svg>
+                    <svg viewBox="0 0 28 20" role="presentation">
+                      <rect width="28" height="20" fill="#fff" />
+                      <path d="M14 5.3a4.7 4.7 0 0 1 0 9.4 2.35 2.35 0 0 0 0-4.7 2.35 2.35 0 0 1 0-4.7Z" fill="#0047a0" />
+                      <path d="M14 14.7a4.7 4.7 0 0 1 0-9.4 2.35 2.35 0 0 0 0 4.7 2.35 2.35 0 0 1 0 4.7Z" fill="#cd2e3a" />
+                      <g stroke="#111" stroke-width=".72">
+                        <path d="M5.3 4.3 8.1 2.5M6 5.4 8.8 3.6M6.7 6.5 9.5 4.7" />
+                        <path d="M18.5 15.3 21.3 13.5M19.2 16.4 22 14.6M19.9 17.5 22.7 15.7" />
+                        <path d="M18.5 4.7 21.3 6.5M19.2 3.6 22 5.4M19.9 2.5 22.7 4.3" />
+                        <path d="M5.3 15.7 8.1 17.5M6 14.6 8.8 16.4M6.7 13.5 9.5 15.3" />
+                      </g>
+                    </svg>
                   </span>
                   <span>한국어</span>
                 </span>
@@ -395,7 +409,7 @@ import '@fontsource/jetbrains-mono/500.css';
             </h1>
 
             <h1 data-i18n="de">
-              GGEMS-Webseite
+              GGEMS-Website
               <span>im Aufbau.</span>
             </h1>
 
@@ -421,7 +435,7 @@ import '@fontsource/jetbrains-mono/500.css';
 
             <h1 data-i18n="zh-CN">
               <span class="cjk-nowrap">GGEMS 网站</span>
-              <span>正在建设中。</span>
+              <span>建设中。</span>
             </h1>
 
             <h1 data-i18n="ja">
@@ -555,10 +569,10 @@ import '@fontsource/jetbrains-mono/500.css';
           <h2 data-i18n="ru">Монте-Карло для медицинской физики.</h2>
           <h2 data-i18n="zh-CN">用于医学物理的蒙特卡罗模拟。</h2>
           <h2 data-i18n="ja">
-            <span class="ja-title-line">医療物理向け</span>
+            <span class="ja-title-line">医学物理向け</span>
             <span class="ja-title-line">モンテカルロ。</span>
           </h2>
-          <h2 data-i18n="ko">의료물리를 위한 몬테카를로.</h2>
+          <h2 data-i18n="ko">의학물리를 위한 몬테카를로.</h2>
 
           <p class="lead" data-i18n="en">
             GGEMS is an open-source, GPU-first Monte Carlo simulation project for medical
@@ -632,13 +646,13 @@ import '@fontsource/jetbrains-mono/500.css';
           <h2 data-i18n="es">Computación multiplataforma</h2>
           <h2 data-i18n="pt-BR">Computação multiplataforma</h2>
           <h2 data-i18n="ru">
-            <span class="ru-title-line">Кроссплатформенные</span>
+            <span class="ru-title-line">Переносимые</span>
             <span class="ru-title-line">вычисления</span>
           </h2>
           <h2 data-i18n="zh-CN">跨平台计算</h2>
           <h2 data-i18n="ja">
-            <span class="ja-title-line">クロスプラットフォーム</span>
-            <span class="ja-title-line">計算</span>
+            <span class="ja-title-line">プラットフォーム</span>
+            <span class="ja-title-line">非依存の計算</span>
           </h2>
           <h2 data-i18n="ko">다중 플랫폼 연산</h2>
 
@@ -684,7 +698,7 @@ import '@fontsource/jetbrains-mono/500.css';
 
           <p class="lead" data-i18n="ja">
             GGEMS は OpenCL を使用し、Windows、Linux、macOS 上で
-            Intel、AMD、NVIDIA ハードウェアによる異種計算を実現します。
+            Intel、AMD、NVIDIA のハードウェアでヘテロジニアス計算を行います。
           </p>
 
           <p class="lead" data-i18n="ko">
@@ -736,7 +750,7 @@ import '@fontsource/jetbrains-mono/500.css';
           <p class="eyebrow" data-i18n="ko">프로젝트 상태</p>
 
           <h2 data-i18n="en">Implementation roadmap</h2>
-          <h2 data-i18n="fr">Roadmap d’implémentation</h2>
+          <h2 data-i18n="fr">Plan d’implémentation</h2>
           <h2 data-i18n="de">Umsetzungsplan</h2>
           <h2 data-i18n="it">Piano di implementazione</h2>
           <h2 data-i18n="es">Plan de implementación</h2>
@@ -766,7 +780,7 @@ import '@fontsource/jetbrains-mono/500.css';
 
           <p class="lead" data-i18n="it">
             L’implementazione è attualmente concentrata sulla navigazione, a partire
-            da una World finita e una Box analitica.
+            da un World finito e una Box analitica.
           </p>
 
           <p class="lead" data-i18n="es">
@@ -785,7 +799,7 @@ import '@fontsource/jetbrains-mono/500.css';
           </p>
 
           <p class="lead" data-i18n="zh-CN">
-            当前实现重点是导航，首先完成有限 World 和解析 Box。
+            当前实现重点是导航，从有限 World 和解析 Box 开始。
           </p>
 
           <p class="lead" data-i18n="ja">
@@ -811,7 +825,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 <span class="roadmap-label" data-i18n="ru">В РАБОТЕ</span>
                 <span class="roadmap-label" data-i18n="zh-CN">进行中</span>
                 <span class="roadmap-label" data-i18n="ja">進行中</span>
-            <span class="roadmap-label" data-i18n="ko">진행 중</span>
+                <span class="roadmap-label" data-i18n="ko">진행 중</span>
 
                 <h3 data-i18n="en">Navigation</h3>
                 <h3 data-i18n="fr">Navigation</h3>
@@ -845,12 +859,12 @@ import '@fontsource/jetbrains-mono/500.css';
                 <h4 data-i18n="it">Ambito geometrico</h4>
                 <h4 data-i18n="es">Ámbito geométrico</h4>
                 <h4 data-i18n="pt-BR">Escopo geométrico</h4>
-                <h4 data-i18n="ru">Область геометрии</h4>
+                <h4 data-i18n="ru">Геометрия</h4>
                 <h4 data-i18n="zh-CN">几何范围</h4>
                 <h4 data-i18n="ja">ジオメトリ範囲</h4>
                 <h4 data-i18n="ko">지오메트리 범위</h4>
 
-                <ul class="roadmap-items-default">
+                <ul data-i18n="en">
                   <li>Finite World</li>
                   <li>Analytic Box</li>
                   <li>Initial bounded navigation</li>
@@ -869,7 +883,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 </ul>
 
                 <ul data-i18n="it">
-                  <li>World finita</li>
+                  <li>World finito</li>
                   <li>Box analitica</li>
                   <li>Prima navigazione delimitata</li>
                 </ul>
@@ -923,7 +937,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 <h4 data-i18n="ja">今後の拡張</h4>
                 <h4 data-i18n="ko">향후 확장</h4>
 
-                <ul class="roadmap-items-default">
+                <ul data-i18n="en">
                   <li>Voxels</li>
                   <li>Mesh-based geometries</li>
                   <li>More complex navigation cases</li>
@@ -936,19 +950,19 @@ import '@fontsource/jetbrains-mono/500.css';
                 </ul>
 
                 <ul data-i18n="de">
-                  <li>Voxels</li>
+                  <li>Voxel</li>
                   <li>Mesh-Geometrien</li>
                   <li>Komplexere Navigationsfälle</li>
                 </ul>
 
                 <ul data-i18n="it">
-                  <li>Voxels</li>
+                  <li>Voxel</li>
                   <li>Geometrie a mesh</li>
                   <li>Casi di navigazione più complessi</li>
                 </ul>
 
                 <ul data-i18n="es">
-                  <li>Voxels</li>
+                  <li>Vóxeles</li>
                   <li>Geometrías malladas</li>
                   <li>Casos de navegación más complejos</li>
                 </ul>
@@ -966,19 +980,19 @@ import '@fontsource/jetbrains-mono/500.css';
                 </ul>
 
                 <ul data-i18n="zh-CN">
-                  <li>Voxels</li>
+                  <li>体素</li>
                   <li>网格几何</li>
                   <li>更复杂的导航场景</li>
                 </ul>
 
                 <ul data-i18n="ja">
-                  <li>Voxels</li>
+                  <li>ボクセル</li>
                   <li>メッシュジオメトリ</li>
                   <li>より複雑なナビゲーション</li>
                 </ul>
 
                 <ul data-i18n="ko">
-                  <li>Voxels</li>
+                  <li>복셀</li>
                   <li>메시 기반 지오메트리</li>
                   <li>더 복잡한 내비게이션 사례</li>
                 </ul>
@@ -989,8 +1003,8 @@ import '@fontsource/jetbrains-mono/500.css';
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="fr">Voir la roadmap complète →</a>
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="de">Gesamte Roadmap ansehen →</a>
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="it">Vedi la roadmap completa →</a>
-            <a class="roadmap-status-link" href="/roadmap/" data-i18n="es">Ver la roadmap completa →</a>
-            <a class="roadmap-status-link" href="/roadmap/" data-i18n="pt-BR">Ver a roadmap completa →</a>
+            <a class="roadmap-status-link" href="/roadmap/" data-i18n="es">Ver la hoja de ruta completa →</a>
+            <a class="roadmap-status-link" href="/roadmap/" data-i18n="pt-BR">Ver o roadmap completo →</a>
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="ru">Открыть полную дорожную карту →</a>
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="zh-CN">查看完整路线图 →</a>
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="ja">ロードマップ全体を見る →</a>
@@ -1015,35 +1029,11 @@ import '@fontsource/jetbrains-mono/500.css';
       </div>
     </footer>
 
-    <script is:inline>
+    <script is:inline define:vars={{ supportedLanguages: languages, pageTitles }}>
       (() => {
         const root = document.documentElement;
         const themeButton = document.querySelector('.theme-toggle');
         const languageButtons = document.querySelectorAll('[data-language]');
-
-        const updateTitle = () => {
-          if (root.dataset.lang === 'fr') {
-            document.title = 'GGEMS — Nouveau site en préparation';
-          } else if (root.dataset.lang === 'de') {
-            document.title = 'GGEMS — Webseite im Aufbau';
-          } else if (root.dataset.lang === 'it') {
-            document.title = 'GGEMS — Sito in preparazione';
-          } else if (root.dataset.lang === 'es') {
-            document.title = 'GGEMS — Sitio web en preparación';
-          } else if (root.dataset.lang === 'pt-BR') {
-            document.title = 'GGEMS — Site em preparação';
-          } else if (root.dataset.lang === 'ru') {
-            document.title = 'GGEMS — сайт в разработке';
-          } else if (root.dataset.lang === 'zh-CN') {
-            document.title = 'GGEMS — 新网站建设中';
-          } else if (root.dataset.lang === 'ja') {
-            document.title = 'GGEMS — 新サイト構築中';
-          } else if (root.dataset.lang === 'ko') {
-            document.title = 'GGEMS — 새 웹사이트 준비 중';
-          } else {
-            document.title = 'GGEMS — Website in progress';
-          }
-        };
 
         const setLanguage = (lang) => {
           root.dataset.lang = lang;
@@ -1056,7 +1046,7 @@ import '@fontsource/jetbrains-mono/500.css';
 
           document.querySelector('.language-switcher')?.removeAttribute('open');
 
-          updateTitle();
+          document.title = pageTitles[lang] ?? pageTitles.en;
         };
 
         languageButtons.forEach((button) => {
@@ -1069,7 +1059,6 @@ import '@fontsource/jetbrains-mono/500.css';
           localStorage.setItem('ggems-theme', nextTheme);
         });
 
-        const supportedLanguages = ['en', 'fr', 'de', 'es', 'it', 'pt-BR', 'ru', 'zh-CN', 'ja', 'ko'];
         setLanguage(
           supportedLanguages.includes(root.dataset.lang)
             ? root.dataset.lang
@@ -1091,9 +1080,7 @@ import '@fontsource/jetbrains-mono/500.css';
     --subtle: #72808e;
     --border: rgb(170 183 197 / 14%);
     --border-strong: rgb(170 183 197 / 24%);
-    --green: #50c070;
     --green-light: #80d0a0;
-    --purple: #8020e0;
     --yellow: #f0f000;
     --progress-label: #f0f000;
     --shadow: rgb(0 0 0 / 18%);
@@ -1115,22 +1102,6 @@ import '@fontsource/jetbrains-mono/500.css';
 
   * {
     box-sizing: border-box;
-  }
-  .roadmap-link {
-    flex: 0 0 auto;
-
-    color: var(--muted);
-
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-
-    text-decoration: none;
-
-    transition: color 160ms ease;
-  }
-
-  .roadmap-link:hover {
-    color: var(--text);
   }
 
   html {
@@ -1193,18 +1164,6 @@ import '@fontsource/jetbrains-mono/500.css';
     overflow-wrap: normal;
   }
 
-  :root[data-lang='fr'] .roadmap-items-default,
-  :root[data-lang='de'] .roadmap-items-default,
-  :root[data-lang='it'] .roadmap-items-default,
-  :root[data-lang='es'] .roadmap-items-default,
-  :root[data-lang='pt-BR'] .roadmap-items-default,
-  :root[data-lang='ru'] .roadmap-items-default,
-  :root[data-lang='zh-CN'] .roadmap-items-default,
-  :root[data-lang='ja'] .roadmap-items-default,
-  :root[data-lang='ko'] .roadmap-items-default {
-    display: none;
-  }
-
   .ja-title-line {
     display: block;
     white-space: nowrap;
@@ -1230,6 +1189,10 @@ import '@fontsource/jetbrains-mono/500.css';
   :root[data-lang='zh-CN'] [data-i18n]:not([data-i18n='zh-CN']),
   :root[data-lang='ja'] [data-i18n]:not([data-i18n='ja']),
   :root[data-lang='ko'] [data-i18n]:not([data-i18n='ko']) {
+    display: none !important;
+  }
+
+  :root:not([data-lang]) .language-switcher summary [data-i18n]:not([data-i18n='en']) {
     display: none !important;
   }
 
@@ -1290,6 +1253,23 @@ import '@fontsource/jetbrains-mono/500.css';
     color: var(--subtle);
     font-size: 0.68rem;
     white-space: nowrap;
+  }
+
+  .roadmap-link {
+    flex: 0 0 auto;
+
+    color: var(--muted);
+
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+
+    text-decoration: none;
+
+    transition: color 160ms ease;
+  }
+
+  .roadmap-link:hover {
+    color: var(--text);
   }
 
   .header-actions {
@@ -1354,99 +1334,6 @@ import '@fontsource/jetbrains-mono/500.css';
     height: 100%;
 
     display: block;
-  }
-
-  .current-flag-fr,
-  .current-code-fr,
-  .current-flag-de,
-  .current-code-de,
-  .current-flag-it,
-  .current-code-it,
-  .current-flag-es,
-  .current-code-es,
-  .current-flag-pt-br,
-  .current-code-pt-br,
-  .current-flag-ru,
-  .current-code-ru,
-  .current-flag-zh-cn,
-  .current-code-zh-cn,
-  .current-flag-ja,
-  .current-code-ja,
-  .current-flag-ko,
-  .current-code-ko {
-    display: none;
-  }
-
-  :root[data-lang='fr'] .current-flag-en,
-  :root[data-lang='fr'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='fr'] .current-flag-fr,
-  :root[data-lang='fr'] .current-code-fr {
-    display: inline-grid;
-  }
-
-  :root[data-lang='de'] .current-flag-en,
-  :root[data-lang='de'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='de'] .current-flag-de,
-  :root[data-lang='de'] .current-code-de {
-    display: inline-grid;
-  }
-
-  :root[data-lang='it'] .current-flag-en,
-  :root[data-lang='it'] .current-code-en,
-  :root[data-lang='es'] .current-flag-en,
-  :root[data-lang='es'] .current-code-en,
-  :root[data-lang='pt-BR'] .current-flag-en,
-  :root[data-lang='pt-BR'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='it'] .current-flag-it,
-  :root[data-lang='it'] .current-code-it,
-  :root[data-lang='es'] .current-flag-es,
-  :root[data-lang='es'] .current-code-es,
-  :root[data-lang='pt-BR'] .current-flag-pt-br,
-  :root[data-lang='pt-BR'] .current-code-pt-br {
-    display: inline-grid;
-  }
-
-  :root[data-lang='ru'] .current-flag-en,
-  :root[data-lang='ru'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='ru'] .current-flag-ru,
-  :root[data-lang='ru'] .current-code-ru {
-    display: inline-grid;
-  }
-
-  :root[data-lang='zh-CN'] .current-flag-en,
-  :root[data-lang='zh-CN'] .current-code-en,
-  :root[data-lang='ja'] .current-flag-en,
-  :root[data-lang='ja'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='zh-CN'] .current-flag-zh-cn,
-  :root[data-lang='zh-CN'] .current-code-zh-cn,
-  :root[data-lang='ja'] .current-flag-ja,
-  :root[data-lang='ja'] .current-code-ja {
-    display: inline-grid;
-  }
-
-  :root[data-lang='ko'] .current-flag-en,
-  :root[data-lang='ko'] .current-code-en {
-    display: none;
-  }
-
-  :root[data-lang='ko'] .current-flag-ko,
-  :root[data-lang='ko'] .current-code-ko {
-    display: inline-grid;
   }
 
   .current-code {
@@ -1695,28 +1582,6 @@ import '@fontsource/jetbrains-mono/500.css';
   }
 
 
-  .button {
-    display: inline-flex;
-    align-items: center;
-
-    padding: 0.85rem 1.2rem;
-
-    border: 1px solid transparent;
-    border-radius: 0.55rem;
-
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-    font-weight: 500;
-
-    text-decoration: none;
-  }
-
-  .button-primary {
-    color: #06120a;
-    background: var(--green);
-  }
-
-
   .status {
     display: flex;
     align-items: center;
@@ -1886,21 +1751,12 @@ import '@fontsource/jetbrains-mono/500.css';
     border-radius: 1rem;
   }
 
-  .roadmap-done {
-    background: linear-gradient(145deg, rgb(80 192 112 / 14%), rgb(80 192 112 / 5%));
-  }
-
   .roadmap-active {
     background:
       color-mix(in srgb, var(--band-b) 92%, var(--yellow) 8%);
   }
 
-  .roadmap-later {
-    background: linear-gradient(145deg, rgb(128 32 224 / 12%), rgb(128 32 224 / 4%));
-  }
-
-  .roadmap-label,
-  .next > span {
+  .roadmap-label {
     width: fit-content;
 
     font-family: 'JetBrains Mono', monospace;
@@ -1910,17 +1766,8 @@ import '@fontsource/jetbrains-mono/500.css';
     text-transform: uppercase;
   }
 
-  .roadmap-done .roadmap-label {
-    color: var(--green);
-  }
-
   .roadmap-active .roadmap-label {
     color: var(--progress-label);
-  }
-
-  .roadmap-later .roadmap-label,
-  .next > span {
-    color: var(--purple);
   }
 
   .roadmap-card-heading {
@@ -2030,23 +1877,6 @@ import '@fontsource/jetbrains-mono/500.css';
   .roadmap-status-link:hover {
     color: var(--text);
   }
-
-  .next {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-    gap: 0.9rem;
-
-    padding-top: 1rem;
-
-    border-top: 1px solid var(--border);
-  }
-
-  .next strong {
-    font-size: clamp(1rem, 1.35vw, 1.2rem);
-    font-weight: 500;
-  }
-
 
   footer {
     border-top: 1px solid var(--border);
@@ -2195,10 +2025,6 @@ import '@fontsource/jetbrains-mono/500.css';
       margin-top: 1.8rem;
     }
 
-    .next {
-      margin-top: 1.5rem;
-    }
-
     .footer-inner {
       grid-template-columns: 1fr;
       justify-items: center;
@@ -2248,11 +2074,6 @@ import '@fontsource/jetbrains-mono/500.css';
 
     .split-heading > h2 {
       font-size: clamp(2.5rem, 11vw, 4rem);
-    }
-
-    .next {
-      grid-template-columns: 1fr;
-      gap: 0.7rem;
     }
   }
 
