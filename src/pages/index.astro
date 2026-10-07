@@ -34,7 +34,7 @@ import '@fontsource/jetbrains-mono/500.css';
         document.documentElement.dataset.theme = theme;
 
         const storedLang = localStorage.getItem('ggems-language');
-        const supportedLanguages = ['en', 'fr', 'de', 'es', 'it', 'pt-BR', 'ru', 'zh-CN', 'ja'];
+        const supportedLanguages = ['en', 'fr', 'de', 'es', 'it', 'pt-BR', 'ru', 'zh-CN', 'ja', 'ko'];
 
         if (storedLang && supportedLanguages.includes(storedLang)) {
           document.documentElement.lang = storedLang;
@@ -174,6 +174,20 @@ import '@fontsource/jetbrains-mono/500.css';
                 </svg>
               </span>
 
+              <span class="flag current-flag current-flag-ko" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="20" fill="#fff" />
+                  <path d="M14 5.3a4.7 4.7 0 0 1 0 9.4 2.35 2.35 0 0 0 0-4.7 2.35 2.35 0 0 1 0-4.7Z" fill="#0047a0" />
+                  <path d="M14 14.7a4.7 4.7 0 0 1 0-9.4 2.35 2.35 0 0 0 0 4.7 2.35 2.35 0 0 1 0 4.7Z" fill="#cd2e3a" />
+                  <g stroke="#111" stroke-width=".72">
+                    <path d="M5.3 4.3 8.1 2.5M6 5.4 8.8 3.6M6.7 6.5 9.5 4.7" />
+                    <path d="M18.5 15.3 21.3 13.5M19.2 16.4 22 14.6M19.9 17.5 22.7 15.7" />
+                    <path d="M18.5 4.7 21.3 6.5M19.2 3.6 22 5.4M19.9 2.5 22.7 4.3" />
+                    <path d="M5.3 15.7 8.1 17.5M6 14.6 8.8 16.4M6.7 13.5 9.5 15.3" />
+                  </g>
+                </svg>
+              </span>
+
               <span class="current-code current-code-en">EN</span>
               <span class="current-code current-code-fr">FR</span>
               <span class="current-code current-code-de">DE</span>
@@ -183,6 +197,7 @@ import '@fontsource/jetbrains-mono/500.css';
               <span class="current-code current-code-ru">RU</span>
               <span class="current-code current-code-zh-cn">ZH-CN</span>
               <span class="current-code current-code-ja">JA</span>
+              <span class="current-code current-code-ko">KO</span>
               <span class="chevron" aria-hidden="true">⌄</span>
             </summary>
 
@@ -322,6 +337,26 @@ import '@fontsource/jetbrains-mono/500.css';
                 </span>
                 <small>JA</small>
               </button>
+
+              <button type="button" data-language="ko">
+                <span class="language-name">
+                  <span class="flag" aria-hidden="true">
+                <svg viewBox="0 0 28 20" role="presentation">
+                  <rect width="28" height="20" fill="#fff" />
+                  <path d="M14 5.3a4.7 4.7 0 0 1 0 9.4 2.35 2.35 0 0 0 0-4.7 2.35 2.35 0 0 1 0-4.7Z" fill="#0047a0" />
+                  <path d="M14 14.7a4.7 4.7 0 0 1 0-9.4 2.35 2.35 0 0 0 0 4.7 2.35 2.35 0 0 1 0 4.7Z" fill="#cd2e3a" />
+                  <g stroke="#111" stroke-width=".72">
+                    <path d="M5.3 4.3 8.1 2.5M6 5.4 8.8 3.6M6.7 6.5 9.5 4.7" />
+                    <path d="M18.5 15.3 21.3 13.5M19.2 16.4 22 14.6M19.9 17.5 22.7 15.7" />
+                    <path d="M18.5 4.7 21.3 6.5M19.2 3.6 22 5.4M19.9 2.5 22.7 4.3" />
+                    <path d="M5.3 15.7 8.1 17.5M6 14.6 8.8 16.4M6.7 13.5 9.5 15.3" />
+                  </g>
+                </svg>
+                  </span>
+                  <span>한국어</span>
+                </span>
+                <small>KO</small>
+              </button>
             </div>
           </details>
 
@@ -394,6 +429,11 @@ import '@fontsource/jetbrains-mono/500.css';
               <span>構築中。</span>
             </h1>
 
+            <h1 data-i18n="ko">
+              GGEMS 웹사이트
+              <span>구축 중.</span>
+            </h1>
+
             <p class="hero-lead" data-i18n="en">
               GGEMS development continues while the new public website is prepared.
             </p>
@@ -428,6 +468,10 @@ import '@fontsource/jetbrains-mono/500.css';
 
             <p class="hero-lead" data-i18n="ja">
               GGEMS の開発は継続中で、新しい公開サイトを準備しています。
+            </p>
+
+            <p class="hero-lead" data-i18n="ko">
+              GGEMS 개발은 계속 진행 중이며, 새로운 공개 웹사이트를 준비하고 있습니다.
             </p>
 
             <p class="definition">GPU Geant4-based Monte Carlo Simulations</p>
@@ -476,6 +520,11 @@ import '@fontsource/jetbrains-mono/500.css';
               <span></span>
               サイト刷新中 · GGEMS の開発は継続中
             </p>
+
+            <p class="status" data-i18n="ko">
+              <span></span>
+              웹사이트 개편 중 · GGEMS 개발 진행 중
+            </p>
           </div>
 
           <div class="hero-visual" aria-hidden="true">
@@ -495,6 +544,7 @@ import '@fontsource/jetbrains-mono/500.css';
           <p class="eyebrow" data-i18n="ru">О GGEMS</p>
           <p class="eyebrow" data-i18n="zh-CN">关于 GGEMS</p>
           <p class="eyebrow" data-i18n="ja">GGEMS について</p>
+          <p class="eyebrow" data-i18n="ko">GGEMS 소개</p>
 
           <h2 data-i18n="en">Monte Carlo for medical physics.</h2>
           <h2 data-i18n="fr">Monte Carlo pour la physique médicale.</h2>
@@ -508,6 +558,7 @@ import '@fontsource/jetbrains-mono/500.css';
             <span class="ja-title-line">医療物理向け</span>
             <span class="ja-title-line">モンテカルロ。</span>
           </h2>
+          <h2 data-i18n="ko">의료물리를 위한 몬테카를로.</h2>
 
           <p class="lead" data-i18n="en">
             GGEMS is an open-source, GPU-first Monte Carlo simulation project for medical
@@ -553,6 +604,11 @@ import '@fontsource/jetbrains-mono/500.css';
             GGEMS は、医用画像、線量評価、粒子線治療を対象とする、
             オープンソースの GPU-first モンテカルロシミュレーションプロジェクトです。
           </p>
+
+          <p class="lead" data-i18n="ko">
+            GGEMS는 의료 영상, 선량평가 및 입자치료를 위한
+            오픈소스 GPU-first 몬테카를로 시뮬레이션 프로젝트입니다.
+          </p>
         </div>
       </section>
 
@@ -567,6 +623,7 @@ import '@fontsource/jetbrains-mono/500.css';
           <p class="eyebrow" data-i18n="ru">ВЫЧИСЛЕНИЯ</p>
           <p class="eyebrow" data-i18n="zh-CN">计算</p>
           <p class="eyebrow" data-i18n="ja">計算</p>
+          <p class="eyebrow" data-i18n="ko">컴퓨팅</p>
 
           <h2 data-i18n="en">Portable Compute</h2>
           <h2 data-i18n="fr">Calcul portable</h2>
@@ -583,6 +640,7 @@ import '@fontsource/jetbrains-mono/500.css';
             <span class="ja-title-line">クロスプラットフォーム</span>
             <span class="ja-title-line">計算</span>
           </h2>
+          <h2 data-i18n="ko">다중 플랫폼 연산</h2>
 
           <p class="lead" data-i18n="en">
             GGEMS uses OpenCL for heterogeneous compute across Windows, Linux and macOS,
@@ -628,6 +686,11 @@ import '@fontsource/jetbrains-mono/500.css';
             GGEMS は OpenCL を使用し、Windows、Linux、macOS 上で
             Intel、AMD、NVIDIA ハードウェアによる異種計算を実現します。
           </p>
+
+          <p class="lead" data-i18n="ko">
+            GGEMS는 OpenCL을 사용해 Windows, Linux, macOS에서
+            Intel, AMD, NVIDIA 하드웨어를 아우르는 이기종 연산을 수행합니다.
+          </p>
         </div>
 
         <div class="container compute-map">
@@ -647,6 +710,7 @@ import '@fontsource/jetbrains-mono/500.css';
             <small data-i18n="ru">СЛОЙ ВЫЧИСЛЕНИЙ</small>
             <small data-i18n="zh-CN">计算层</small>
             <small data-i18n="ja">計算層</small>
+            <small data-i18n="ko">연산 계층</small>
             <strong>OpenCL</strong>
           </div>
 
@@ -669,6 +733,7 @@ import '@fontsource/jetbrains-mono/500.css';
           <p class="eyebrow" data-i18n="ru">СТАТУС ПРОЕКТА</p>
           <p class="eyebrow" data-i18n="zh-CN">项目状态</p>
           <p class="eyebrow" data-i18n="ja">プロジェクト状況</p>
+          <p class="eyebrow" data-i18n="ko">프로젝트 상태</p>
 
           <h2 data-i18n="en">Implementation roadmap</h2>
           <h2 data-i18n="fr">Roadmap d’implémentation</h2>
@@ -682,6 +747,7 @@ import '@fontsource/jetbrains-mono/500.css';
             <span class="ja-title-line">実装</span>
             <span class="ja-title-line">ロードマップ</span>
           </h2>
+          <h2 data-i18n="ko">구현 로드맵</h2>
 
           <p class="lead" data-i18n="en">
             Implementation currently focuses on Navigation, beginning with a finite World
@@ -714,16 +780,21 @@ import '@fontsource/jetbrains-mono/500.css';
           </p>
 
           <p class="lead" data-i18n="ru">
-            Сейчас реализация сосредоточена на навигации, начиная с конечного World
-            и аналитического Box.
+            Сейчас основное внимание уделяется навигации: сначала конечный World
+            и аналитический Box.
           </p>
 
           <p class="lead" data-i18n="zh-CN">
-            当前实现重点是导航，首先构建有限 World 和解析 Box。
+            当前实现重点是导航，首先完成有限 World 和解析 Box。
           </p>
 
           <p class="lead" data-i18n="ja">
-            現在の実装は Navigation に集中しており、有限 World と解析的 Box から進めています。
+            現在はナビゲーションの実装に集中し、有限 World と解析 Box から進めています。
+          </p>
+
+          <p class="lead" data-i18n="ko">
+            현재 구현은 내비게이션에 집중하고 있으며,
+            유한 World와 해석적 Box부터 진행하고 있습니다.
           </p>
         </div>
 
@@ -740,6 +811,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 <span class="roadmap-label" data-i18n="ru">В РАБОТЕ</span>
                 <span class="roadmap-label" data-i18n="zh-CN">进行中</span>
                 <span class="roadmap-label" data-i18n="ja">進行中</span>
+            <span class="roadmap-label" data-i18n="ko">진행 중</span>
 
                 <h3 data-i18n="en">Navigation</h3>
                 <h3 data-i18n="fr">Navigation</h3>
@@ -750,6 +822,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 <h3 data-i18n="ru">Навигация</h3>
                 <h3 data-i18n="zh-CN">导航</h3>
                 <h3 data-i18n="ja">ナビゲーション</h3>
+                <h3 data-i18n="ko">내비게이션</h3>
               </div>
 
               <p data-i18n="en">Current implementation work focuses on the first bounded geometry slice.</p>
@@ -758,9 +831,10 @@ import '@fontsource/jetbrains-mono/500.css';
               <p data-i18n="it">Il lavoro attuale riguarda il primo caso di geometria delimitata.</p>
               <p data-i18n="es">El trabajo actual se centra en el primer caso de geometría acotada.</p>
               <p data-i18n="pt-BR">O trabalho atual está focado no primeiro caso de geometria limitada.</p>
-              <p data-i18n="ru">Текущая реализация сосредоточена на первой ограниченной геометрии.</p>
-              <p data-i18n="zh-CN">当前实现工作集中在首个有界几何场景。</p>
-              <p data-i18n="ja">現在の実装作業は、最初の有限境界ジオメトリに集中しています。</p>
+              <p data-i18n="ru">Текущая работа посвящена первому ограниченному геометрическому сценарию.</p>
+              <p data-i18n="zh-CN">当前工作聚焦于第一个有界几何场景。</p>
+              <p data-i18n="ja">現在は、最初の有限境界ジオメトリの実装に集中しています。</p>
+              <p data-i18n="ko">현재는 첫 번째 유한 경계 지오메트리 구현에 집중하고 있습니다.</p>
             </div>
 
             <div class="roadmap-current-groups">
@@ -774,6 +848,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 <h4 data-i18n="ru">Область геометрии</h4>
                 <h4 data-i18n="zh-CN">几何范围</h4>
                 <h4 data-i18n="ja">ジオメトリ範囲</h4>
+                <h4 data-i18n="ko">지오메트리 범위</h4>
 
                 <ul class="roadmap-items-default">
                   <li>Finite World</li>
@@ -810,6 +885,30 @@ import '@fontsource/jetbrains-mono/500.css';
                   <li>Box analítica</li>
                   <li>Navegação limitada inicial</li>
                 </ul>
+
+                <ul data-i18n="ru">
+                  <li>Конечный World</li>
+                  <li>Аналитический Box</li>
+                  <li>Начальная ограниченная навигация</li>
+                </ul>
+
+                <ul data-i18n="zh-CN">
+                  <li>有限 World</li>
+                  <li>解析 Box</li>
+                  <li>初始有界导航</li>
+                </ul>
+
+                <ul data-i18n="ja">
+                  <li>有限 World</li>
+                  <li>解析 Box</li>
+                  <li>初期の有限境界ナビゲーション</li>
+                </ul>
+
+                <ul data-i18n="ko">
+                  <li>유한 World</li>
+                  <li>해석적 Box</li>
+                  <li>초기 유한 경계 내비게이션</li>
+                </ul>
               </section>
 
               <section class="roadmap-current-group">
@@ -822,6 +921,7 @@ import '@fontsource/jetbrains-mono/500.css';
                 <h4 data-i18n="ru">Дальнейшие расширения</h4>
                 <h4 data-i18n="zh-CN">后续扩展</h4>
                 <h4 data-i18n="ja">今後の拡張</h4>
+                <h4 data-i18n="ko">향후 확장</h4>
 
                 <ul class="roadmap-items-default">
                   <li>Voxels</li>
@@ -858,6 +958,30 @@ import '@fontsource/jetbrains-mono/500.css';
                   <li>Geometrias em malha</li>
                   <li>Casos de navegação mais complexos</li>
                 </ul>
+
+                <ul data-i18n="ru">
+                  <li>Воксели</li>
+                  <li>Сеточные геометрии</li>
+                  <li>Более сложные случаи навигации</li>
+                </ul>
+
+                <ul data-i18n="zh-CN">
+                  <li>Voxels</li>
+                  <li>网格几何</li>
+                  <li>更复杂的导航场景</li>
+                </ul>
+
+                <ul data-i18n="ja">
+                  <li>Voxels</li>
+                  <li>メッシュジオメトリ</li>
+                  <li>より複雑なナビゲーション</li>
+                </ul>
+
+                <ul data-i18n="ko">
+                  <li>Voxels</li>
+                  <li>메시 기반 지오메트리</li>
+                  <li>더 복잡한 내비게이션 사례</li>
+                </ul>
               </section>
             </div>
 
@@ -870,6 +994,7 @@ import '@fontsource/jetbrains-mono/500.css';
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="ru">Открыть полную дорожную карту →</a>
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="zh-CN">查看完整路线图 →</a>
             <a class="roadmap-status-link" href="/roadmap/" data-i18n="ja">ロードマップ全体を見る →</a>
+            <a class="roadmap-status-link" href="/roadmap/" data-i18n="ko">전체 로드맵 보기 →</a>
           </article>
         </div>
       </section>
@@ -913,6 +1038,8 @@ import '@fontsource/jetbrains-mono/500.css';
             document.title = 'GGEMS — 新网站建设中';
           } else if (root.dataset.lang === 'ja') {
             document.title = 'GGEMS — 新サイト構築中';
+          } else if (root.dataset.lang === 'ko') {
+            document.title = 'GGEMS — 새 웹사이트 준비 중';
           } else {
             document.title = 'GGEMS — Website in progress';
           }
@@ -942,7 +1069,7 @@ import '@fontsource/jetbrains-mono/500.css';
           localStorage.setItem('ggems-theme', nextTheme);
         });
 
-        const supportedLanguages = ['en', 'fr', 'de', 'es', 'it', 'pt-BR', 'ru', 'zh-CN', 'ja'];
+        const supportedLanguages = ['en', 'fr', 'de', 'es', 'it', 'pt-BR', 'ru', 'zh-CN', 'ja', 'ko'];
         setLanguage(
           supportedLanguages.includes(root.dataset.lang)
             ? root.dataset.lang
@@ -1047,16 +1174,34 @@ import '@fontsource/jetbrains-mono/500.css';
       sans-serif;
   }
 
+  :root[data-lang='ko'] body {
+    font-family:
+      'Space Grotesk',
+      'Malgun Gothic',
+      'Apple SD Gothic Neo',
+      'Noto Sans KR',
+      sans-serif;
+  }
+
 
   :root[data-lang='ja'] [data-i18n='ja'] {
     line-break: strict;
+  }
+
+  :root[data-lang='ko'] [data-i18n='ko'] {
+    word-break: keep-all;
+    overflow-wrap: normal;
   }
 
   :root[data-lang='fr'] .roadmap-items-default,
   :root[data-lang='de'] .roadmap-items-default,
   :root[data-lang='it'] .roadmap-items-default,
   :root[data-lang='es'] .roadmap-items-default,
-  :root[data-lang='pt-BR'] .roadmap-items-default {
+  :root[data-lang='pt-BR'] .roadmap-items-default,
+  :root[data-lang='ru'] .roadmap-items-default,
+  :root[data-lang='zh-CN'] .roadmap-items-default,
+  :root[data-lang='ja'] .roadmap-items-default,
+  :root[data-lang='ko'] .roadmap-items-default {
     display: none;
   }
 
@@ -1083,7 +1228,8 @@ import '@fontsource/jetbrains-mono/500.css';
   :root[data-lang='pt-BR'] [data-i18n]:not([data-i18n='pt-BR']),
   :root[data-lang='ru'] [data-i18n]:not([data-i18n='ru']),
   :root[data-lang='zh-CN'] [data-i18n]:not([data-i18n='zh-CN']),
-  :root[data-lang='ja'] [data-i18n]:not([data-i18n='ja']) {
+  :root[data-lang='ja'] [data-i18n]:not([data-i18n='ja']),
+  :root[data-lang='ko'] [data-i18n]:not([data-i18n='ko']) {
     display: none !important;
   }
 
@@ -1225,7 +1371,9 @@ import '@fontsource/jetbrains-mono/500.css';
   .current-flag-zh-cn,
   .current-code-zh-cn,
   .current-flag-ja,
-  .current-code-ja {
+  .current-code-ja,
+  .current-flag-ko,
+  .current-code-ko {
     display: none;
   }
 
@@ -1288,6 +1436,16 @@ import '@fontsource/jetbrains-mono/500.css';
   :root[data-lang='zh-CN'] .current-code-zh-cn,
   :root[data-lang='ja'] .current-flag-ja,
   :root[data-lang='ja'] .current-code-ja {
+    display: inline-grid;
+  }
+
+  :root[data-lang='ko'] .current-flag-en,
+  :root[data-lang='ko'] .current-code-en {
+    display: none;
+  }
+
+  :root[data-lang='ko'] .current-flag-ko,
+  :root[data-lang='ko'] .current-code-ko {
     display: inline-grid;
   }
 
